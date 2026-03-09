@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 
 from make_guide_v3 import (
     CITY_DATA, CITY_ORDER, COST_TABLE,
-    NANPA_STRATEGIES, NANPA_TIPS,
+    VENUE_GUIDE, USEFUL_PHRASES,
     SCAM_PREVENTION, HANAMI_STRATEGY, ESSENTIAL_APPS,
 )
 
@@ -40,31 +40,152 @@ def yt_thumb(yt_id, title, channel, note, url):
 <p class="yt-note">💡 {note}</p>
 """
 
-def eval_data():
+def eval_report():
+    """6기준 평가 보고서 (4/2~4/5 여행 기준, 각 5점 만점 = 30점)"""
+    # (도시, {기준별 점수}, 공항코드, 공항→도심 교통, 총평)
     return [
-        ("후쿠오카",   "★★★☆☆", "접근성·가격 최고. 한국인 많아 희소성 낮음."),
-        ("미야자키",   "★★★★★", "스낵바 밀도 전국 1위. 현지인 비율 최고. 최우선 추천."),
-        ("가고시마",   "★★★★☆", "쇼추 문화 공유로 대화 쉬움. 사쿠라지마 화제 풍부."),
-        ("오이타/벳부","★★★☆☆", "온천 후 이자카야 황금 루트."),
-        ("구마모토",   "★★★★☆", "쿠마몬 화제 최강. 성 야경 데이트 활용 가능."),
-        ("나가사키",   "★★★★☆", "이국적 분위기. 야경 세계 3대 데이트 카드."),
-        ("나하",       "★★★★☆", "아열대 리조트 기분. 우치나구치 즉각 반응."),
-        ("기타큐슈",   "★★★★☆", "외국인 희소성 극대화. 야키토리 화제."),
-        ("히로시마",   "★★★★☆", "역사 감동 공유. 나가레카와 규모 크고 인터내셔널."),
-        ("오카야마",   "★★★★☆", "외국인 거의 없음. ぼっけぇ 방언 임팩트."),
-        ("마쓰야마",   "★★★☆☆", "온천 후 이자카야 루트. 도고 온천 화제."),
-        ("삿포로",     "★★★★☆", "스스키노 규모 압도적. 클럽 가능."),
-        ("하코다테",   "★★★☆☆", "야경 데이트 최적. 유흥가 규모 소규모."),
-        ("센다이",     "★★★★☆", "도호쿠 최대 유흥가. おばんです 인사 강력."),
-        ("가나자와",   "★★★☆☆", "'작은 교토' 세련된 분위기. 해산물 화제."),
+        ("후쿠오카", {
+            "airport": 5,  # FUK→하카타 지하철 5분
+            "izakaya": 3,  # 한국인 많아 현지 밀도 보통
+            "sightseeing": 4,  # 다자이후·오호리공원·캐널시티
+            "transport": 5,  # 지하철·버스 완비
+            "flight": 5,  # LCC 최다, 매일 다수
+            "april": 4,  # 벚꽃 만개, 하카타 돈타쿠 직전
+        }, "FUK", "후쿠오카공항 → 하카타역: 지하철 5분", "접근성·가격 최고. 벚꽃 시즌 최적. 한국인 방문 잦아 희소성은 낮음."),
+        ("미야자키", {
+            "airport": 4,  # KMI→시내 버스 20분
+            "izakaya": 5,  # 스낵바 밀도 전국 1위
+            "sightseeing": 3,  # 아오시마·다카치호 (차 필요)
+            "transport": 3,  # 시내는 OK, 교외 렌터카 권장
+            "flight": 3,  # 주 3~4회 직항
+            "april": 4,  # 벚꽃+따뜻한 기후
+        }, "KMI", "미야자키공항 → 시내: 버스 20분", "스낵바 밀도 전국 1위. 이자카야 문화 체험 최적. 교외 명소는 렌터카 필요."),
+        ("가고시마", {
+            "airport": 4,  # KOJ→텐몬칸 버스 25분
+            "izakaya": 4,  # 쇼추 문화 깊음
+            "sightseeing": 5,  # 사쿠라지마·시로야마·센간엔
+            "transport": 4,  # 시전차+버스 양호
+            "flight": 4,  # 주 4~7회 직항
+            "april": 5,  # 벚꽃+사쿠라지마 절경, 최적 기후
+        }, "KOJ", "가고시마공항 → 텐몬칸: 공항버스 40분", "사쿠라지마+벚꽃 4월 절경. 쇼추 문화 대화 소재 풍부."),
+        ("오이타/벳부", {
+            "airport": 3,  # OIT→오이타역 버스 45분
+            "izakaya": 3,  # 규모 작지만 온천 후 이자카야 매력
+            "sightseeing": 4,  # 벳부 지옥온천·유후인
+            "transport": 3,  # JR+버스 가능하나 유후인은 시간 소요
+            "flight": 3,  # 직항 있으나 편수 적음
+            "april": 5,  # 벳부 八湯 온천마쓰리(무료) + 벚꽃
+        }, "OIT", "오이타공항 → 오이타역: 버스 45분 / 벳부역: 버스+JR 약 1시간", "4월 첫째주 벳부 온천마쓰리 = 무료 입욕 + 벚꽃. 최적 타이밍."),
+        ("구마모토", {
+            "airport": 4,  # KMJ→시내 버스 40분
+            "izakaya": 4,  # 쿠마몬 화제, 바사시 체험
+            "sightseeing": 4,  # 구마모토성·아소산·스이젠지
+            "transport": 4,  # 시전차+버스 양호
+            "flight": 3,  # 직항 있으나 편수 제한
+            "april": 4,  # 벚꽃+구마모토성 라이트업
+        }, "KMJ", "구마모토공항 → 시내: 공항버스 40분", "구마모토성+벚꽃 야경. 바사시·쿠마몬 대화 소재 풍부."),
+        ("나가사키", {
+            "airport": 3,  # NGS→시내 버스 45분
+            "izakaya": 4,  # 이국적 분위기, 챵폰 문화
+            "sightseeing": 5,  # 이나사야마 야경·데지마·그라바엔·평화공원
+            "transport": 4,  # 시전차 중심 양호
+            "flight": 3,  # 직항 편수 적음
+            "april": 4,  # 벚꽃+이나사야마 야경
+        }, "NGS", "나가사키공항 → 시내: 공항버스 45분", "세계 3대 야경+이국적 역사. 관광 밀도 높음."),
+        ("나하", {
+            "airport": 5,  # OKA→국제거리 모노레일 15분
+            "izakaya": 4,  # 마쓰야마 거리 활기, 우치나구치
+            "sightseeing": 4,  # 슈리성·국제거리·아메리칸빌리지
+            "transport": 3,  # 모노레일 한 노선, 교외 렌터카
+            "flight": 5,  # 매일 다수 직항
+            "april": 3,  # 벚꽃은 이미 끝(1~2월). 해변 시즌 전
+        }, "OKA", "나하공항 → 국제거리: 모노레일(유이레일) 15분", "항공 접근 최고. 류큐 문화 독특. 4월 벚꽃은 없지만 아열대 기후 쾌적."),
+        ("기타큐슈", {
+            "airport": 4,  # KKJ→고쿠라역 버스 33분
+            "izakaya": 4,  # 외국인 희소, 야키우동 발상지
+            "sightseeing": 3,  # 고쿠라성·모지코 레트로
+            "transport": 4,  # JR+모노레일 양호
+            "flight": 3,  # 직항 편수 적음
+            "april": 4,  # 벚꽃+고쿠라성 야경
+        }, "KKJ", "기타큐슈공항 → 고쿠라역: 공항버스 33분", "외국인 희소 = 현지 밀도 최고. 가성비 우수."),
+        ("히로시마", {
+            "airport": 3,  # HIJ→히로시마역 버스 50분
+            "izakaya": 4,  # 나가레카와 규모 큼
+            "sightseeing": 5,  # 원폭돔·미야지마·히로시마성
+            "transport": 4,  # 시전차+JR 양호
+            "flight": 3,  # 직항 있으나 편수 제한
+            "april": 5,  # 벚꽃 만개+미야지마 절경
+        }, "HIJ", "히로시마공항 → 히로시마역: 공항리무진 50분", "원폭돔+미야지마+벚꽃. 4월 관광 최적. 역사 감동."),
+        ("오카야마", {
+            "airport": 3,  # OKJ→오카야마역 버스 30분
+            "izakaya": 4,  # 외국인 극소, 방언 임팩트
+            "sightseeing": 4,  # 고라쿠엔·구라시키·오카야마성
+            "transport": 4,  # JR 중심 양호
+            "flight": 3,  # 직항 편수 적음
+            "april": 4,  # 고라쿠엔 벚꽃 만개
+        }, "OKJ", "오카야마공항 → 오카야마역: 공항버스 30분", "고라쿠엔 벚꽃 명소. 외국인 거의 없어 현지 체험 진정성 높음."),
+        ("마쓰야마", {
+            "airport": 4,  # MYJ→시내 버스 20분
+            "izakaya": 3,  # 소규모 카운터 이자카야
+            "sightseeing": 4,  # 도고온천·마쓰야마성·시마나미해도
+            "transport": 3,  # 시전차 있으나 노선 한정
+            "flight": 3,  # 직항 편수 적음
+            "april": 4,  # 도고온천+벚꽃+봄 기후
+        }, "MYJ", "마쓰야마공항 → 시내: 공항리무진 20분", "3000년 역사 도고온천+벚꽃. 문학 도시 분위기."),
+        ("삿포로", {
+            "airport": 3,  # CTS→삿포로역 JR 37분
+            "izakaya": 4,  # 스스키노 규모 압도적
+            "sightseeing": 4,  # 오도리공원·시계탑·오타루
+            "transport": 4,  # 지하철 3노선 + JR
+            "flight": 5,  # 매일 다수 직항
+            "april": 3,  # 아직 춥고 벚꽃은 5월. 눈 녹는 중
+        }, "CTS", "신치토세공항 → 삿포로역: JR쾌속 37분", "스스키노 이자카야 규모 최대. 4월은 아직 춥고 벚꽃 없음."),
+        ("하코다테", {
+            "airport": 4,  # HKD→시내 버스 20분
+            "izakaya": 3,  # 다이몬 요코초 소규모
+            "sightseeing": 4,  # 하코다테산 야경·고료카쿠·아침시장
+            "transport": 3,  # 시전차+버스, 노선 한정
+            "flight": 3,  # 직항 편수 적음
+            "april": 3,  # 홋카이도라 벚꽃 4월 말~5월, 아직 쌀쌀
+        }, "HKD", "하코다테공항 → 시내: 버스 20분", "세계 3대 야경. 4월은 벚꽃 이르지만 고료카쿠 5월 초 만개."),
+        ("센다이", {
+            "airport": 3,  # SDJ→센다이역 전철 25분
+            "izakaya": 4,  # 코쿠분초 도호쿠 최대
+            "sightseeing": 4,  # 마쓰시마·즈이호덴·아오바성
+            "transport": 4,  # 지하철+JR 양호
+            "flight": 4,  # 직항 주 여러편
+            "april": 4,  # 벚꽃 만개 시즌+히토메센본자쿠라
+        }, "SDJ", "센다이공항 → 센다이역: 공항철도 25분", "도호쿠 최대 이자카야 밀집. 규탄 문화. 벚꽃 만개 시즌."),
+        ("가나자와", {
+            "airport": 3,  # KMQ→가나자와역 버스 40분
+            "izakaya": 3,  # 카타마치 고급 분위기
+            "sightseeing": 5,  # 겐로쿠엔·히가시 차야·21세기미술관
+            "transport": 4,  # 버스 노선 양호
+            "flight": 3,  # 직항 편수 적음
+            "april": 5,  # 겐로쿠엔 야간 벚꽃 라이트업 최고
+        }, "KMQ", "고마쓰공항 → 가나자와역: 공항리무진 40분", "겐로쿠엔 야간 벚꽃 라이트업 = 일본 3대 정원의 절정."),
     ]
 
+
+# 레거시 호환용
+def eval_data():
+    """레거시 호환: eval_report() 데이터를 구 형식으로 변환"""
+    result = []
+    for city, scores, _, _, comment in eval_report():
+        total = sum(scores.values())
+        if total >= 26: stars = "★★★★★"
+        elif total >= 22: stars = "★★★★☆"
+        elif total >= 18: stars = "★★★☆☆"
+        else: stars = "★★☆☆☆"
+        result.append((city, stars, comment))
+    return result
+
 CONCLUSION = [
-    "【최우선 추천】 미야자키: 스낵바 밀도 전국 1위, 현지인 비율 최고, 방언 효과 극대화.",
-    "【차선 추천 (규슈)】 가고시마·구마모토·나가사키·기타큐슈: 어느 도시든 그대로 적용 가능.",
-    "【하나미 활용】 4월 초 규슈·주고쿠 최적. 벚꽃 낮 → 이자카야 저녁 2단계 플랜 성공률 최고.",
-    "【예산 최적화】 기타큐슈·미야자키: 동일 효과 + 상대적으로 저렴한 항공권·물가.",
-    "【최종 제안】 4박 5일 단일 도시 집중: 미야자키 또는 가고시마 → 이틀째부터 동네 단골 효과.",
+    "【종합 추천】 후쿠오카: LCC 최다 취항, 야타이·이자카야 문화 최고, 대중교통 편리, 벚꽃 시즌 최적.",
+    "【규슈 소도시】 미야자키·가고시마·구마모토·나가사키: 방언 체험 + 독특한 지역 문화 + 저렴한 물가.",
+    "【하나미 활용】 4월 초 규슈·주고쿠 최적. 벚꽃 낮 관광 → 이자카야 저녁 코스로 하루 알차게 활용.",
+    "【예산 최적화】 기타큐슈·미야자키: 항공권·물가 모두 저렴. 가성비 여행에 최적.",
+    "【최종 제안】 3박 4일 단일 도시 집중: 도심 관광 + 이자카야 문화 체험을 깊이 있게 즐기기.",
 ]
 
 
@@ -84,11 +205,11 @@ def build_html_v3():
     )
     strategy_rows = "".join(
         f"<tr><td><b>{p}</b></td><td>{s}</td></tr>\n"
-        for p, s in NANPA_STRATEGIES
+        for p, s in VENUE_GUIDE
     )
     tips_rows = "".join(
         f"<tr><td>{si}</td><td class='jp'>{ex}</td><td>{d}</td></tr>\n"
-        for si, ex, d in NANPA_TIPS
+        for si, ex, d in USEFUL_PHRASES
     )
     scam_html = "".join(
         f"<div class='tip-card'><b>▶ {t}</b><p>{d}</p></div>\n"
@@ -156,19 +277,19 @@ def build_html_v3():
         {thumb_html}
       </div>
 
-      <div class="info-block nanpa-block">
-        <h3>🍻 유흥가 &amp; 방언 접근 전략</h3>
+      <div class="info-block culture-block">
+        <h3>🍻 현지 문화 &amp; 방언 가이드</h3>
         <p><b>📍 핵심 구역:</b> {cd['district']}</p>
         <p class="sub">{cd['district_desc']}</p>
         <div class="score-bar">
           <span class="label">⭐ 적합도:</span>
-          <span class="score-stars">{cd['nanpa_score']}</span>
+          <span class="score-stars">{cd['local_vibe_score']}</span>
         </div>
-        <p><b>🎯 이유:</b> {cd['nanpa_reason']}</p>
-        <p class="dialect-badge">🗣️ {cd['nanpa_dialect']}</p>
+        <p><b>🎯 이유:</b> {cd['local_vibe']}</p>
+        <p class="dialect-badge">🗣️ {cd['dialect_guide']}</p>
         <div class="strategy-box">
           <b>💡 핵심 전략</b>
-          <p>{cd['nanpa_strategy']}</p>
+          <p>{cd['local_tips']}</p>
         </div>
       </div>
 
@@ -292,7 +413,7 @@ body{{font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var
 .yt-meta a{{color:#7ab3ff;}}
 .yt-note{{font-size:10px;color:#888;margin-top:4px;}}
 /* 접근 전략 */
-.nanpa-block{{background:#fff5f5;border-radius:8px;padding:14px;}}
+.culture-block{{background:#fff5f5;border-radius:8px;padding:14px;}}
 .score-bar{{display:flex;align-items:center;gap:10px;margin:7px 0;}}
 .score-stars{{font-size:15px;color:#f0a000;}}
 .dialect-badge{{background:var(--purple);color:#fff;padding:3px 11px;border-radius:20px;font-size:11px;display:inline-block;margin:5px 0;}}
@@ -344,7 +465,7 @@ table.common-table tr:hover td{{background:#f0f4ff;}}
 <body>
 <header class="main-header">
   <h1>🎯 일본 소도시 나이트라이프 가이드 v3</h1>
-  <div class="subtitle">ICN 직항 15개 소도시 | 이자카야·스낵바 완전 공략 | 방언 접근 전략 | 목적달성 플랜</div>
+  <div class="subtitle">ICN 직항 15개 소도시 | 이자카야·스낵바 완전 공략 | 방언 접근 전략 | 여행 만족도 플랜</div>
   <div class="meta">📅 2026년 4월 첫째 주 4박5일 | 👥 일본어 능숙 한국 남성 2인 | 🎯 이자카야·스낵바 현지 여성 인연 만들기</div>
 </header>
 <div class="layout">
@@ -367,7 +488,7 @@ table.common-table tr:hover td{{background:#f0f4ff;}}
     <section class="section-card" id="strategy">
       <h2>📋 전략 총론 — 목적과 활용법</h2>
       <div class="formula-box">
-        <p class="formula">✅ 성공 공식: 방언 한 마디 → 관심 유도 → 합석 → 대화 심화 → LINE 교환 → 다음 자리 제안</p>
+        <p class="formula">✅ 여행 준비 체크리스트: 방언 암기 → 이자카야 입장 → 현지 음식 즐기기 → 단골 만들기 → 재방문</p>
       </div>
       <h3>📌 활용 순서</h3>
       <ol style="padding-left:20px;line-height:2;font-size:13px">
@@ -375,7 +496,7 @@ table.common-table tr:hover td{{background:#f0f4ff;}}
         <li><b>출발 1주 전</b> — 도시 섹션 정독. 타임테이블·대화 스크립트 숙지</li>
         <li><b>현지 도착 당일</b> — 타임테이블 따라 이자카야 진입. 방언 첫 마디 준비</li>
         <li><b>야간 활동 중</b> — 대화 스크립트 참고. 자연스럽게 단계별 진행</li>
-        <li><b>LINE 교환 후</b> — 귀국 후에도 연락 유지. 다음 방문 약속</li>
+        <li><b>여행 후</b> — 방문한 가게 리뷰 작성. 다음 여행 계획</li>
       </ol>
       <h3>⚠️ 주의사항</h3>
       <ul style="padding-left:20px;font-size:12px;line-height:2">
@@ -397,10 +518,10 @@ table.common-table tr:hover td{{background:#f0f4ff;}}
       <table class="common-table">
         <thead><tr><th>시간대</th><th>전략</th></tr></thead>
         <tbody>
-          <tr><td class="time">17:00~19:00 (골든 타임)</td><td>밥집·야타이 1차. 퇴근 후 첫 술자리. 자연스러운 첫 접촉 최적.</td></tr>
-          <tr><td class="time">19:00~21:00 (황금 타임)</td><td>이자카야 메인 시간대. 분위기 무르익음. 합석·대화 성공률 최고.</td></tr>
-          <tr><td class="time">21:00~23:00 (기회 시간)</td><td>스낵바·바 2차. 경계심 낮아진 상태 — 대화 진입 용이.</td></tr>
-          <tr><td class="time">23:00~02:00 (심야)</td><td>클럽·심야 바. LINE 교환 또는 3차 제안 마지막 기회.</td></tr>
+          <tr><td class="time">17:00~19:00 (골든 타임)</td><td>밥집·야타이 1차. 퇴근 후 첫 술자리. 현지 분위기 체험 최적.</td></tr>
+          <tr><td class="time">19:00~21:00 (황금 타임)</td><td>이자카야 메인 시간대. 분위기 무르익음. 현지 분위기 최고조.</td></tr>
+          <tr><td class="time">21:00~23:00 (기회 시간)</td><td>스낵바·바 2차. 분위기 편안해지는 시간대.</td></tr>
+          <tr><td class="time">23:00~02:00 (심야)</td><td>클럽·심야 바. 라이브 음악·DJ 이벤트 즐기기.</td></tr>
         </tbody>
       </table>
       <h3 style="margin-top:18px">💬 범용 대화 스크립트</h3>
@@ -492,11 +613,11 @@ def build_html_hobis():
     )
     strategy_rows = "".join(
         f"<tr><td class='hl'>{p}</td><td>{s}</td></tr>\n"
-        for p, s in NANPA_STRATEGIES
+        for p, s in VENUE_GUIDE
     )
     tips_rows = "".join(
         f"<tr><td>{si}</td><td class='jp-h'>{ex}</td><td>{d}</td></tr>\n"
-        for si, ex, d in NANPA_TIPS
+        for si, ex, d in USEFUL_PHRASES
     )
     scam_html = "".join(
         f"<div class='h-card'><div class='h-card-title'>{t}</div><p>{d}</p></div>\n"
@@ -583,12 +704,12 @@ def build_html_hobis():
         <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
         <p class="h-p"><span class="h-label">ZONE :</span> {cd['district']}</p>
         <p class="h-sub">{cd['district_desc']}</p>
-        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">{cd['nanpa_score']}</span></p>
-        <p class="h-sub">&gt; {cd['nanpa_reason']}</p>
-        <div class="h-dialect">{cd['nanpa_dialect']}</div>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">{cd['local_vibe_score']}</span></p>
+        <p class="h-sub">&gt; {cd['local_vibe']}</p>
+        <div class="h-dialect">{cd['dialect_guide']}</div>
         <div class="h-strat-box">
           <span class="h-strat-label">// PLAN</span>
-          <p>{cd['nanpa_strategy']}</p>
+          <p>{cd['local_tips']}</p>
         </div>
       </div>
 
@@ -942,7 +1063,7 @@ table.h-common tr:hover td{{background:rgba(0,212,232,.04);}}
 <body>
 <header class="h-header">
   <h1>// JAPAN NL GUIDE v3 — HOBIS EDITION</h1>
-  <div class="h-sub-title">&gt; ICN 직항 15개 소도시 | 이자카야·스낵바 공략 | 방언 접근 전략 | 목적달성 플랜</div>
+  <div class="h-sub-title">&gt; ICN 직항 15개 소도시 | 이자카야·스낵바 공략 | 방언 접근 전략 | 여행 만족도 플랜</div>
   <div class="h-meta">TARGET: 2026.04 첫째 주 4박5일 | CREW: 일본어 능숙 한국 남성 2인</div>
 </header>
 
@@ -967,7 +1088,7 @@ table.h-common tr:hover td{{background:rgba(0,212,232,.04);}}
     <section class="h-section" id="strategy">
       <div class="h-section-title">// 01 — STRATEGY OVERVIEW</div>
       <div class="h-formula-box">
-        <p class="h-formula">FORMULA &gt; 방언 한 마디 → 관심 유도 → 합석 → 대화 심화 → LINE 교환 → 다음 자리 제안</p>
+        <p class="h-formula">FORMULA &gt; 방언 한 마디 → 이자카야 입장 → 현지 음식 즐기기 → 단골 만들기 → 재방문</p>
       </div>
       <h3>[ EXECUTION SEQUENCE ]</h3>
       <ol style="padding-left:18px;line-height:2.2;font-size:11px;color:var(--grey-l)">
@@ -975,7 +1096,7 @@ table.h-common tr:hover td{{background:rgba(0,212,232,.04);}}
         <li><span class="hl">T-7:</span> 도시 섹션 정독. 타임테이블·대화 스크립트 숙지</li>
         <li><span class="hl">D-DAY:</span> 타임테이블 따라 이자카야 진입. 방언 첫 마디 준비</li>
         <li><span class="hl">ON-SITE:</span> 대화 스크립트 참고. 자연스럽게 단계별 진행</li>
-        <li><span class="hl">POST:</span> LINE 교환 후 귀국 후에도 연락 유지</li>
+        <li><span class="hl">POST:</span> 방문한 가게 리뷰 작성. 다음 여행 계획</li>
       </ol>
       <h3>[ WARNINGS ]</h3>
       <ul style="padding-left:18px;font-size:10px;line-height:2.2;color:var(--grey-l)">
@@ -997,10 +1118,10 @@ table.h-common tr:hover td{{background:rgba(0,212,232,.04);}}
       <table class="h-common">
         <thead><tr><th>시간대</th><th>전략</th></tr></thead>
         <tbody>
-          <tr><td class="time-h">[17:00~19:00]</td><td>밥집·야타이 1차. 퇴근 후 첫 술자리. 자연스러운 첫 접촉 최적.</td></tr>
-          <tr><td class="time-h">[19:00~21:00]</td><td>이자카야 메인 시간대. 분위기 무르익음. 합석·대화 성공률 최고.</td></tr>
-          <tr><td class="time-h">[21:00~23:00]</td><td>스낵바·바 2차. 경계심 낮아진 상태 — 대화 진입 용이.</td></tr>
-          <tr><td class="time-h">[23:00~02:00]</td><td>클럽·심야 바. LINE 교환 또는 3차 제안 마지막 기회.</td></tr>
+          <tr><td class="time-h">[17:00~19:00]</td><td>밥집·야타이 1차. 퇴근 후 첫 술자리. 현지 분위기 체험 최적.</td></tr>
+          <tr><td class="time-h">[19:00~21:00]</td><td>이자카야 메인 시간대. 분위기 무르익음. 현지 분위기 최고조.</td></tr>
+          <tr><td class="time-h">[21:00~23:00]</td><td>스낵바·바 2차. 분위기 편안해지는 시간대.</td></tr>
+          <tr><td class="time-h">[23:00~02:00]</td><td>클럽·심야 바. 라이브 음악·DJ 이벤트 즐기기.</td></tr>
         </tbody>
       </table>
       <h3>[ COMMON DIALOGUE ]</h3>
