@@ -1828,6 +1828,46 @@ def _build_sections(city, cat):
   return sections
 
 
+def _build_card_summary_html(ck, cat):
+  """카드에 표시된 항목을 overlay 상단 요약 패널로 생성"""
+  cd = CITY_DATA.get(ck, {})
+  if cat == "spots" and "spots" in cd:
+    items = cd["spots"]
+    if items:
+      rows = ""
+      for sn, sr, sd in items:
+        rows += (
+          f"<tr><td style='white-space:nowrap;font-weight:bold;vertical-align:top;padding:4px 10px 4px 0'>{sn}</td>"
+          f"<td style='color:#888;vertical-align:top;padding:4px 6px;white-space:nowrap'>{sr}</td>"
+          f"<td style='vertical-align:top;padding:4px 0'>{sd}</td></tr>"
+        )
+      return (
+        f"<div style='margin-bottom:16px;padding:12px;background:#f0f7ff;border-radius:8px;border:1px solid #d0e0f0'>"
+        f"<p style='font-weight:bold;margin:0 0 8px'>📍 추천 이자카야 & 바</p>"
+        f"<table style='width:100%;font-size:13px;border-collapse:collapse'>{rows}</table></div>"
+      )
+  elif cat == "local_drink" and "local_drink" in cd:
+    d_name, d_order, d_brand = cd["local_drink"]
+    return (
+      f"<div style='margin-bottom:16px;padding:12px;background:#fff8f0;border-radius:8px;border:1px solid #f0e0c0'>"
+      f"<p style='font-weight:bold;margin:0 0 6px'>🍶 카드 요약</p>"
+      f"<p style='margin:2px 0'><b>{d_name}</b></p>"
+      f"<p style='margin:2px 0;color:#666'>주문: <span style='background:#e8f4ff;padding:2px 6px;border-radius:3px'>{d_order}</span></p>"
+      f"<p style='margin:2px 0;color:#666'>추천 브랜드: {d_brand}</p></div>"
+    )
+  elif cat == "food":
+    fn = cd.get("food_name", "")
+    fd = cd.get("food_desc", "")
+    if fn:
+      return (
+        f"<div style='margin-bottom:16px;padding:12px;background:#f0fff0;border-radius:8px;border:1px solid #c0e0c0'>"
+        f"<p style='font-weight:bold;margin:0 0 6px'>🍽️ 카드 요약</p>"
+        f"<p style='margin:2px 0'><b>{fn}</b></p>"
+        f"<p style='margin:2px 0;color:#666'>{fd}</p></div>"
+      )
+  return ""
+
+
 def build_overlay_js_data():
   """모든 오버레이 데이터를 JS 주입용으로 변환"""
   combined = {}
@@ -1837,6 +1877,10 @@ def build_overlay_js_data():
       d = OVERLAY_DETAIL.get(ck,{}).get(cat,{})
       if not d:
         continue
+      # ── 카드 항목 요약 패널 추가 ──
+      cs = _build_card_summary_html(ck, cat)
+      if cs:
+        d = dict(d, card_summary=cs)
       # ── 섹션별 맵+비디오 지원 (food / spots / daytime) ──
       secs = _build_sections(ck, cat)
       if secs:
@@ -1940,6 +1984,16 @@ function showOverlay(city, cat) {
   __ov_city = city; __ov_cat = cat; __ov_vidIdx = 0;
   const d = window.__OV[city][cat];
   document.getElementById('ov-title').innerHTML = d.title || '';
+
+  // 카드 항목 요약 패널
+  const cardSum = document.getElementById('ov-card-summary');
+  if (d.card_summary) {
+    cardSum.innerHTML = d.card_summary;
+    cardSum.style.display = 'block';
+  } else {
+    cardSum.innerHTML = '';
+    cardSum.style.display = 'none';
+  }
 
   const hasSections = d.sections && d.sections.length > 0;
 
@@ -2439,6 +2493,9 @@ OVERLAY_HTML_MODAL = """
   <div class="ov-inner">
     <button class="ov-close" onclick="closeOverlay()" title="닫기">✕</button>
     <div class="ov-title" id="ov-title"></div>
+
+    <!-- 카드 항목 요약 패널 -->
+    <div id="ov-card-summary" style="display:none"></div>
 
     <!-- ① 레거시: 단일 맵 (sections 없을 때) -->
     <div id="ov-map-section">

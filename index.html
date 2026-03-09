@@ -2914,6 +2914,9 @@ table.common-table tr:hover td{background:#f0f4ff;}
     <button class="ov-close" onclick="closeOverlay()" title="닫기">✕</button>
     <div class="ov-title" id="ov-title"></div>
 
+    <!-- 카드 항목 요약 패널 -->
+    <div id="ov-card-summary" style="display:none"></div>
+
     <!-- ① 레거시: 단일 맵 (sections 없을 때) -->
     <div id="ov-map-section">
       <div class="ov-map-label">📍 Google Maps</div>
@@ -2979,6 +2982,16 @@ function showOverlay(city, cat) {
   __ov_city = city; __ov_cat = cat; __ov_vidIdx = 0;
   const d = window.__OV[city][cat];
   document.getElementById('ov-title').innerHTML = d.title || '';
+
+  // 카드 항목 요약 패널
+  const cardSum = document.getElementById('ov-card-summary');
+  if (d.card_summary) {
+    cardSum.innerHTML = d.card_summary;
+    cardSum.style.display = 'block';
+  } else {
+    cardSum.innerHTML = '';
+    cardSum.style.display = 'none';
+  }
 
   const hasSections = d.sections && d.sections.length > 0;
 
