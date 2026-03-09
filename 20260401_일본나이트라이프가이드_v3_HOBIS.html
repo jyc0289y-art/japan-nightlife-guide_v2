@@ -1,0 +1,3294 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>JAPAN NL GUIDE v3 // HOBIS EDITION</title>
+<style>
+/* ── HOBIS 테마 (스타크래프트 테란 감성) ── */
+:root{
+  --bg:       #0d0f13;
+  --panel:    #111418;
+  --panel2:   #0a0d10;
+  --cyan:     #00d4e8;
+  --green:    #3dba5c;
+  --green-l:  #00ff41;
+  --orange:   #ff9500;
+  --red:      #ff3838;
+  --pink:     #ff6bcd;
+  --grey:     #4a5568;
+  --grey-l:   #8a95a8;
+  --white:    #e2e8f0;
+  --border:   rgba(0,212,232,.18);
+  --border-g: rgba(61,186,92,.25);
+  --glow-c:   0 0 8px rgba(0,212,232,.5);
+  --glow-g:   0 0 8px rgba(61,186,92,.5);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Courier New',Courier,monospace;
+  background:var(--bg);color:var(--white);font-size:13px;line-height:1.6;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.15) 2px,rgba(0,0,0,.15) 4px);
+}
+
+/* ── 헤더 ── */
+.h-header{
+  background:var(--panel2);
+  border-bottom:2px solid var(--cyan);
+  padding:18px 28px;
+  position:sticky;top:0;z-index:200;
+}
+.h-header h1{
+  font-size:20px;color:var(--cyan);
+  text-shadow:var(--glow-c);
+  letter-spacing:2px;text-transform:uppercase;
+}
+.h-header .h-sub-title{font-size:11px;color:var(--grey-l);margin-top:4px;letter-spacing:1px;}
+.h-header .h-meta{font-size:10px;color:var(--grey);margin-top:3px;}
+
+/* ── 레이아웃 ── */
+.h-layout{display:flex;min-height:100vh;}
+
+/* ── 사이드바 ── */
+.h-sidebar{
+  width:185px;min-width:185px;
+  background:var(--panel2);
+  border-right:1px solid var(--border);
+  position:sticky;top:0;height:100vh;
+  overflow-y:auto;padding:14px 0;
+}
+.h-sidebar .sb-title{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--grey);padding:6px 14px;border-bottom:1px dashed var(--border);
+  margin-bottom:6px;
+}
+.h-sidebar ul{list-style:none;}
+.h-sidebar li a{
+  display:block;padding:6px 14px;color:var(--grey-l);
+  text-decoration:none;font-size:11px;
+  border-left:2px solid transparent;
+  transition:all .15s;letter-spacing:.5px;
+}
+.h-sidebar li a:hover{
+  background:rgba(0,212,232,.08);
+  border-left-color:var(--cyan);
+  color:var(--cyan);text-shadow:var(--glow-c);
+}
+
+/* ── 메인 ── */
+.h-main{flex:1;padding:20px 24px;max-width:1100px;}
+
+/* ── 일반 섹션 카드 ── */
+.h-section{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:22px;margin-bottom:20px;
+  position:relative;
+}
+.h-section::before,.h-section::after,
+.h-section>.h-tl,.h-section>.h-tr{
+  content:'';position:absolute;width:10px;height:10px;
+}
+.h-section-title{
+  font-size:14px;color:var(--cyan);
+  text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:14px;padding-bottom:8px;
+  border-bottom:1px dashed var(--border);
+  text-shadow:var(--glow-c);
+}
+.h-section h3{
+  font-size:11px;color:var(--green);
+  text-transform:uppercase;letter-spacing:1px;
+  margin:14px 0 8px;
+}
+
+/* ── 도시 섹션 ── */
+.h-city{
+  background:var(--panel);
+  border:1px solid var(--border-g);
+  border-radius:4px;
+  margin-bottom:28px;
+  overflow:hidden;
+  position:relative;
+}
+.h-city-head{
+  background:linear-gradient(90deg,#0a1a0f 0%,#0d1f18 100%);
+  border-bottom:1px solid var(--border-g);
+  padding:18px 22px;
+  position:relative;
+}
+.h-city-head h2{
+  font-size:17px;color:var(--green-l);
+  text-shadow:var(--glow-g);
+  letter-spacing:1.5px;margin-bottom:4px;
+}
+.h-region{font-size:12px;color:var(--cyan);}
+.h-tagline{font-size:11px;color:var(--grey-l);letter-spacing:.5px;}
+
+/* ── 코너 장식 ── */
+.h-corner{position:absolute;width:10px;height:10px;}
+.h-corner.tl{top:0;left:0;border-top:2px solid var(--green-l);border-left:2px solid var(--green-l);}
+.h-corner.tr{top:0;right:0;border-top:2px solid var(--green-l);border-right:2px solid var(--green-l);}
+.h-corner.bl{bottom:0;left:0;border-bottom:2px solid var(--border-g);border-left:2px solid var(--border-g);}
+.h-corner.br{bottom:0;right:0;border-bottom:2px solid var(--border-g);border-right:2px solid var(--border-g);}
+
+/* ── 도시 그리드 ── */
+.h-city-grid{display:grid;grid-template-columns:2fr 1fr;}
+.h-col-main{padding:16px;border-right:1px solid var(--border);}
+.h-col-side{padding:16px;background:#0a0d10;}
+
+/* ── 블록 ── */
+.h-block{margin-bottom:16px;padding-bottom:14px;border-bottom:1px dashed rgba(0,212,232,.1);}
+.h-block:last-child{border-bottom:none;margin-bottom:0;}
+.h-block-title{
+  font-size:10px;color:var(--cyan);
+  text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:9px;
+  text-shadow:var(--glow-c);
+}
+.h-p{font-size:12px;margin-bottom:3px;}
+.h-sub{font-size:10px;color:var(--grey-l);margin-bottom:2px;}
+.h-label{color:var(--grey);font-size:10px;}
+.hl{color:var(--green);}
+.h-score{color:var(--orange);font-size:15px;letter-spacing:2px;}
+.h-dialect{
+  font-size:11px;color:var(--green-l);
+  border:1px solid var(--border-g);
+  padding:4px 10px;display:inline-block;
+  border-radius:2px;margin:6px 0;
+  text-shadow:var(--glow-g);
+}
+.h-strat-box{
+  border-left:3px solid var(--green);
+  padding:8px 12px;margin-top:9px;
+  background:rgba(61,186,92,.05);
+}
+.h-strat-label{font-size:10px;color:var(--green);display:block;margin-bottom:3px;letter-spacing:1px;}
+
+/* ── YouTube 썸네일 (HOBIS) ── */
+.yt-h-block{background:#050810;border:1px solid rgba(0,212,232,.2);border-radius:4px;padding:14px;}
+.h-yt-wrap{position:relative;margin:9px 0;border-radius:3px;overflow:hidden;}
+.h-yt-wrap img{width:100%;display:block;filter:brightness(.85) saturate(.9);}
+.h-play-overlay{
+  position:absolute;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,13,20,.55);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  opacity:0;transition:.2s;
+}
+.h-yt-wrap:hover .h-play-overlay{opacity:1;}
+.h-play-btn{
+  font-size:22px;color:var(--green-l);
+  text-shadow:var(--glow-g);letter-spacing:3px;
+}
+.h-play-sub{font-size:10px;color:var(--grey-l);margin-top:4px;}
+.h-yt-title{font-size:11px;color:var(--cyan);margin-top:4px;}
+.h-yt-title a{color:var(--cyan);text-decoration:none;}
+.h-yt-title a:hover{text-shadow:var(--glow-c);}
+
+/* ── 테이블 ── */
+.h-table{width:100%;border-collapse:collapse;font-size:10px;margin-top:6px;}
+.h-table th{
+  background:#050810;color:var(--cyan);
+  padding:5px 8px;text-align:left;
+  font-size:9px;letter-spacing:1px;
+  text-transform:uppercase;border-bottom:1px solid var(--border);
+}
+.h-table td{
+  padding:5px 8px;border-bottom:1px solid rgba(0,212,232,.07);
+  vertical-align:top;
+}
+.h-table tr:hover td{background:rgba(0,212,232,.04);}
+.time-h{color:var(--orange);font-size:10px;white-space:nowrap;}
+.tip-h{color:var(--grey-l);font-size:9px;}
+.sit-h{color:var(--grey-l);font-size:10px;}
+.jp-h{color:var(--green);font-family:serif;}
+.note-h{font-size:9px;color:var(--grey-l);}
+
+/* ── 리스트 ── */
+.h-list{list-style:none;padding:0;}
+.h-list li{
+  font-size:11px;padding:4px 0;
+  border-bottom:1px dashed rgba(0,212,232,.08);
+  color:var(--grey-l);
+}
+.h-list li:last-child{border-bottom:none;}
+.sn-h{color:var(--green);font-weight:700;}
+.sr-h{color:var(--orange);font-size:10px;}
+
+/* ── 기타 ── */
+.h-drink-name{color:var(--cyan);font-size:13px;margin-bottom:4px;}
+.h-order{color:var(--green-l);font-family:serif;}
+.h-food-name{color:var(--orange);font-size:13px;margin-bottom:5px;}
+.h-budget{color:var(--green);font-size:11px;margin-bottom:2px;}
+.h-card{
+  background:rgba(255,149,0,.07);border-left:3px solid var(--orange);
+  padding:10px 13px;margin-bottom:8px;border-radius:0 4px 4px 0;
+}
+.h-card.sakura-h{background:rgba(255,107,205,.07);border-left-color:var(--pink);}
+.h-card-title{font-size:11px;color:var(--orange);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px;}
+.h-card.sakura-h .h-card-title{color:var(--pink);}
+.h-card p{font-size:10px;color:var(--grey-l);}
+.h-app{
+  display:flex;align-items:flex-start;gap:8px;
+  padding:6px 10px;margin-bottom:5px;
+  background:rgba(0,212,232,.05);border-radius:3px;
+  border-left:2px solid var(--border);
+}
+.h-app-name{font-size:11px;color:var(--cyan);min-width:200px;}
+.h-app-desc{font-size:10px;color:var(--grey-l);}
+
+/* 공통 테이블 */
+table.h-common{width:100%;border-collapse:collapse;font-size:11px;margin:9px 0;}
+table.h-common th{
+  background:#050810;color:var(--cyan);padding:7px 10px;
+  text-align:left;font-size:10px;letter-spacing:1px;text-transform:uppercase;
+  border-bottom:1px solid var(--border);
+}
+table.h-common td{padding:6px 10px;border-bottom:1px solid rgba(0,212,232,.08);}
+table.h-common tr:hover td{background:rgba(0,212,232,.04);}
+
+/* 평가 점수 색상 */
+.score-h.five{color:var(--green-l);text-shadow:var(--glow-g);}
+.score-h.four{color:var(--cyan);}
+.score-h.three{color:var(--grey-l);}
+
+/* formula */
+.h-formula-box{
+  background:linear-gradient(90deg,#0a0a1e 0%,#0a1a14 100%);
+  border:1px solid var(--border);border-radius:4px;
+  padding:16px 20px;margin:12px 0;
+}
+.h-formula{font-size:12px;color:var(--green-l);text-shadow:var(--glow-g);letter-spacing:.5px;}
+
+/* conclusion */
+.h-conclusion{
+  border:1px solid var(--border-g);border-radius:4px;
+  padding:16px 20px;margin:12px 0;
+  background:rgba(61,186,92,.05);
+}
+.h-conclusion li{font-size:11px;color:var(--grey-l);margin-bottom:6px;}
+.h-conclusion li b{color:var(--green);}
+
+@media(max-width:900px){
+  .h-city-grid{grid-template-columns:1fr;}
+  .h-col-main{border-right:none;border-bottom:1px dashed var(--border);}
+  .h-sidebar{display:none;}
+}
+@media print{
+  body{background:#fff;color:#000;background-image:none;}
+  .h-sidebar,.h-play-overlay{display:none;}
+  .h-header{position:static;}
+}
+</style>
+</head>
+<body>
+<header class="h-header">
+  <h1>// JAPAN NL GUIDE v3 — HOBIS EDITION</h1>
+  <div class="h-sub-title">&gt; ICN 직항 15개 소도시 | 이자카야·스낵바 공략 | 방언 접근 전략 | 여행 만족도 플랜</div>
+  <div class="h-meta">TARGET: 2026.04 첫째 주 4박5일 | CREW: 일본어 능숙 한국 남성 2인</div>
+</header>
+
+<div class="h-layout">
+  <nav class="h-sidebar">
+    <div class="sb-title">// NAVIGATION</div>
+    <ul>
+      <li><a href="#strategy">[ STRATEGY ]</a></li>
+      <li><a href="#tactics">[ TACTICS ]</a></li>
+      <li><a href="#scam">[ SCAM DEF ]</a></li>
+      <li><a href="#hanami">[ HANAMI ]</a></li>
+      <li><a href="#cost">[ BUDGET ]</a></li>
+      <li><a href="#apps">[ APPS ]</a></li>
+      <li><a href="#cities">--- CITIES ---</a></li>
+      <li><a href="#fukuoka">🎡 후쿠오카</a></li>
+<li><a href="#miyazaki">🌴 미야자키</a></li>
+<li><a href="#kagoshima">🌋 가고시마</a></li>
+<li><a href="#oita">♨️ 오이타/벳부</a></li>
+<li><a href="#kumamoto">🐻 구마모토</a></li>
+<li><a href="#nagasaki">⛵ 나가사키</a></li>
+<li><a href="#naha">🌺 나하 (오키나와)</a></li>
+<li><a href="#kitakyushu">🏭 기타큐슈</a></li>
+<li><a href="#hiroshima">🕊️ 히로시마</a></li>
+<li><a href="#okayama">🍑 오카야마</a></li>
+<li><a href="#matsuyama">🏯 마쓰야마</a></li>
+<li><a href="#sapporo">❄️ 삿포로</a></li>
+<li><a href="#hakodate">🌙 하코다테</a></li>
+<li><a href="#sendai">🌿 센다이</a></li>
+<li><a href="#kanazawa">🦀 가나자와</a></li>
+<li><a href="#takamatsu">🍜 다카마쓰</a></li>
+<li><a href="#shizuoka">🗻 시즈오카</a></li>
+<li><a href="#saga">🏺 사가</a></li>
+<li><a href="#tokushima">💃 도쿠시마</a></li>
+<li><a href="#miyakojima">🏝️ 미야코지마</a></li>
+<li><a href="#ishigaki">🐠 이시가키</a></li>
+<li><a href="#shimoji">✈️ 시모지시마</a></li>
+
+      <li><a href="#eval">[ EVAL ]</a></li>
+    </ul>
+  </nav>
+
+  <main class="h-main">
+
+    <section class="h-section" id="strategy">
+      <div class="h-section-title">// 01 — STRATEGY OVERVIEW</div>
+      <div class="h-formula-box">
+        <p class="h-formula">FORMULA &gt; 방언 한 마디 → 이자카야 입장 → 현지 음식 즐기기 → 단골 만들기 → 재방문</p>
+      </div>
+      <h3>[ EXECUTION SEQUENCE ]</h3>
+      <ol style="padding-left:18px;line-height:2.2;font-size:11px;color:var(--grey-l)">
+        <li><span class="hl">T-14:</span> 방언 YouTube 시청. 핵심 표현 3개씩 암기</li>
+        <li><span class="hl">T-7:</span> 도시 섹션 정독. 타임테이블·대화 스크립트 숙지</li>
+        <li><span class="hl">D-DAY:</span> 타임테이블 따라 이자카야 진입. 방언 첫 마디 준비</li>
+        <li><span class="hl">ON-SITE:</span> 대화 스크립트 참고. 자연스럽게 단계별 진행</li>
+        <li><span class="hl">POST:</span> 방문한 가게 리뷰 작성. 다음 여행 계획</li>
+      </ol>
+      <h3>[ WARNINGS ]</h3>
+      <ul style="padding-left:18px;font-size:10px;line-height:2.2;color:var(--grey-l)">
+        <li>&gt; 항공 가격은 2026.03 기준 — 실제 예약 시 항공사 공식 사이트 재확인</li>
+        <li>&gt; 스낵바 입장료·세트는 가게마다 편차 큼 — 입장 전 반드시 직접 확인</li>
+        <li>&gt; 4월 첫째 주는 골든위크 직전 — 호텔 가격 상승 주의</li>
+        <li>&gt; 벚꽃 개화 시기 매년 변동 — 여행 직전 sakura.info 실시간 확인</li>
+      </ul>
+    </section>
+
+    <section class="h-section" id="tactics">
+      <div class="h-section-title">// 02 — APPROACH STRATEGY</div>
+      <h3>[ BY LOCATION ]</h3>
+      <table class="h-common">
+        <thead><tr><th>장소</th><th>접근 전략</th></tr></thead>
+        <tbody><tr><td class='hl'>스낵바 (スナック)</td><td>마마상이 운영하는 카운터 바. 세트 ¥3,000~5,000 (음료+안주). 카라오케 가능한 곳 多. 현지인 단골 문화를 체험하기 좋음.</td></tr>
+<tr><td class='hl'>타치노미 (立ち飲み)</td><td>서서 마시는 선술집. 센베로(¥1,000 세트) 가능. 퇴근 후 직장인들이 가볍게 한 잔 하는 곳. 가성비 최고.</td></tr>
+<tr><td class='hl'>야타이 (屋台)</td><td>포장마차 카운터 좌석. 라멘·야키토리·오뎅이 기본. 후쿠오카 나카스·텐진 지역에 약 100개 운영. 1인 ¥2,000~3,000.</td></tr>
+<tr><td class='hl'>바 (バー)</td><td>카운터석에서 바텐더가 추천하는 칵테일·위스키를 즐기는 공간. 현지 추천 술을 물어보면 좋음. 1인 ¥2,000~4,000.</td></tr>
+<tr><td class='hl'>클럽 (クラブ)</td><td>DJ 음악과 댄스플로어. 입장료 ¥2,000~3,000 (1드링크 포함). 삿포로·후쿠오카·센다이에 규모 있는 곳 多.</td></tr>
+</tbody>
+      </table>
+      <h3>[ BY TIME ]</h3>
+      <table class="h-common">
+        <thead><tr><th>시간대</th><th>전략</th></tr></thead>
+        <tbody>
+          <tr><td class="time-h">[17:00~19:00]</td><td>밥집·야타이 1차. 퇴근 후 첫 술자리. 현지 분위기 체험 최적.</td></tr>
+          <tr><td class="time-h">[19:00~21:00]</td><td>이자카야 메인 시간대. 분위기 무르익음. 현지 분위기 최고조.</td></tr>
+          <tr><td class="time-h">[21:00~23:00]</td><td>스낵바·바 2차. 분위기 편안해지는 시간대.</td></tr>
+          <tr><td class="time-h">[23:00~02:00]</td><td>클럽·심야 바. 라이브 음악·DJ 이벤트 즐기기.</td></tr>
+        </tbody>
+      </table>
+      <h3>[ COMMON DIALOGUE ]</h3>
+      <table class="h-common">
+        <thead><tr><th>상황</th><th>일본어</th><th>해설</th></tr></thead>
+        <tbody><tr><td>주문하기</td><td class='jp-h'>「生ビール一つください」</td><td>생맥주 하나 주세요</td></tr>
+<tr><td>추천 요청</td><td class='jp-h'>「おすすめは何ですか？」</td><td>추천 메뉴가 뭐예요?</td></tr>
+<tr><td>자기소개</td><td class='jp-h'>「韓国から来ました、○○といいます」</td><td>한국서 왔어요, ○○라고 해요</td></tr>
+<tr><td>칭찬</td><td class='jp-h'>「雰囲気いいですね！」</td><td>분위기 좋네요</td></tr>
+<tr><td>방언 배우기</td><td class='jp-h'>「○○弁、教えてもらえますか？」</td><td>○○방언 가르쳐 주실 수 있어요?</td></tr>
+<tr><td>맛 표현</td><td class='jp-h'>「めっちゃ美味しいです！」</td><td>진짜 맛있어요!</td></tr>
+<tr><td>계산</td><td class='jp-h'>「お会計お願いします」</td><td>계산 부탁드려요</td></tr>
+<tr><td>감사</td><td class='jp-h'>「ごちそうさまでした！」</td><td>잘 먹었습니다!</td></tr>
+</tbody>
+      </table>
+    </section>
+
+    <section class="h-section" id="scam">
+      <div class="h-section-title">// 03 — SCAM DEFENSE</div>
+      <div class='h-card'><div class='h-card-title'>お通し(오토오시) 확인</div><p>착석 전 '오토오시 있어요?'(お通しはありますか？) 반드시 확인. 없는 가게 선택 우선.</p></div>
+<div class='h-card'><div class='h-card-title'>스낵바 가격 선확인</div><p>입장 전 '세트 가격 얼마예요?'(セット料金はいくらですか？). 가격표 없으면 패스.</p></div>
+<div class='h-card'><div class='h-card-title'>미터 없는 택시 탑승 금지</div><p>반드시 미터기 있는 택시만 탑승. 심야 고정요금 택시는 사전 합의 후 탑승.</p></div>
+<div class='h-card'><div class='h-card-title'>호객 행위 주점 금지</div><p>길에서 호객하는 가게는 100% 바가지. 'いいですよ〜' 들려도 절대 따라가지 말 것.</p></div>
+<div class='h-card'><div class='h-card-title'>신용카드 스키밍 주의</div><p>ATM은 반드시 은행·편의점(7-Eleven·로손·패밀리마트) ATM 사용. 도로변 ATM 금지.</p></div>
+<div class='h-card'><div class='h-card-title'>술값 합산 주의</div><p>2인이 다른 손님과 자리 안내해서 마실 경우 계산서 분리 요청(別々でお願いします).</p></div>
+<div class='h-card'><div class='h-card-title'>심야 이동 시 안전 앱 활용</div><p>Google Maps에서 야간 루트 확인. 인적 드문 골목 단독 이동 최소화.</p></div>
+
+    </section>
+
+    <section class="h-section" id="hanami">
+      <div class="h-section-title">// 04 — HANAMI STRATEGY</div>
+      <div class='h-card sakura-h'><div class='h-card-title'>🌸 낮 하나미 → 야간 이자카야 전환 작전</div><p>벚꽃 명소에서 낮부터 음주 파티 중인 그룹에 접근. '같이 마셔도 돼요?'(一緒に飲んでもいいですか？)로 시작. 저녁에 이자카야로 자연스럽게 2차 유도.</p></div>
+<div class='h-card sakura-h'><div class='h-card-title'>🌸 꽃구경 핑계 말 걸기 공식</div><p>「どこかおすすめの桜スポットありますか？」(추천 벚꽃 명소 있어요?) → 현지인들 신나서 안내해줌. 함께 이동 제안 자연스럽게.</p></div>
+<div class='h-card sakura-h'><div class='h-card-title'>🌸 하나미 도시락 공유 전술</div><p>편의점 또는 슈퍼에서 오니기리·안주 구매 후 벚꽃 공원에서 '나눠 먹어요'(一緒に食べましょう) 제안. 가장 낮은 진입 장벽.</p></div>
+<div class='h-card sakura-h'><div class='h-card-title'>🌸 벚꽃 사진 찍어주기 스타트</div><p>혼자 또는 소수인 여성에게 '사진 찍어드릴까요?'(写真撮りましょうか？). 자연스러운 대화 입구.</p></div>
+<div class='h-card sakura-h'><div class='h-card-title'>🌸 4월 첫째 주 시기 주의사항</div><p>도시마다 개화 시기 편차 큼 (규슈: 3월 말~4월 초 / 도호쿠: 4월 중순~말). 여행 직전 sakura.info 또는 기상청 사이트에서 개화 상황 실시간 확인 필수.</p></div>
+
+    </section>
+
+    <section class="h-section" id="cost">
+      <div class="h-section-title">// 05 — BUDGET GUIDE</div>
+      <table class="h-common">
+        <thead><tr><th>항목</th><th>비용</th><th>설명</th></tr></thead>
+        <tbody><tr><td>센베로 (センベロ)</td><td class='hl'>¥1,000</td><td>맥주·하이볼 1잔 + 안주 2~3개. 선술집(타치노미)에서 주로 운영.</td></tr>
+<tr><td>오토오시·お通し (자동 안주)</td><td class='hl'>¥300~1,000</td><td>입장 시 자동 제공. 사실상 착석료. 1인당 부과.</td></tr>
+<tr><td>일반 이자카야 1인 예산</td><td class='hl'>¥1,500~5,000</td><td>맥주 2~3잔 + 안주 2~3종.</td></tr>
+<tr><td>노미호다이 飲み放題 (2시간)</td><td class='hl'>¥1,500~2,000</td><td>음료 무제한만. 음식 별도 주문.</td></tr>
+<tr><td>노미호다이+식사 세트</td><td class='hl'>¥3,700~6,000</td><td>2시간 음료무제한 + 코스 요리 포함.</td></tr>
+<tr><td>스낵바 スナック (입장 세트)</td><td class='hl'>¥2,000~3,500</td><td>마마상 접대 포함. 위스키 1병 + 안주 세트. 서비스료 20~30% 별도.</td></tr>
+<tr><td>야타이 屋台 1끼</td><td class='hl'>¥1,200~2,500</td><td>라멘·오뎅·야키토리 + 맥주 1잔 기준.</td></tr>
+<tr><td>편의점 심야 맥주</td><td class='hl'>¥500~800</td><td>야간 이동 중 맥주·하이볼 캔. 1인 1캔.</td></tr>
+</tbody>
+      </table>
+      <div style="border:1px solid var(--border-g);border-radius:3px;padding:10px 14px;margin-top:12px;font-size:11px;color:var(--green)">
+        &gt; 2인 4박 5일 총: ¥300,000~600,000 (1인 ¥150,000~300,000)<br>
+        <span style="font-size:10px;color:var(--grey-l)">&gt;&gt; 항공권 40~50% 차지 → 조기 예약이 핵심 절약 포인트</span>
+      </div>
+    </section>
+
+    <section class="h-section" id="apps">
+      <div class="h-section-title">// 06 — REQUIRED APPS</div>
+      <div class='h-app'><span class='h-app-name'>&gt; Google Maps (구글맵스)</span><span class='h-app-desc'>오프라인 지도 사전 다운로드 필수. 현지 이자카야 평점·리뷰 확인.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; Google 번역 (카메라 번역)</span><span class='h-app-desc'>메뉴판 카메라로 비추면 즉시 번역. 방언 단어 검색도 가능.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; LINE (라인)</span><span class='h-app-desc'>일본 국민 메신저. 가게 예약·관광 정보 공유에 유용. QR코드 방식 친구 추가.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; PayPay (페이페이)</span><span class='h-app-desc'>일본 최대 QR 결제. 현지 이자카야 대부분 사용 가능. 외국 카드 등록 OK.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; Tabelog (타베로그)</span><span class='h-app-desc'>일본 음식점 평가 앱. 이자카야 검색·예약. 3.5점 이상 = 신뢰.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; Gurunavi (구루나비)</span><span class='h-app-desc'>음식점 예약 특화. 한국어 메뉴 있는 가게 필터링 가능.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; Hyperdia / 乗換案内</span><span class='h-app-desc'>일본 전철·버스 환승 경로 검색. 공항~시내 루트 사전 확인.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; X (트위터)</span><span class='h-app-desc'>현지 분위기·이벤트·술자리 정보 실시간 검색. #○○弁 검색으로 현지인 팔로우.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; DeepL 번역기</span><span class='h-app-desc'>자연스러운 일본어 번역. 문자 전송 전 최종 체크 용도.</span></div>
+<div class='h-app'><span class='h-app-name'>&gt; Sakura Info (사쿠라 인포)</span><span class='h-app-desc'>벚꽃 개화 시기 실시간 확인. 도시별 개화 예측 지도 제공.</span></div>
+
+    </section>
+
+    <div id="cities" style="margin:28px 0 10px;border-bottom:2px solid var(--border-g);padding-bottom:10px">
+      <p style="font-size:16px;color:var(--green-l);text-shadow:var(--glow-g);letter-spacing:2px">// 07 — CITY PLANS [15 CITIES]</p>
+      <p style="font-size:10px;color:var(--grey);margin-top:5px;letter-spacing:.5px">
+        PER CITY: FLIGHT &gt; DIALECT TRAINING &gt; APPROACH STRATEGY &gt; NIGHT TIMETABLE &gt; LOCAL DRINK &gt; SAKURA &gt; DAYTIME &gt; SPOTS &gt; DIALOGUE &gt; BUDGET
+      </p>
+    </div>
+
+    
+<section class="h-city" id="fukuoka">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🎡 후쿠오카 (福岡) <span class="h-region">[ 규슈 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 최저가 항공 · 나카스 야타이 · 접근성 최고</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 후쿠오카(FUK) | 비행 약 1시간 20분</p>
+        <p class="h-sub">&gt; LCC 최다 취항 (피치·에어부산·제주항공). 편수 가장 많고 저렴.</p>
+        <p class="h-sub">&gt; ACCESS: 하카타역까지 지하철 5분 (¥260)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/ksH3wecTxso" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/ksH3wecTxso/hqdefault.jpg"
+              alt="博多弁講座 ネイティブが教える"
+              onerror="this.src='https://img.youtube.com/vi/ksH3wecTxso/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/ksH3wecTxso" target="_blank">博多弁講座 ネイティブが教える</a></p>
+        <p class="h-sub">CH: とりごえ</p>
+        <p class="h-sub">&gt;&gt; 남성 네이티브가 일상 하카타벤을 친절하게 설명. 출발 전 2~3회 반복 시청 권장.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 나카스 (中洲) · 텐진 (天神)</p>
+        <p class="h-sub">나카스 강변 야타이(屋台) 약 20개. 옆자리 낯선 사람과 자연스러운 대화 가능. 텐진은 클럽·바·이자카야 밀집.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★☆☆ (보통)</span></p>
+        <p class="h-sub">&gt; 한국인 방문객도 많아 현지인들이 익숙한 편. 야타이 자리 안내문화로 대화가 자연스럽게 시작됨. 나카스·텐진 인터내셔널 바는 영어 소통 가능.</p>
+        <div class="h-dialect">하카타벤(博多弁) — 「ばり」「～やけん」「なんしよーと？」「よかよか」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>야타이 카운터에 앉아 '하카타에 처음 왔는데 뭐 먹어야 해요?' 질문으로 시작. 「ばりうまかねぇ！」(엄청 맛있다!) 한 마디에 현지인 분위기 훈훈해짐.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:30~18:30]</td><td>하카타역 주변 라멘으로 워밍업</td><td class='tip-h'>이치란(一蘭) 또는 신신(しんしん) — 솔로 카운터석에서 몸 풀기</td></tr>
+<tr><td class='time-h'>[18:30~20:00]</td><td>나카스 야타이 진입</td><td class='tip-h'>강변 야타이 카운터석 착석. 하이볼 1잔 + 모츠나베 주문. 옆자리 대화 시작.</td></tr>
+<tr><td class='time-h'>[20:00~22:00]</td><td>텐진 이자카야 2차</td><td class='tip-h'>焼鳥忍者 또는 타치노미 바. 방언 카드 꺼내기.</td></tr>
+<tr><td class='time-h'>[22:00~24:00]</td><td>텐진 클럽 거리</td><td class='tip-h'>Club KIETH·Voodoo Lounge. K-POP 신청곡으로 분위기 업.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>심야 라멘 or 편의점 맥주</td><td class='tip-h'>숙소 귀환 전 나카스 심야 야타이 재방문도 가능.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>야타이 착석 직후</td><td class='jp-h'>「隣いいですか？ 博多初めてなんですよ〜」</td><td class='note-h'>옆자리 OK 받고 '하카타 처음이에요'로 자연스럽게 대화 진입</td></tr>
+<tr><td class='sit-h'>방언 칭찬 카드</td><td class='jp-h'>「ばりかわいい方やなぁと思って〜」</td><td class='note-h'>'엄청 예쁘시다 생각했어요' — 하카타벤으로 칭찬하면 반드시 웃음</td></tr>
+<tr><td class='sit-h'>음식 감탄</td><td class='jp-h'>「なんしよーと？ ばりうまかね！」</td><td class='note-h'>'뭐 먹고 있어요? 엄청 맛있겠다!' — 대화 트리거</td></tr>
+<tr><td class='sit-h'></td><td class='jp-h'>「LINE交換してもいいですか？韓国戻っても連絡したいんで」</td><td class='note-h'>'한국 돌아가도 연락하고 싶어서요' 이유 덧붙이면 성공률 업</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 하카타 하이볼 + 모츠나베용 니혼슈</p>
+        <p class="h-order jp-h">「ハイボールください」/ 「地酒ありますか？」</p>
+        <p class="h-sub">REC: 이치노이 (一ノ井) 후쿠오카산 사케</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">마이즈루 공원 (舞鶴公園)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 후쿠오카성 터 + 벚꽃 1,300그루. 낮부터 하나미 파티 인파 많아 합류 최적.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>다자이후 텐만구 (太宰府天満宮)</span> : 학문의 신 사당. 관광객 많지만 현지 젊은이도 방문. 사진 찍어주기 스타트 포인트.</li>
+<li><span class='hl'>캐널시티 하카타 (キャナルシティ博多)</span> : 쇼핑몰+분수쇼. 카페에서 낮 합류 시도 가능.</li>
+<li><span class='hl'>후쿠오카 타워 전망대</span> : 야경 데이트 유도용 낮 정보 수집. '저녁에 다시 오고 싶다'로 약속 잡기.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>나카스 야타이 거리</span> <span class='sr-h'>4.3★ 평균</span> — 강변 포장마차. 옆자리 대화 자연스러움. ばっかす 야타이 추천.</li>
+<li><span class='sn-h'>焼鳥忍者</span> <span class='sr-h'>4.4★ / 890 리뷰</span> — 텐진 이자카야. 솔로 카운터석 있어 대화하기 좋음.</li>
+<li><span class='sn-h'>Bar Drift</span> <span class='sr-h'>4.3★ / 214 리뷰</span> — 나카스 인터내셔널 바. 영어 OK. 외국인 방문객 多.</li>
+<li><span class='sn-h'>텐진 클럽 거리</span> <span class='sr-h'>금·토 심야</span> — Club KIETH·Voodoo Lounge 등. 댄스 교류 가능.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">하카타 라멘 (博多ラーメン)</p>
+        <p class="h-sub">크리미한 하얀 돈코츠 스프, 가는 면. 모츠나베(もつ鍋), 야키토리, 명란젓(明太子)도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 토요코인 하카타역 하카타구치 (¥5,500~), APA호텔 텐진 (¥6,000~). 나카스 도보 10분 이내 위치 우선.</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥90,000~130,000 + 숙박 3박 ¥30,000~48,000 + 식비/주류 3일 ¥30,000~50,000 = 총 ¥150,000~228,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,000~8,000 + 식사 ¥2,000~3,000 + 주류·이자카야 ¥3,000~8,000 + 교통 ¥500~1,000 = 1인 1일 ¥10,500~20,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="miyazaki">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🌴 미야자키 (宮崎) <span class="h-region">[ 규슈 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 일본 스낵타운 No.1 · 교류 난이도 최하</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 미야자키(KMI) | 비행 약 2시간</p>
+        <p class="h-sub">&gt; 직항 편수 적음 (주 3~4회) — 조기 예약 필수. 항공사: 에어부산·진에어</p>
+        <p class="h-sub">&gt; ACCESS: 시내 중심부까지 약 20분 (공항버스 ¥460)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/gopK62eRSO4" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/gopK62eRSO4/hqdefault.jpg"
+              alt="宮崎弁でやっちょんな！ 女性ネイティブが教える宮崎弁"
+              onerror="this.src='https://img.youtube.com/vi/gopK62eRSO4/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/gopK62eRSO4" target="_blank">宮崎弁でやっちょんな！ 女性ネイティブが教える宮崎弁</a></p>
+        <p class="h-sub">CH: ゆきこｈｒの宮崎弁でやっちょんな</p>
+        <p class="h-sub">&gt;&gt; 미야자키 출신 여성이 일상 방언 직접 설명. 여성의 입으로 나오는 미야자키벤 발음과 억양 학습에 최적.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 니시타치 (にしたち · 西橘通り)</p>
+        <p class="h-sub">스낵바·이자카야 1,500개 이상 밀집, 일본 전국 스낵바 밀도 1위. 저녁 7시부터 새벽까지 현지인으로 가득 찬 골목.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★★ (최상)</span></p>
+        <p class="h-sub">&gt; 관광객 적고 현지인 비율 최고. 스낵바 문화 특성상 마마상이 대화를 유도해줌. K-POP·한드라마 인기 높아 한국인에 친화적.</p>
+        <div class="h-dialect">미야자키벤(宮崎弁) — 「なまい！」「～ちゃが」「よだきい」「おいどん」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>니시타치 메인 스트리트 스낵바 1차 → 이자카야 2차 코스. 방언 한 마디에 현지인 즉각 반응. '미야자키 처음이에요' 보다 방언 섞어 말하면 '어, 미야자키 알아요?' 반응 폭발.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:00~18:30]</td><td>지토안 닭고기 저녁식사</td><td class='tip-h'>미야자키 명물 지토안야키(地鶏炭火焼) + 쇼추 1잔. 에너지 충전.</td></tr>
+<tr><td class='time-h'>[18:30~20:30]</td><td>니시타치 이자카야 1차</td><td class='tip-h'>Akinai(あきない) 스탠딩 이자카야 진입. 방언 카드 꺼내기.</td></tr>
+<tr><td class='time-h'>[20:30~23:00]</td><td>스낵바 2차 작전</td><td class='tip-h'>니시타치 골목 스낵바 탐색. 마마상에게 '자리 안내가능한 가게 있어요?' 선문의.</td></tr>
+<tr><td class='time-h'>[23:00~01:00]</td><td>The Bar 또는 심야 이자카야</td><td class='tip-h'>인연 있으면 3차 유도. 없으면 The Bar에서 새 대상 탐색.</td></tr>
+<tr><td class='time-h'>[01:00~]</td><td>편의점 야간 라운드</td><td class='tip-h'>세븐일레븐·로손에서 하이볼 캔 들고 니시타치 마무리 순회.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>입장 첫 마디</td><td class='jp-h'>「なまい！こんなすごい街、初めて見たが！」</td><td class='note-h'>'진짜! 이런 대단한 거리 처음 봤어요!' — 미야자키벤 감탄사로 즉시 주목</td></tr>
+<tr><td class='sit-h'>스낵바 마마상에게</td><td class='jp-h'>「韓国から来たんですけど、地元の方と話せる席ありますか？」</td><td class='note-h'>'현지 분들이랑 얘기할 수 있는 자리 있어요?' — 마마상이 직접 연결해줌</td></tr>
+<tr><td class='sit-h'>방언 배우기 요청</td><td class='jp-h'>「宮崎弁、教えてもらえますか？おいどん、もっと知りたいちゃが！」</td><td class='note-h'>방언으로 배우고 싶다 표현하면 현지인들 매우 좋아함</td></tr>
+<tr><td class='sit-h'>연락처</td><td class='jp-h'>「よだきいかもしれんけど、LINE交換してもらえますか？」</td><td class='note-h'>'귀찮을 수도 있지만' — 배려하는 말투로 거절 방지</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 미야자키 쇼추 (宮崎焼酎)</p>
+        <p class="h-order jp-h">「芋焼酎ロックでください」</p>
+        <p class="h-sub">REC: 키리시마 쇼추 (霧島) / 운카이 (雲海) 보리쇼추</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">미야자키 신궁 (宮崎神宮)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 신궁 경내 벚꽃 + 넓은 잔디. 낮 하나미 파티 인파 합류 → 이자카야 저녁 유도 최적 코스.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>아오시마 신사 (青島神社)</span> : 바다 한가운데 신사. 인스타 명소. 사진 찍어주기로 대화 시작.</li>
+<li><span class='hl'>미야자키 신궁 (宮崎神宮)</span> : 넓은 공원 산책 + 벚꽃. 낮 하나미 인파 합류 포인트.</li>
+<li><span class='hl'>피닉스 자연동물원 (フェニックス自然動物園)</span> : 커플·가족 多. 혼자인 여성 관광객 접근 포인트.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>Akinai (あきない)</span> <span class='sr-h'>4.4★ / 1,782 리뷰</span> — 니시타치 스탠딩 이자카야. 현지 직장인 단골 多, 자리 안내문화.</li>
+<li><span class='sn-h'>八州 (やしゅう)</span> <span class='sr-h'>4.4★ / 533 리뷰</span> — 정통 이자카야. 미야자키 지토안 닭고기 전문.</li>
+<li><span class='sn-h'>The Bar</span> <span class='sr-h'>4.2★ / 340 리뷰</span> — 외국인·현지인 믹스 바. 영어 OK. 입문용 최적.</li>
+<li><span class='sn-h'>晴夜 (はれや)</span> <span class='sr-h'>4.0★ / 473 리뷰</span> — 개인실 이자카야. 단체 여행객 추천.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">치킨난반 (チキン南蛮)</p>
+        <p class="h-sub">튀긴 닭고기에 타르타르소스 + 달달한 식초 소스. 미야자키 발상 일본 전국구 소울푸드. 지토안닭(地鶏炭火焼), 냉국수(冷や汁)도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 토요코인 미야자키역 (¥5,000~). 니시타치까지 도보 10분. 슈퍼호텔 미야자키 (¥4,500~) 가성비 최고.</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥130,000~160,000 + 숙박 3박 ¥30,000~48,000 + 식비/주류 3일 ¥30,000~50,000 = 총 ¥190,000~258,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,000~8,000 + 식사 ¥1,500~2,500 + 주류·이자카야 ¥3,000~7,000 + 교통 ¥300~600 = 1인 1일 ¥9,800~18,100</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="kagoshima">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🌋 가고시마 (鹿児島) <span class="h-region">[ 규슈 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 일본 쇼추 왕국 · 사쿠라지마가 보이는 야경</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 가고시마(KOJ) | 비행 약 2시간</p>
+        <p class="h-sub">&gt; 직항 있음 (주 4~7회 계절 변동). 항공사: 아시아나·에어부산·진에어</p>
+        <p class="h-sub">&gt; ACCESS: 시내(텐몬칸)까지 공항버스 약 25분 (¥1,000)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/ZIXUAXaD0Tg" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/ZIXUAXaD0Tg/hqdefault.jpg"
+              alt="鹿児島弁の力 — 単語と例文で学ぶ"
+              onerror="this.src='https://img.youtube.com/vi/ZIXUAXaD0Tg/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/ZIXUAXaD0Tg" target="_blank">鹿児島弁の力 — 単語と例文で学ぶ</a></p>
+        <p class="h-sub">CH: 鹿児島弁の力</p>
+        <p class="h-sub">&gt;&gt; 가고시마벤 단어+예문 집중 강의. 알아들을 수 없기로 유명한 가고시마벤 핵심 표현 30개 정리.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 텐몬칸 (天文館)</p>
+        <p class="h-sub">가고시마 최대 유흥가. 타치노미·스낵바·이자카야 밀집. 쇼추 저렴하게 즐기는 센베로 문화 발달.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 타치노미 문화로 낯선 사람과 대화가 자연스러움. 쇼추 문화 공유로 대화 시작 쉬움. 한국인이 드물어 현지인들이 특히 반갑게 맞아줌.</p>
+        <div class="h-dialect">가고시마벤(鹿児島弁) — 「わっぜか！」「～ごわす」「よかよか」「～じゃっど」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>텐몬칸 타치노미에서 쇼추 들고 자리 안내. '사쓰마 쇼추 어떤 게 맛있어요?' 질문이면 현지인들 신나서 설명. 「わっぜかうまか！」(엄청 맛있다!) 한 마디면 모두가 친구.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:30~18:30]</td><td>텐몬칸 흑돼지 저녁식사</td><td class='tip-h'>黒豚 샤부샤부 또는 사쓰마아게. 쇼추 한 잔으로 위장 준비.</td></tr>
+<tr><td class='time-h'>[18:30~20:30]</td><td>텐몬칸 타치노미 1차</td><td class='tip-h'>タチノミキリツ 또는 인근 선술집. 쇼추 공유 화제로 자리 안내.</td></tr>
+<tr><td class='time-h'>[20:30~22:30]</td><td>이자카야 2차</td><td class='tip-h'>이자카야 017 よかバン. 좌석 적어 자리 안내당연한 구조.</td></tr>
+<tr><td class='time-h'>[22:30~01:00]</td><td>스낵바 심야 작전</td><td class='tip-h'>텐몬칸 북쪽 골목 스낵바 2~3곳 순회. 마마상 활용.</td></tr>
+<tr><td class='time-h'>[01:00~]</td><td>야간 라멘·귀환</td><td class='tip-h'>가고시마 라멘 (돼지골수+닭뼈 혼합 스프) 마무리.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>쇼추 대화 시작</td><td class='jp-h'>「薩摩焼酎の中でどれが一番おすすめですか？わっぜか種類あって迷って…」</td><td class='note-h'>'사쓰마 쇼추 중 뭐가 제일 추천이에요? 엄청 많아서 헷갈려서요' — 쇼추 화제 즉시 반응</td></tr>
+<tr><td class='sit-h'>방언 첫 마디</td><td class='jp-h'>「わっぜかきれいじゃっど！と言いたいんですけど合ってますか？」</td><td class='note-h'>'엄청 예쁘다고 말하고 싶은데 맞아요?' — 방언 확인 구실로 자연스럽게</td></tr>
+<tr><td class='sit-h'>자리 안내요청</td><td class='jp-h'>「よかよか、隣に座っていいですか？よかよか？」</td><td class='note-h'>'괜찮아요, 옆에 앉아도 될까요? 괜찮아요?' — 방언 반복으로 웃음 유발</td></tr>
+<tr><td class='sit-h'></td><td class='jp-h'>「よかよかなら、LINE交換しましょうよ！」</td><td class='note-h'>'괜찮으면 해요!' — よかよか를 키워드로 자연스럽게</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 사쓰마 쇼추 (薩摩焼酎)</p>
+        <p class="h-order jp-h">「芋焼酎お湯割りでください」</p>
+        <p class="h-sub">REC: 키리시마 (霧島) / 사쿠라지마 (桜島) / 이모코지마 (芋麹島)</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">가고시마성 (鶴丸城跡) + 사쿠라지마 뷰</p>
+        <p class="h-sub">BLOOM: 3월 중순~4월 초</p>
+        <p class="h-sub">&gt; 가고시마성 해자 주변 벚꽃 + 뒤편 사쿠라지마 화산 뷰. 사진 명소로 낮 접근 최적.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>사쿠라지마 페리 (桜島フェリー)</span> : 왕복 ¥260. 15분 크루즈. 현지인도 많이 탑승. 선내 좁아 대화 자연스러움.</li>
+<li><span class='hl'>이오지마 온천 (指宿温泉·砂むし)</span> : 모래 온천 체험. 독특한 경험으로 대화 소재 무한 제공.</li>
+<li><span class='hl'>선리빔 가고시마 (仙巌園)</span> : 시마즈가 정원. 사쿠라지마 뷰 최고. 사진 찍어주기 스타트.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>이자카야 017 よかバン</span> <span class='sr-h'>4.9★ / 191 리뷰</span> — 텐몬칸 인근. 로컬 분위기 최강. 좌석 적어 자리 안내필수.</li>
+<li><span class='sn-h'>タチノミキリツ</span> <span class='sr-h'>4.3★ / 219 리뷰</span> — 선술집. ¥1,000~2,000으로 쇼추+안주. 현지 직장인 합류 쉬움.</li>
+<li><span class='sn-h'>未完成少年</span> <span class='sr-h'>4.5★ / 30 리뷰</span> — 아늑한 분위기 바. 남녀 혼합 손님 多.</li>
+<li><span class='sn-h'>텐몬칸 북쪽 골목</span> <span class='sr-h'>생활 술자리</span> — 라멘 후 이자카야 2차 코스. 현지인 비율 최고.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">쿠로부타 (黒豚)</p>
+        <p class="h-sub">가고시마 흑돼지 샤부샤부. 사쓰마아게(さつま揚げ 어묵튀김), 가고시마 쇼추(焼酎) 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 가고시마 (¥7,000~, 텐몬칸 도보 5분). APA호텔 가고시마 (¥6,000~). 조식 포함 플랜 고려.</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥150,000~180,000 + 숙박 3박 ¥36,000~54,000 + 식비/주류 3일 ¥30,000~50,000 = 총 ¥216,000~284,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥6,000~9,000 + 식사 ¥2,000~3,000 + 주류·이자카야 ¥3,000~8,000 + 교통 ¥500~1,000 = 1인 1일 ¥11,500~21,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="oita">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// ♨️ 오이타/벳부 (大分/別府) <span class="h-region">[ 규슈 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 온천 왕국 · 지옥 찜 요리 · 토리텐 발상지</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 오이타(OIT) | 비행 약 1시간 25분</p>
+        <p class="h-sub">&gt; 항공사: 에어부산·진에어.</p>
+        <p class="h-sub">&gt; ACCESS: 오이타역까지 공항버스 약 45분 (¥1,500). 벳부역은 오이타역에서 JR 12분.</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/POsKQ6pEiak" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/POsKQ6pEiak/hqdefault.jpg"
+              alt="大分の女の子が教える大分弁！"
+              onerror="this.src='https://img.youtube.com/vi/POsKQ6pEiak/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/POsKQ6pEiak" target="_blank">大分の女の子が教える大分弁！</a></p>
+        <p class="h-sub">CH: じゅりぷぅ</p>
+        <p class="h-sub">&gt;&gt; 오이타 출신 여성 유튜버가 일상 방언 소개. 여성이 실제로 쓰는 오이타벤 억양 학습에 최적.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 中央町 (주오마치) · 府内町 (후나이마치)</p>
+        <p class="h-sub">오이타 시내 중심 이자카야 밀집 구역. 나이트라이프는 벳부보다 오이타 시내가 훨씬 풍성.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★☆☆ (보통~상)</span></p>
+        <p class="h-sub">&gt; 규슈 소도시 특유의 따뜻한 인심. 온천 문화로 대화가 자연스럽게 열리는 분위기.</p>
+        <div class="h-dialect">오이타벤(大分弁) — 「～ちゃ」「しちょる」「なしか？」「でけん」「よかよか」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>오이타 시내 주오마치 이자카야에서 토리텐을 안주 삼아 '이게 오이타 명물이에요?'로 시작. 「なしかそんなに旨いとや！」(왜 이렇게 맛있어요!) 방언 섞으면 호응 폭발.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[낮 14:00~16:00]</td><td>벳부 지옥온천 순회</td><td class='tip-h'>7개 지옥 온천 투어. 족욕 + 온천 계란. 현지인 관광객 접근 포인트.</td></tr>
+<tr><td class='time-h'>[17:00~18:30]</td><td>오이타역 귀환 + 저녁식사</td><td class='tip-h'>토리텐(鶏天) 또는 세키아지(関アジ) 해산물 저녁.</td></tr>
+<tr><td class='time-h'>[18:30~21:00]</td><td>주오마치 이자카야 1차</td><td class='tip-h'>とよ常 또는 기린지(麒麟児). 오이타벤 카드 꺼내기.</td></tr>
+<tr><td class='time-h'>[21:00~23:30]</td><td>후나이마치 타치노미 2차</td><td class='tip-h'>선술집 순회. 쇼추 + 토리텐 재주문.</td></tr>
+<tr><td class='time-h'>[23:30~]</td><td>심야 귀환 또는 벳부 온천 마무리</td><td class='tip-h'>벳부 숙박 시 료칸 온천에서 하루 마무리.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>온천 화제 시작</td><td class='jp-h'>「大分の温泉、どこが一番よかったですか？なしかこんなに種類あるとや！」</td><td class='note-h'>'오이타 온천 어디가 제일 좋았어요? 왜 이렇게 종류가 많아요!' — 방언+감탄</td></tr>
+<tr><td class='sit-h'>토리텐 주문</td><td class='jp-h'>「トリテンってなんしか？初めて食べたけどばりうまかちゃ！」</td><td class='note-h'>'토리텐이 뭔가요? 처음 먹었는데 엄청 맛있네요!' — 질문+감탄 콤보</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「隣いいですか？一人で来たんで、なしか寂しくて〜」</td><td class='note-h'>'옆자리 될까요? 혼자 왔더니 왜인지 외로워서요'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「韓国からなんですけど、LINEしてもいいですか？でけんですかね…？」</td><td class='note-h'>'한국서 왔는데 라인 해도 될까요? 안 될까요…?' — 방언 でけん으로 마무리</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 오이타 기린지 쇼추 (麒麟児焼酎)</p>
+        <p class="h-order jp-h">「焼酎水割りでください」/ 「麦焼酎ありますか？」</p>
+        <p class="h-sub">REC: 니카 위스키 오이타 증류소 / 쿠라지 (くらじ) 보리쇼추</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">오이타 성터 공원 (大分城址公園)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 오이타성 해자 + 벚꽃. 도심 한복판 하나미 파티 장소. 음주 허용 구역.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>벳부 지옥온천 (別府地獄めぐり)</span> : 7개 색깔 온천. 인스타 명소. 족욕 무료 구역에서 대화 가능.</li>
+<li><span class='hl'>유후인 (湯布院)</span> : 오이타역에서 JR 1시간. 한국 여성 관광객 많음. 접근 난이도 낮음.</li>
+<li><span class='hl'>오이타 시립 도서관 카페</span> : 현지인 젊은층 많은 카페. 낮 합류 포인트.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>とよ常</span> <span class='sr-h'>4.4★</span> — 오이타 시내 대표 이자카야. 토리텐·지역 음식 풍성.</li>
+<li><span class='sn-h'>麒麟児 (기린지)</span> <span class='sr-h'>4.3★</span> — 이자카야+바. 오이타 보리쇼추 전문점. 현지인 단골.</li>
+<li><span class='sn-h'>스탠딩 바 후나이마치</span> <span class='sr-h'>4.1★</span> — 타치노미 바. 가격 저렴. 현지 직장인 야간 귀가 전 합류.</li>
+<li><span class='sn-h'>벳부 온천 바</span> <span class='sr-h'>벳부역 인근</span> — 온천 후 한 잔 문화. 료칸 게스트 혼합.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">토리텐 (鶏天)</p>
+        <p class="h-sub">닭고기 텐푸라. 오이타 발상. 폰즈 소스 찍어먹기. 세키아지(関アジ) 전갱이회, 온천에서 삶은 지옥 계란도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">전략: 오이타역 비즈니스호텔 + 벳부 료칸 1박 믹스 추천. 도미인 오이타 (¥6,500~). 벳부 기리시마 관광호텔 (¥8,000~, 노천온천 포함).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥130,000~160,000 + 숙박 3박 ¥30,000~54,000 + 식비/주류 3일 ¥28,000~48,000 = 총 ¥188,000~262,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,000~8,000 + 식사 ¥2,000~3,000 + 주류·이자카야 ¥2,500~6,000 + 교통 ¥800~1,500 = 1인 1일 ¥10,300~18,500</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="kumamoto">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🐻 구마모토 (熊本) <span class="h-region">[ 규슈 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 구마모토성 야경 · 쿠마몬의 도시 · 현지인 이자카야 밀집</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 구마모토(KMJ) | 비행 약 1시간 50분</p>
+        <p class="h-sub">&gt; 항공사: 에어부산·아시아나. 직항 주 5~7회. 미야자키 대비 편수 많음.</p>
+        <p class="h-sub">&gt; ACCESS: 구마모토역까지 공항버스 약 50분 (¥900)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/oSO2gMk7fx8" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/oSO2gMk7fx8/hqdefault.jpg"
+              alt="熊本弁「ど」の使い方講座"
+              onerror="this.src='https://img.youtube.com/vi/oSO2gMk7fx8/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/oSO2gMk7fx8" target="_blank">熊本弁「ど」の使い方講座</a></p>
+        <p class="h-sub">CH: 語り芝居 岡田かずえ</p>
+        <p class="h-sub">&gt;&gt; 구마모토벤 특유의 「ど」 활용법 집중 강의. 짧고 강렬한 구마모토벤 감탄사 학습에 효과적.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 카미토리 (上通り) · 시모토리 (下通り)</p>
+        <p class="h-sub">구마모토 최대 아케이드 쇼핑가 + 이자카야 밀집 구역. 카미토리·시모토리 뒷골목에 스낵바·바·이자카야 집중.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 지방 소도시 특유의 인정 넘치는 분위기. 한국인이 드물어 현지인들이 관심 보여줌. 쿠마몬 공통화제로 대화 쉽게 시작 가능.</p>
+        <div class="h-dialect">구마모토벤(熊本弁) — 「～ばい」「～ばってん」「よかよか」「なんばしよっとか？」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>카미토리 아케이드 인근 이자카야. 쿠마몬 굿즈 화제로 아이스브레이킹. 「なんばしよっとか？」(뭐 하고 있어요?) 방언으로 자연스럽게 대화 시작.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:00~18:30]</td><td>구마모토성 야경 산책</td><td class='tip-h'>날 밝을 때 성 외관 확인 + 하이볼 캔 들고 성 주변 산책. 사진 찍어주기 포인트.</td></tr>
+<tr><td class='time-h'>[18:30~20:30]</td><td>카미토리 이자카야 1차</td><td class='tip-h'>마구로 (まぐろ) 이자카야 또는 현지 타치노미. 방언 카드 준비.</td></tr>
+<tr><td class='time-h'>[20:30~23:00]</td><td>시모토리 뒷골목 2차</td><td class='tip-h'>스낵바 순회. 쿠마몬 화제로 아이스브레이킹.</td></tr>
+<tr><td class='time-h'>[23:00~01:00]</td><td>심야 이자카야 or 바</td><td class='tip-h'>구마모토 시내 심야 영업점 탐색.</td></tr>
+<tr><td class='time-h'>[01:00~]</td><td>구마몬 편의점 야식</td><td class='tip-h'>세븐일레븐 구마몬 패키지 야식으로 마무리.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>쿠마몬 화제</td><td class='jp-h'>「くまモン、韓国でも大人気なんですよ！なんばしよっとか？ってくまモンも言いますよね？」</td><td class='note-h'>'쿠마몬 한국에서도 엄청 인기예요! 나베시요토카도 쿠마몬이 쓰죠?' — 방언+쿠마몬 콤보</td></tr>
+<tr><td class='sit-h'>성 화제</td><td class='jp-h'>「熊本城、すごかばい！地震の後もこんなに綺麗に…感動したばってん」</td><td class='note-h'>'구마모토성 대단하네요! 지진 이후에도 이렇게 아름답게… 감동받았지만' — ばい·ばってん 방언</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「なんばしよっとか？よかよか、一緒に飲みませんか？」</td><td class='note-h'>'뭐 하고 있어요? 괜찮으면 같이 마실래요?'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「よかよかなら、LINE教えてもらえますか？」</td><td class='note-h'>'괜찮으면 라인 알려줄 수 있어요?'</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 구마모토 쇼추 (熊本焼酎) + 니혼슈</p>
+        <p class="h-order jp-h">「球磨焼酎お湯割りください」</p>
+        <p class="h-sub">REC: 전통 구마 쇼추 (球磨焼酎) / 레이잔 (霊山) 쌀쇼추</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">구마모토성 (熊本城)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 부흥 중인 구마모토성 + 벚꽃 700그루. 야간 라이트업 있음. 성 배경 사진 찍어주기로 대화 시작.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>구마모토성 (熊本城)</span> : 2016년 지진 후 부흥 중. 역사 이야기로 감동 공유 → 공감대 형성.</li>
+<li><span class='hl'>스이젠지 공원 (水前寺公園)</span> : 에도시대 정원. 구마몬 동상 포토존.</li>
+<li><span class='hl'>가라시렌콘 가게 순례</span> : 구마모토 명물 가라시렌콘 탐방. 음식 화제 무한 제공.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>カウンターワインバー</span> <span class='sr-h'>4.3★</span> — 카운터석 중심 와인·사케 바. 1인 여성 손님 多.</li>
+<li><span class='sn-h'>居酒屋 わらべ</span> <span class='sr-h'>4.4★</span> — 현지인 단골. 구마모토 향토요리 전문.</li>
+<li><span class='sn-h'>시모토리 타치노미</span> <span class='sr-h'>4.0★</span> — 저렴한 선술집. 현지 직장인 야간 1차.</li>
+<li><span class='sn-h'>스낵 쿠마몬 거리</span> <span class='sr-h'>시모토리 뒷골목</span> — 스낵바 집중 구역. 마마상 활용.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">바사시 (馬刺し)</p>
+        <p class="h-sub">말고기 육회. 구마모토 명물. 참기름+생강 찍어 먹기. 가라시렌콘(辛子蓮根 매운 연근), 다이코쿠 라멘도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 구마모토 (¥7,000~). 토요코인 구마모토역 (¥5,500~). 시모토리 도보권 위치 우선.</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥140,000~170,000 + 숙박 3박 ¥33,000~51,000 + 식비/주류 3일 ¥28,000~48,000 = 총 ¥201,000~269,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,500~8,500 + 식사 ¥2,000~3,000 + 주류·이자카야 ¥2,500~7,000 + 교통 ¥500~1,000 = 1인 1일 ¥10,500~19,500</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="nagasaki">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// ⛵ 나가사키 (長崎) <span class="h-region">[ 규슈 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 야경 세계 3대 · 이국적 정서 · 중화가 + 이자카야</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 나가사키(NGS) | 비행 약 1시간 50분</p>
+        <p class="h-sub">&gt; 항공사: 에어부산·아시아나. 직항 주 5~7회.</p>
+        <p class="h-sub">&gt; ACCESS: 나가사키역까지 공항버스 약 40분 (¥900)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/YzdD-z5WX78" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/YzdD-z5WX78/hqdefault.jpg"
+              alt="長崎弁講座 第1回 — ねこねこ日本語"
+              onerror="this.src='https://img.youtube.com/vi/YzdD-z5WX78/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/YzdD-z5WX78" target="_blank">長崎弁講座 第1回 — ねこねこ日本語</a></p>
+        <p class="h-sub">CH: Improve KYOTO</p>
+        <p class="h-sub">&gt;&gt; 나가사키벤 1회 강좌. 규슈 방언 공통점과 나가사키 고유 표현 비교. 나가사키벤 입문에 최적.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 시안바시 (思案橋) · 마루야마 (丸山)</p>
+        <p class="h-sub">나가사키 최대 유흥가. 시안바시 다리 건너면 이자카야·스낵바·클럽 밀집. 에도시대부터 이어진 유흥가 전통.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 이국적 분위기로 외국인에 개방적. 이중 문화 도시 특성상 한국인에 친화적. 야경 화제로 대화 시작 쉬움.</p>
+        <div class="h-dialect">나가사키벤(長崎弁) — 「～ばい」「～たい」「よかよか」「おいどん」「なんしようと？」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>시안바시 이자카야 1차 후 마루야마 스낵바 2차. 야경 투어 화제로 아이스브레이킹. 「ながさきばりきれかとこばい！」(나가사키 엄청 예쁜 곳이네요!) 방언으로 감탄.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:00~18:30]</td><td>이나사야마 야경 사전 답사</td><td class='tip-h'>나가사키 야경 명소 확인. 저녁 야경 데이트 유도용 정보 수집.</td></tr>
+<tr><td class='time-h'>[18:30~20:30]</td><td>짬폰 저녁식사 + 시안바시 이자카야 1차</td><td class='tip-h'>나가사키 짬폰 저녁 후 시안바시 이자카야 진입.</td></tr>
+<tr><td class='time-h'>[20:30~23:00]</td><td>마루야마 스낵바 2차</td><td class='tip-h'>마루야마 골목 스낵바. 마마상과 친해지기.</td></tr>
+<tr><td class='time-h'>[23:00~01:00]</td><td>야경 데이트 or 클럽</td><td class='tip-h'>인연 있으면 이나사야마 야경 제안. 없으면 시안바시 클럽.</td></tr>
+<tr><td class='time-h'>[01:00~]</td><td>심야 귀환</td><td class='tip-h'>전차(路面電車) 막차 확인 후 귀환.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>야경 화제</td><td class='jp-h'>「長崎の夜景、世界一らしいですね！ながさきばりきれかとこばい！」</td><td class='note-h'>'나가사키 야경 세계 최고라더니! 나가사키 엄청 예쁜 곳이네요!' — 방언+감탄</td></tr>
+<tr><td class='sit-h'>짬폰 화제</td><td class='jp-h'>「チャンポン食べたんですけど、なんしようとか知ってますか？これ長崎発祥らしくて！」</td><td class='note-h'>'짬폰 먹었는데 뭔지 아세요? 나가사키 발상이라던데!'</td></tr>
+<tr><td class='sit-h'>야경 제안</td><td class='jp-h'>「夜景、一緒に見に行きませんか？稲佐山、よかよかですよ！」</td><td class='note-h'>'야경 같이 보러 가실래요? 이나사야마, 좋아요!'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「よかよかなら、LINE交換しましょうたい！」</td><td class='note-h'>'괜찮으면 해요!' — たい 방언 어미로 마무리</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 나가사키 비루 + 쇼추</p>
+        <p class="h-order jp-h">「長崎ビールください」/ 「芋焼酎ロックで」</p>
+        <p class="h-sub">REC: 나가사키 지역 맥주 / 이키 쇼추 (壱岐焼酎)</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">이나사야마 공원 (稲佐山公園)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 야경 명소 이나사야마 + 벚꽃. 야간 라이트업. 낮 하나미 → 야경 데이트 2단계 전략.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>글로버 정원 (グラバー園)</span> : 나가사키 이국적 명소 대표. 언덕 정원. 한국 여성 관광객 多.</li>
+<li><span class='hl'>하우스텐보스 (ハウステンボス)</span> : 나가사키 인근 네덜란드풍 테마파크. 커플·그룹 多.</li>
+<li><span class='hl'>나가사키 차이나타운 (新地中華街)</span> : 짬폰·사라우동 탐방. 점심 화제 무한 제공.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>ツル茶ん (츠루찬)</span> <span class='sr-h'>4.2★ / 이자카야</span> — 시안바시 중심. 현지인 단골.</li>
+<li><span class='sn-h'>思案橋ラーメン</span> <span class='sr-h'>4.1★</span> — 심야 라멘. 이자카야 2차 후 마무리.</li>
+<li><span class='sn-h'>마루야마 스낵바 거리</span> <span class='sr-h'>마루야마</span> — 스낵바 10개 이상 밀집. 마마상 활용.</li>
+<li><span class='sn-h'>Bar Marine</span> <span class='sr-h'>4.3★</span> — 항구 뷰 바. 야경 데이트 2차 장소.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">나가사키 짬폰 (長崎ちゃんぽん)</p>
+        <p class="h-sub">해산물·야채·돼지고기 풍성한 나가사키 발상 짬폰. 사라우동(皿うどん), 카스테라(カステラ)도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 나가사키 (¥7,000~). 나가사키역에서 시안바시까지 전차 10분. 마루야마 도보권 게스트하우스도 선택지.</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥140,000~170,000 + 숙박 3박 ¥33,000~51,000 + 식비/주류 3일 ¥28,000~48,000 = 총 ¥201,000~269,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,500~8,500 + 식사 ¥2,000~3,000 + 주류·이자카야 ¥2,500~7,000 + 교통 ¥500~1,000 = 1인 1일 ¥10,500~19,500</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="naha">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🌺 나하 (오키나와) (那覇 (沖縄)) <span class="h-region">[ 오키나와 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 아열대 리조트 · 오키나와벤 · 아와모리 쇼추</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 나하(OKA) | 비행 약 2시간 30분</p>
+        <p class="h-sub">&gt; 항공사: 제주항공·에어부산·진에어. 성수기 가격 상승 주의.</p>
+        <p class="h-sub">&gt; ACCESS: 나하 공항에서 유이레일(모노레일) 13분 (¥270)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/Vesck-FX5ec" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/Vesck-FX5ec/hqdefault.jpg"
+              alt="楽しく覚えよう！沖縄方言 Vol.1"
+              onerror="this.src='https://img.youtube.com/vi/Vesck-FX5ec/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/Vesck-FX5ec" target="_blank">楽しく覚えよう！沖縄方言 Vol.1</a></p>
+        <p class="h-sub">CH: おきなわちゃんねる</p>
+        <p class="h-sub">&gt;&gt; 즐겁게 배우는 오키나와 방언 Vol.1. 우치나구치 기본 인사·표현 집중. 현지인 발음·억양 학습 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 마쓰야마 (松山) · 국제거리 (国際通り)</p>
+        <p class="h-sub">마쓰야마는 나하 최대 유흥가. 스낵바·클럽·이자카야 밀집. 국제거리는 관광 + 현지인 혼합 구역.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 리조트 기분으로 현지인·관광객 모두 기분 좋은 상태. 오키나와 고유 방언으로 인해 '배워보고 싶다' 반응 즉각. 해변+야간 코스 조합 가능.</p>
+        <div class="h-dialect">우치나구치(ウチナーグチ) — 「はいさい！」「めんそーれ！」「にふぇーでーびる」「うちなーんちゅ？」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>마쓰야마 이자카야에서 아와모리 오유와리 주문. '오키나와 처음이에요, 방언 가르쳐 주세요'로 시작. 「はいさい！」 한 마디에 오키나와 사람들 즉각 환영 반응.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[14:00~17:00]</td><td>국제거리 + 마키시 공설시장 탐방</td><td class='tip-h'>오키나와 음식 탐방. 해산물·아와모리 시음. 낮부터 기분 UP.</td></tr>
+<tr><td class='time-h'>[17:00~19:00]</td><td>슈리성 야경 산책</td><td class='tip-h'>유네스코 세계유산 슈리성. 야경 명소.</td></tr>
+<tr><td class='time-h'>[19:00~21:30]</td><td>마쓰야마 이자카야 1차</td><td class='tip-h'>오리온 맥주 + 아와모리. 방언 카드 꺼내기.</td></tr>
+<tr><td class='time-h'>[21:30~24:00]</td><td>마쓰야마 클럽·스낵바 2차</td><td class='tip-h'>마쓰야마 클럽 거리. K-POP 신청으로 분위기 주도.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>코자 거리 또는 숙소 귀환</td><td class='tip-h'>심야까지 운영하는 아와모리 바.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>첫 인사 충격요법</td><td class='jp-h'>「はいさい！うちなーんちゅですか？」</td><td class='note-h'>'안녕하세요! 오키나와 분이에요?' — 우치나구치로 시작하면 100% 반응</td></tr>
+<tr><td class='sit-h'>아와모리 화제</td><td class='jp-h'>「泡盛、初めて飲みましたよ！なんか독특な味で…韓国の焼酎と全然違って！」</td><td class='note-h'>'아와모리 처음 마셨어요! 독특한 맛이라서… 한국 소주랑 완전 달라서!'</td></tr>
+<tr><td class='sit-h'>방언 배우기</td><td class='jp-h'>「にふぇーでーびる！ってどういう意味ですか？教えてください！」</td><td class='note-h'>'니훼이데비루가 무슨 뜻이에요? 가르쳐 주세요!' — 방언 질문으로 대화 지속</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「めんそーれ、またいつでも連絡してください！LINE交換しましょう！」</td><td class='note-h'>'언제든지 연락 주세요! 해요!' — めんそーれ 환영 인사로 마무리</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 아와모리 (泡盛)</p>
+        <p class="h-order jp-h">「泡盛の水割りください」/ 「オリオンビールください」</p>
+        <p class="h-sub">REC: 자키미 (残波) / 쿠에나 (久遠) / 세이와 (瑞穂)</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">나하 히가시 공원 (末吉公園)</p>
+        <p class="h-sub">BLOOM: 1월 말~2월 초 (히칸자쿠라 早咲き)</p>
+        <p class="h-sub">&gt; 오키나와 벚꽃은 일본 최초 개화. 4월은 이미 끝남 → 4월 여행 시 벚꽃 기대 금지. 대신 해변·꽃축제 활용.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>추라우미 수족관 (美ら海水族館)</span> : 세계 최대급 수족관. 커플·가족 多. 사진 찍어주기 포인트.</li>
+<li><span class='hl'>나키진 성터 (今帰仁城跡)</span> : 세계유산 성터 + 바다뷰. 드라이브 데이트 코스.</li>
+<li><span class='hl'>비세 후쿠기 가로수 길 (備瀬のフクギ並木)</span> : 초록 터널 산책로. 인스타 명소. 커플 사진 찍어주기 스타트.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>마쓰야마 이자카야 거리</span> <span class='sr-h'>4.2★ 평균</span> — 오키나와 최대 유흥가. 이자카야+클럽+스낵바 밀집.</li>
+<li><span class='sn-h'>Bar Helios</span> <span class='sr-h'>4.3★</span> — 아와모리 전문 바. 오키나와 방언으로 대화 유도.</li>
+<li><span class='sn-h'>クラブa/so/bi</span> <span class='sr-h'>4.1★</span> — 나하 클럽. K-POP 행사 多. 댄스 플로어 교류 가능.</li>
+<li><span class='sn-h'>国際通り 야타이촌</span> <span class='sr-h'>4.0★</span> — 오키나와 음식·아와모리. 관광+현지 혼합 구역.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">오키나와 소바 (沖縄そば)</p>
+        <p class="h-sub">돼지뼈+가다랑어 스프, 굵은 면. 소키(갈비살) 토핑 추천. 고야참푸르(ゴーヤーチャンプルー), 타코라이스, 오리온 맥주도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 나하 (¥7,500~). 국제거리 도보 5분. 마쓰야마 도보권 게스트하우스도 선택지 (¥3,000~). 리조트 호텔은 나하 외곽 주의.</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥150,000~190,000 + 숙박 3박 ¥36,000~54,000 + 식비/주류 3일 ¥28,000~50,000 = 총 ¥214,000~294,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥6,000~9,000 + 식사 ¥2,000~3,500 + 주류·이자카야 ¥3,000~8,000 + 교통 ¥500~1,500 = 1인 1일 ¥11,500~22,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="kitakyushu">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🏭 기타큐슈 (北九州) <span class="h-region">[ 규슈 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 고쿠라 유흥가 · 공업도시 이면의 나이트라이프 · 야키토리 성지</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 기타큐슈(KKJ) | 비행 약 1시간 30분</p>
+        <p class="h-sub">&gt; 항공사: 에어부산·진에어. 후쿠오카보다 편수 적지만 가격 저렴한 경우 多.</p>
+        <p class="h-sub">&gt; ACCESS: 고쿠라역까지 공항버스 약 30분 (¥710)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/hDub84tNyPk" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/hDub84tNyPk/hqdefault.jpg"
+              alt="北九州弁レッスン — 地元女子が教える"
+              onerror="this.src='https://img.youtube.com/vi/hDub84tNyPk/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/hDub84tNyPk" target="_blank">北九州弁レッスン — 地元女子が教える</a></p>
+        <p class="h-sub">CH: 占部朱乃</p>
+        <p class="h-sub">&gt;&gt; 기타큐슈 출신 여성이 직접 가르치는 기타큐슈벤. 하카타벤과의 차이점도 설명. 규슈 방언 통합 학습에 효과적.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 고쿠라 탄가 (旦過) · 야스카와 거리 (鍛冶町)</p>
+        <p class="h-sub">고쿠라역 인근 탄가시장·가지마치 이자카야 밀집. 야키토리 가게 집중. 현지인 비율 매우 높은 진짜 로컬 유흥가.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 외국인 관광객이 드물어 현지인들이 특히 친절하게 대해줌. 공업도시 특유의 직선적이고 활발한 성격. 야키토리 화제로 쉬운 대화 시작.</p>
+        <div class="h-dialect">기타큐슈벤(北九州弁) — 「～ちゃ」「～やけん」「なんしよーと？」「ばり」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>탄가 시장 주변 야키토리 가게 카운터석 착석. '기타큐슈 야키토리 유명하다던데 맞아요?' 질문으로 시작. 기타큐슈벤은 하카타벤과 유사하여 이미 배운 방언 활용 가능.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:00~18:30]</td><td>탄가 시장 탐방</td><td class='tip-h'>탄가시장 식재료·음식 탐방. 점포 아주머니들과 방언 연습.</td></tr>
+<tr><td class='time-h'>[18:30~21:00]</td><td>가지마치 야키토리 1차</td><td class='tip-h'>고쿠라 야키토리 골목. 모츠나베 또는 야키토리 코스.</td></tr>
+<tr><td class='time-h'>[21:00~23:30]</td><td>야스카와 거리 이자카야 2차</td><td class='tip-h'>현지인 단골 이자카야 탐색. 방언 카드.</td></tr>
+<tr><td class='time-h'>[23:30~01:00]</td><td>스낵바 심야 작전</td><td class='tip-h'>고쿠라 스낵바 골목 순회.</td></tr>
+<tr><td class='time-h'>[01:00~]</td><td>심야 라멘 귀환</td><td class='tip-h'>기타큐슈 스타일 돈코츠 라멘으로 마무리.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>야키토리 화제</td><td class='jp-h'>「北九州の焼き鳥、ばりうまかちゃ！どれがおすすめですか？」</td><td class='note-h'>'기타큐슈 야키토리 엄청 맛있네요! 뭐가 추천이에요?' — ばり 방언으로 감탄</td></tr>
+<tr><td class='sit-h'>희소성 카드</td><td class='jp-h'>「北九州、韓国の人にあまり知られてないんですけど、来てよかったばい！」</td><td class='note-h'>'기타큐슈 한국 사람들한테 잘 알려지지 않았는데, 와서 좋았어요!'</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「隣いいですか？一人で来てばりさびしかちゃ」</td><td class='note-h'>'옆자리 될까요? 혼자 와서 엄청 외로워요' — ばり+ちゃ 방언</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「LINE交換してもいいですか？なんしよーと？って聞きたかっただけやけん」</td><td class='note-h'>'해도 될까요? 뭐 하고 있어요? 묻고 싶었을 뿐이에요' — 방언 활용</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 기타큐슈 사케 + 하이볼</p>
+        <p class="h-order jp-h">「ハイボールください」/ 「地酒ありますか？」</p>
+        <p class="h-sub">REC: 기타큐슈 지역 사케 / 야키토리와 함께하는 생맥주</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">고쿠라성 (小倉城)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 고쿠라성 해자 + 벚꽃. 야간 라이트업. 성 배경 사진 찍어주기 스타트.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>고쿠라성 (小倉城)</span> : 검은 성벽이 인상적인 기타큐슈 상징. 성 배경 사진 포인트.</li>
+<li><span class='hl'>탄가 시장 (旦過市場)</span> : 100년 역사 시장. 생선·야채·반찬 탐방. 식문화 대화 소재.</li>
+<li><span class='hl'>스페이스월드 跡地 (이온몰)</span> : 대형 쇼핑몰. 카페에서 낮 합류.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>야키토리 골목 (鍛冶町)</span> <span class='sr-h'>4.3★ 평균</span> — 기타큐슈 야키토리 성지. 카운터석 필수.</li>
+<li><span class='sn-h'>모츠나베 전문점</span> <span class='sr-h'>4.2★</span> — 기타큐슈 명물 모츠나베. 현지인 단골.</li>
+<li><span class='sn-h'>고쿠라 스낵바 거리</span> <span class='sr-h'>야스카와 인근</span> — 스낵바 밀집. 마마상 활용.</li>
+<li><span class='sn-h'>Bar Junction</span> <span class='sr-h'>4.1★</span> — 고쿠라 인터내셔널 바. 현지인+외국인 믹스.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">기타큐슈 야키토리 (北九州焼き鳥)</p>
+        <p class="h-sub">기타큐슈는 야키토리 소비량 전국 1위. 한 입 크기 돼지·닭 내장 꼬치. 모츠나베, 고쿠라 스타일 라멘도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 토요코인 고쿠라역 (¥4,500~). 고쿠라역에서 야키토리 거리 도보 10분. APA호텔 고쿠라역 (¥5,500~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥110,000~150,000 + 숙박 3박 ¥27,000~45,000 + 식비/주류 3일 ¥27,000~46,000 = 총 ¥164,000~241,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥4,500~7,500 + 식사 ¥1,500~2,500 + 주류·이자카야 ¥2,500~6,500 + 교통 ¥400~800 = 1인 1일 ¥8,900~17,300</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="hiroshima">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🕊️ 히로시마 (広島) <span class="h-region">[ 주고쿠 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 역사와 야간 번화가의 공존 · 나가레카와 최대 환락가</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 히로시마(HIJ) | 비행 약 2시간</p>
+        <p class="h-sub">&gt; 직항 운항 (아시아나·일본항공). 미야자키·가고시마 대비 다소 비쌈.</p>
+        <p class="h-sub">&gt; ACCESS: 히로시마역까지 공항버스 약 45분 (¥1,450)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/gcpGxFt7es4" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/gcpGxFt7es4/hqdefault.jpg"
+              alt="広島弁完全マスター講座"
+              onerror="this.src='https://img.youtube.com/vi/gcpGxFt7es4/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/gcpGxFt7es4" target="_blank">広島弁完全マスター講座</a></p>
+        <p class="h-sub">CH: ムカイワンダーランド</p>
+        <p class="h-sub">&gt;&gt; 히로시마벤 종합 마스터 강의. じゃけん·じゃろ 등 핵심 어미부터 일상 표현까지 체계적으로 정리.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 나가레카와 (流川) · 야겐보리 (薬研堀)</p>
+        <p class="h-sub">나가레카와~야겐보리는 주코쿠·시코쿠 최대 환락가. 이자카야·스낵바·바·클럽 밀집. 주말 저녁 수천 명.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 나가레카와 인터내셔널 바 多. 히로시마 시민들 외국인에 개방적. 평화 화제로 깊은 대화 자연스럽게 시작 가능.</p>
+        <div class="h-dialect">히로시마벤(広島弁) — 「～じゃけん」「～じゃろ？」「えらい(피곤하다)」「ぼちぼちじゃね」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>나가레카와 인터내셔널 바에서 영어로 시작 → 일본어 전환. '히로시마벤 가르쳐줘'라고 하면 신나서 가르쳐줌. 「えらかったじゃろ？」(오늘 힘들었죠?) 공감 분위기 형성.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[낮 10:00~15:00]</td><td>미야지마 이쓰쿠시마 신사</td><td class='tip-h'>세계유산 조이. 가이젠 산책. 사진 찍어주기 포인트.</td></tr>
+<tr><td class='time-h'>[15:00~18:00]</td><td>히로시마 평화 기념관</td><td class='tip-h'>역사 공감. 감동 공유 → 감정적 연대 형성.</td></tr>
+<tr><td class='time-h'>[18:00~20:30]</td><td>나가레카와 오코노미야키 저녁</td><td class='tip-h'>히로시마 명물 오코노미야키 저녁. 에너지 충전.</td></tr>
+<tr><td class='time-h'>[20:30~23:00]</td><td>나가레카와 바·이자카야 1차</td><td class='tip-h'>Mick's Izakaya 또는 Wonderful Joke Bar. 방언 카드.</td></tr>
+<tr><td class='time-h'>[23:00~01:30]</td><td>야겐보리 클럽 2차</td><td class='tip-h'>심야 클럽 진입. K-POP 신청.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>역사 공감</td><td class='jp-h'>「広島、すごく感動したじゃけん…平和記念館、泣きそうになったちゃ」</td><td class='note-h'>'히로시마 정말 감동받았어요… 평화기념관 울 뻔 했어요' — 방언+감성</td></tr>
+<tr><td class='sit-h'>방언 배우기</td><td class='jp-h'>「広島弁、教えてもらえますか？～じゃけんって使い方合ってますか？」</td><td class='note-h'>'히로시마벤 가르쳐줄 수 있어요? ~자켄 쓰는 법 맞아요?'</td></tr>
+<tr><td class='sit-h'>오코노미야키 화제</td><td class='jp-h'>「広島の貝、ばりうまかったじゃろ？오코노미야키にも入ってたし！」</td><td class='note-h'>'히로시마 굴 엄청 맛있었죠? 오코노미야키에도 들어있었고!'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「えらかったかもしれんけど、LINE交換してくれんかったら寂しいじゃろ？」</td><td class='note-h'>'힘들었을 수도 있지만,  안 해주면 쓸쓸하잖아요?'</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 히로시마 사케 + 카키(굴) 안주</p>
+        <p class="h-order jp-h">「地酒ありますか？」/ 「ハイボールください」</p>
+        <p class="h-sub">REC: 니혼이치 (日本一) / 가모쓰루 (賀茂鶴) 히로시마 사케</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">히로시마성 (広島城)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 히로시마성 해자 + 벚꽃 350그루. 평화기념공원과 함께 벚꽃 명소. 낮 하나미 파티 인파.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>미야지마 이쓰쿠시마 신사 (厳島神社)</span> : 바다 위 오토리이 세계유산. 사슴이 자유롭게 돌아다님. 인스타 필수.</li>
+<li><span class='hl'>히로시마 평화 기념관 (広島平和記念資料館)</span> : 역사적 감동 공유. 감성 대화 소재.</li>
+<li><span class='hl'>오노미치 (尾道)</span> : 히로시마에서 JR 40분. 언덕 마을+고양이 거리. 인스타 명소.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>Mick's Izakaya</span> <span class='sr-h'>4.5★ / 187 리뷰</span> — 영어 메뉴. 노미호다이. 외국인 多.</li>
+<li><span class='sn-h'>Wonderful Joke Bar</span> <span class='sr-h'>4.4★ / 203 리뷰</span> — 무료 노래방 + 칵테일 ¥500~. 교류 최적.</li>
+<li><span class='sn-h'>九十九-つくも-</span> <span class='sr-h'>4.3★ / 821 리뷰</span> — 넓은 이자카야. 단체·개인 모두 적합.</li>
+<li><span class='sn-h'>縁や 나가레카와</span> <span class='sr-h'>4.5★ / 209 리뷰</span> — 개인실 이자카야. 2인 데이트용.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">히로시마풍 오코노미야키 (お好み焼き)</p>
+        <p class="h-sub">면+야채+고기 층층이 구운 히로시마 스타일. 굴(牡蠣) 토핑 추천. 카키프라이, 레몬라멘도 명물.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 히로시마 (¥8,000~). 나가레카와 도보 10분. 리조트 호텔 히로시마 (¥7,000~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥162,000~ + 숙박 3박 ¥36,000~54,000 + 식비/주류 3일 ¥30,000~50,000 = 총 ¥228,000~266,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥6,000~9,000 + 식사 ¥2,500~4,000 + 주류·이자카야 ¥3,000~8,000 + 교통 ¥800~1,500 = 1인 1일 ¥12,300~22,500</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="okayama">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🍑 오카야마 (岡山) <span class="h-region">[ 주고쿠 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 뒤라쿠엔 정원 · 청보 오카야마성 · 복숭아의 도시</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 오카야마(OKA) | 비행 약 2시간</p>
+        <p class="h-sub">&gt; 항공사: 아시아나·티웨이. 직항 주 3~5회. 조기 예약 권장.</p>
+        <p class="h-sub">&gt; ACCESS: 오카야마역까지 공항버스 약 30분 (¥760)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/DD-njkjMnyY" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/DD-njkjMnyY/hqdefault.jpg"
+              alt="ぼっけぇ！岡山弁 — 岡山弁専門チャンネル"
+              onerror="this.src='https://img.youtube.com/vi/DD-njkjMnyY/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/DD-njkjMnyY" target="_blank">ぼっけぇ！岡山弁 — 岡山弁専門チャンネル</a></p>
+        <p class="h-sub">CH: ぼっけぇ!岡山弁</p>
+        <p class="h-sub">&gt;&gt; 오카야마벤 전문 채널. ぼっけぇ 등 핵심 표현 + 일상 대화 예문. 오카야마벤 집중 학습 가능.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 오마치 (表町) · 이즈미초 (泉町) 뒷골목</p>
+        <p class="h-sub">오카야마역 동쪽 이즈미초·오마치 뒷골목에 이자카야·스낵바 밀집. 관광객 드문 진짜 현지 유흥가.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 외국인이 거의 없어 현지인들이 매우 반갑게 맞아줌. 인근 구라시키 관광 후 오카야마로 야간 이동 가능. 오카야마 특유의 복숭아·청포도 화제로 대화 시작 용이.</p>
+        <div class="h-dialect">오카야마벤(岡山弁) — 「ぼっけぇ！」「～じゃけぇ」「～なんじゃ」「おえん(안돼)」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>이즈미초 이자카야에서 오카야마산 복숭아·청포도 화제로 시작. 「ぼっけぇうまいじゃけぇ！」(엄청 맛있잖아요!) 오카야마벤 감탄사 사용 시 현지인 즉각 반응.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[낮 10:00~14:00]</td><td>구라시키 미관지구 탐방</td><td class='tip-h'>에도시대 창고 마을. 사진 찍어주기 포인트. 인스타 명소.</td></tr>
+<tr><td class='time-h'>[14:00~17:00]</td><td>뒤라쿠엔 정원 (後楽園)</td><td class='tip-h'>일본 3대 정원. 오카야마성 뷰. 벚꽃 명소.</td></tr>
+<tr><td class='time-h'>[18:00~20:30]</td><td>오마치 이자카야 1차</td><td class='tip-h'>마마카리(さわら) 요리 + 오카야마산 사케. 방언 카드.</td></tr>
+<tr><td class='time-h'>[20:30~23:00]</td><td>이즈미초 뒷골목 2차</td><td class='tip-h'>스낵바 순회. 현지인 단골 이자카야.</td></tr>
+<tr><td class='time-h'>[23:00~]</td><td>심야 귀환 또는 추가 라운드</td><td class='tip-h'>오카야마역 인근 심야 바.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>오카야마벤 첫 마디</td><td class='jp-h'>「ぼっけぇきれいな街ですね！岡山、ぼっけぇ好きになりましたじゃけぇ！」</td><td class='note-h'>'엄청 예쁜 도시네요! 오카야마 엄청 좋아졌어요!' — ぼっけぇ+じゃけぇ 방언 콤보</td></tr>
+<tr><td class='sit-h'>과일 화제</td><td class='jp-h'>「岡山の桃、ぼっけぇうまかったじゃけぇ！韓国に持って帰りたいくらいで」</td><td class='note-h'>'오카야마 복숭아 엄청 맛있었어요! 한국에 가져가고 싶을 정도로'</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「隣いいですか？一人じゃぼっけぇ寂しいんじゃ〜」</td><td class='note-h'>'옆자리 될까요? 혼자면 엄청 외로워요~'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「おえんかもしれんけど、LINE教えてもらえませんか？」</td><td class='note-h'>'안 될 수도 있지만, 라인 알려줄 수 있어요?' — おえん 방언으로 귀엽게</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 오카야마 사케 + 백포도주</p>
+        <p class="h-order jp-h">「地酒お願いします」/ 「岡山ワインありますか？」</p>
+        <p class="h-sub">REC: 오카야마 사케 (두 학, 봉 등) / 오카야마 와이너리 화이트</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">뒤라쿠엔 정원 (後楽園)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 일본 3대 정원 내 벚꽃. 정원 입장료 ¥410. 오카야마성과 함께 야경 명소.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>구라시키 미관지구 (倉敷美観地区)</span> : 오카야마에서 JR 18분. 에도 창고 마을. 인스타 필수 코스.</li>
+<li><span class='hl'>뒤라쿠엔 정원 + 오카야마성</span> : 일본 3대 정원 + 검은 까마귀성. 세트 관람 추천.</li>
+<li><span class='hl'>오카야마 과일 파르페 카페</span> : 복숭아·청포도 파르페 명물. SNS 인기. 카페 합류 포인트.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>오마치 이자카야 (表町)</span> <span class='sr-h'>4.3★ 평균</span> — 오카야마 현지인 단골 이자카야 거리.</li>
+<li><span class='sn-h'>마마카리 전문점</span> <span class='sr-h'>4.4★</span> — 오카야마 향토 생선 마마카리 초절임 전문.</li>
+<li><span class='sn-h'>이즈미초 스낵바</span> <span class='sr-h'>이즈미초 뒷골목</span> — 현지인 전용 스낵바 밀집 구역.</li>
+<li><span class='sn-h'>Bar 桃太郎</span> <span class='sr-h'>4.2★</span> — 오카야마 바. 모모타로(복숭아 소년) 테마. 관광+현지 혼합.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">마마카리 (ままかり)</p>
+        <p class="h-sub">오카야마 향토 생선 사와라(さわら) 초절임. '밥 도둑' 이라는 의미. 오카야마산 복숭아·청포도, 데미카츠(デミカツ)도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 오카야마 (¥7,000~). 오카야마역 도보 5분. APA호텔 오카야마 (¥5,500~). 구라시키 숙박 시 오카야마 당일치기 가능.</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥156,000~ + 숙박 3박 ¥33,000~48,000 + 식비/주류 3일 ¥28,000~48,000 = 총 ¥217,000~252,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,500~8,000 + 식사 ¥2,000~3,500 + 주류·이자카야 ¥2,500~7,000 + 교통 ¥600~1,200 = 1인 1일 ¥10,600~19,700</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="matsuyama">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🏯 마쓰야마 (松山) <span class="h-region">[ 시코쿠 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 도고 온천 · 마쓰야마성 · 시코쿠 최대 도시</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 마쓰야마(MYJ) | 비행 약 2시간</p>
+        <p class="h-sub">&gt; 항공사: 아시아나·대한항공. 직항 주 5~7회.</p>
+        <p class="h-sub">&gt; ACCESS: 마쓰야마 시내까지 공항버스 약 30분 (¥720). 도고 온천까지 시내 전차 추가 20분.</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/GnyY_YFRfkA" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/GnyY_YFRfkA/hqdefault.jpg"
+              alt="方言美人 — 松山・伊予弁編"
+              onerror="this.src='https://img.youtube.com/vi/GnyY_YFRfkA/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/GnyY_YFRfkA" target="_blank">方言美人 — 松山・伊予弁編</a></p>
+        <p class="h-sub">CH: 【公式】方言美人</p>
+        <p class="h-sub">&gt;&gt; 방언 미인 채널의 마쓰야마·이요벤 편. 귀여운 여성 진행자가 이요벤 일상 표현 소개. 발음·억양 학습 최적.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 니반초 (二番町) · 산반초 (三番町)</p>
+        <p class="h-sub">마쓰야마 시내 이자카야·바 밀집 구역. 도고 온천 후 시내 이자카야 코스가 마쓰야마 정석 나이트라이프.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★☆☆ (보통~상)</span></p>
+        <p class="h-sub">&gt; 시코쿠 최대 도시. 외국인이 드물어 현지인들이 친절하게 대해줌. 도고 온천 화제로 대화 시작 용이.</p>
+        <div class="h-dialect">이요벤(伊予弁) — 「～じゃけん」「～ちゃ」「ほんなら」「えらい(피곤하다)」「おいね」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>도고 온천 입욕 후 시내 이자카야로. '도고 온천 처음인데 어떤 코스가 좋아요?' 질문으로 시작. 「えらかったじゃろ？」(오늘 힘들었죠?) 공감 카드 활용.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[15:00~17:30]</td><td>도고 온천 (道後温泉) 입욕</td><td class='tip-h'>일본 최고령 온천. 1900년 역사. 온천 후 기분 최고조 상태로 야간 작전 준비.</td></tr>
+<tr><td class='time-h'>[17:30~19:00]</td><td>마쓰야마성 야경 케이블카</td><td class='tip-h'>케이블카 ¥270. 마쓰야마 시내 뷰. 석양 사진 포인트.</td></tr>
+<tr><td class='time-h'>[19:00~21:30]</td><td>니반초 이자카야 1차</td><td class='tip-h'>자리야(じゃりや) 또는 현지 타치노미. 이요벤 카드.</td></tr>
+<tr><td class='time-h'>[21:30~24:00]</td><td>산반초 바·스낵바 2차</td><td class='tip-h'>마쓰야마 심야 바 순회.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>심야 귀환</td><td class='tip-h'>도고 온천 숙박 시 료칸 온천 재입욕으로 마무리.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>온천 화제</td><td class='jp-h'>「道後温泉、えらく気持ちよかったちゃ！歴史があるけん感動したじゃけん！」</td><td class='note-h'>'도고 온천 엄청 기분 좋았어요! 역사가 있어서 감동했어요!'</td></tr>
+<tr><td class='sit-h'>방언 첫 마디</td><td class='jp-h'>「伊予弁、教えてもらえますか？えらい、って疲れたって意味なんですか？」</td><td class='note-h'>'이요벤 가르쳐줄 수 있어요? 에라이가 피곤하다는 뜻이에요?'</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「ほんなら、隣座ってもいいですかね？一人でえらいさみしかったじゃけん」</td><td class='note-h'>'그렇다면 옆자리 앉아도 될까요? 혼자서 엄청 외로웠거든요'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「おいね、LINE交換できたら嬉しいんじゃけど…」</td><td class='note-h'>'맞네요, 할 수 있으면 기쁠 것 같은데…'</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 마쓰야마 니혼슈 + 미깡 하이볼</p>
+        <p class="h-order jp-h">「地酒お願いします」/ 「ミカンサワーください」</p>
+        <p class="h-sub">REC: 우치코 (内子) 사케 / 에히메 미깡(감귤) 사와</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">마쓰야마성 (松山城)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 마쓰야마성 + 벚꽃 200그루. 케이블카로 올라가는 성 주변 벚꽃길 절경.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>도고 온천 (道後温泉)</span> : 3000년 역사 온천. 신과 신화의 도시 마쓰야마 상징.</li>
+<li><span class='hl'>마쓰야마성 (松山城)</span> : 현존 12천수 중 하나. 케이블카·리프트 이용. 벚꽃 명소.</li>
+<li><span class='hl'>오즈 성하마을 (大洲城下町)</span> : 마쓰야마에서 JR 30분. 강변 성하마을. 드라이브 코스.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>じゃりや</span> <span class='sr-h'>4.3★ / 이자카야</span> — 니반초 현지인 단골. 에히메 지역 요리.</li>
+<li><span class='sn-h'>도고 온천 바</span> <span class='sr-h'>도고 온천 인근</span> — 온천 후 입욕객 대상 바. 유카타 착용 이동 가능.</li>
+<li><span class='sn-h'>산반초 타치노미</span> <span class='sr-h'>4.1★</span> — 저렴한 선술집. 현지 직장인 야간 1차.</li>
+<li><span class='sn-h'>Bar 松山</span> <span class='sr-h'>4.2★</span> — 카운터석 중심 바. 에히메 위스키 전문.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">타이메시 (鯛めし)</p>
+        <p class="h-sub">에히메 명물 도미밥. 자루소바(조르로 방식 생선 간장 소스), 미깡(감귤) 디저트도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 마쓰야마 (¥7,000~). 전략: 도고 온천 료칸 1박 + 시내 호텔 2박 믹스. ANA크라운플라자 마쓰야마 (¥8,500~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥150,000~ + 숙박 3박 ¥33,000~54,000 + 식비/주류 3일 ¥28,000~48,000 = 총 ¥211,000~252,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,500~8,500 + 식사 ¥2,000~3,500 + 주류·이자카야 ¥2,500~7,000 + 교통 ¥600~1,200 = 1인 1일 ¥10,600~20,200</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="sapporo">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// ❄️ 삿포로 (札幌) <span class="h-region">[ 홋카이도 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 홋카이도 최대 도시 · 스스키노 환락가 · 삿포로 맥주</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 삿포로 신치토세(CTS) | 비행 약 3시간</p>
+        <p class="h-sub">&gt; 항공사: 에어부산·제주항공·아시아나. 4월 초는 스키 시즌 종료 후 → 항공권 저렴.</p>
+        <p class="h-sub">&gt; ACCESS: 삿포로역까지 쾌속 에어포트 37분 (¥1,150)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/BKwA5dxKbcU" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/BKwA5dxKbcU/hqdefault.jpg"
+              alt="北海道弁 方言女子 1時間目"
+              onerror="this.src='https://img.youtube.com/vi/BKwA5dxKbcU/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/BKwA5dxKbcU" target="_blank">北海道弁 方言女子 1時間目</a></p>
+        <p class="h-sub">CH: 愛しのHanyuri</p>
+        <p class="h-sub">&gt;&gt; 홋카이도 출신 방언 여자의 1교시. 나마라·메코이 등 핵심 표현 + 귀여운 억양 집중 학습.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 스스키노 (すすきの)</p>
+        <p class="h-sub">홋카이도 최대 유흥가. 클럽·이자카야·스낵바·바 6,000개 이상 밀집. 일본 3대 환락가 중 하나.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 스스키노 규모 압도적. 클럽·이자카야 문화 발달로 자연스럽게 현지인과 어울릴 기회 多. 4월 초 벚꽃 아직 이르지만 오도리 공원 이벤트 多.</p>
+        <div class="h-dialect">홋카이도벤(北海道弁) — 「なまら！」「めんこい」「～だべ？」「したっけ」「なんも」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>스스키노 클럽 또는 이자카야 카운터석. 「なまらうまいじゃないですか！」(엄청 맛있지 않아요!) 홋카이도 음식 감탄 + 삿포로 맥주 화제로 자연스럽게 대화 시작.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:00~18:30]</td><td>오도리 공원 야경 산책</td><td class='tip-h'>삿포로 중심 오도리 공원. 4월 행사 확인. 사진 찍어주기 포인트.</td></tr>
+<tr><td class='time-h'>[18:30~20:30]</td><td>스스키노 이자카야 1차</td><td class='tip-h'>삿포로 생맥주 + 징기스칸 야키니쿠. 방언 카드.</td></tr>
+<tr><td class='time-h'>[20:30~23:00]</td><td>스스키노 바·스낵바 2차</td><td class='tip-h'>스낵바 마마상 활용. 현지 단골 이자카야 탐색.</td></tr>
+<tr><td class='time-h'>[23:00~02:00]</td><td>스스키노 클럽</td><td class='tip-h'>Club Precious 또는 Entertainment 클럽. K-POP 신청.</td></tr>
+<tr><td class='time-h'>[02:00~]</td><td>심야 라멘 귀환</td><td class='tip-h'>삿포로 미소 라멘 + 버터콘 마무리.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>첫 마디 최강 카드</td><td class='jp-h'>「なまらかわいくないですか！思わず声かけちゃいました」</td><td class='note-h'>'엄청 귀여우시지 않나요! 저도 모르게 말을 걸어버렸어요' — 직접적이지만 홋카이도 방언으로 부드럽게</td></tr>
+<tr><td class='sit-h'>맥주 화제</td><td class='jp-h'>「サッポロビール、なまら旨いだべ？韓国のビールとぜんぜん違って！」</td><td class='note-h'>'삿포로 맥주 엄청 맛있죠? 한국 맥주랑 완전 달라서!'</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「隣いいですか？一人じゃなまらさみしくて〜」</td><td class='note-h'>'옆자리 될까요? 혼자면 엄청 외로워서요~'</td></tr>
+<tr><td class='sit-h'>헤어질 때</td><td class='jp-h'>「したっけ、LINE教えてもらえたら嬉しいんですけど！」</td><td class='note-h'>'그러면, 라인 알려주시면 기쁠 것 같은데요!' — したっけ로 자연스럽게</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 삿포로 생맥주 + 위스키 하이볼</p>
+        <p class="h-order jp-h">「サッポロ生ビールください」/ 「ハイボールください」</p>
+        <p class="h-sub">REC: 삿포로 클래식 생맥주 (札幌クラシック) / 닛카 위스키 요이치</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">마루야마 공원 (円山公園)</p>
+        <p class="h-sub">BLOOM: 4월 말~5월 초 (홋카이도는 벚꽃 늦음)</p>
+        <p class="h-sub">&gt; 4월 첫째 주는 아직 일러 벚꽃 없음. 대신 오도리 공원 봄 행사 활용. 삿포로 벚꽃은 4월 말~5월 초.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>오도리 공원 (大通公園)</span> : 삿포로 중심 1.5km 공원. 봄 행사 多. 만남 포인트.</li>
+<li><span class='hl'>삿포로 맥주 박물관 (サッポロビール博物館)</span> : 삿포로 맥주 역사 + 시음. 맥주 화제로 대화 무한.</li>
+<li><span class='hl'>홋카이도 대학 (北海道大学)</span> : 은행나무 가로수길. 봄 캠퍼스 산책. 대학생 인파.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>스스키노 이자카야 거리</span> <span class='sr-h'>4.3★ 평균</span> — 6,000개 이상. 현지인·관광객 혼합.</li>
+<li><span class='sn-h'>징기스칸 야키니쿠점</span> <span class='sr-h'>4.4★</span> — 홋카이도 명물 양고기 야키니쿠. 활발한 분위기.</li>
+<li><span class='sn-h'>Club Precious</span> <span class='sr-h'>4.2★</span> — 스스키노 대표 클럽. K-POP 이벤트 多.</li>
+<li><span class='sn-h'>스스키노 스낵바 거리</span> <span class='sr-h'>심야</span> — 스낵바 밀집. 마마상 활용 최적.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">삿포로 미소 라멘 (味噌ラーメン)</p>
+        <p class="h-sub">진한 미소 스프 + 버터콘 토핑. 홋카이도 명물. 징기스칸(ジンギスカン 양고기 야키니쿠), 해산물 가이센동도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 삿포로 스스키노 (¥8,500~, 스스키노 도보 5분). 크로스호텔 삿포로 (¥7,000~). JR타워 호텔 일본 삿포로 (¥9,000~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥140,000~180,000 + 숙박 3박 ¥36,000~57,000 + 식비/주류 3일 ¥32,000~54,000 = 총 ¥208,000~291,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥6,000~9,500 + 식사 ¥2,500~4,500 + 주류·이자카야 ¥3,500~9,000 + 교통 ¥500~1,000 = 1인 1일 ¥12,500~24,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="hakodate">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🌙 하코다테 (函館) <span class="h-region">[ 홋카이도 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 세계 3대 야경 · 아침시장 · 이국정서 항구도시</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 하코다테(HKD) | 비행 약 3시간 10분</p>
+        <p class="h-sub">&gt; 항공사: 에어부산·아시아나. 직항 편수 적음 (주 3~4회). 조기 예약 필수.</p>
+        <p class="h-sub">&gt; ACCESS: 하코다테역까지 공항버스 약 20분 (¥510)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/GFUZ8ar43Gk" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/GFUZ8ar43Gk/hqdefault.jpg"
+              alt="方言美人 — 函館出身のお姉さんが教える函館弁"
+              onerror="this.src='https://img.youtube.com/vi/GFUZ8ar43Gk/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/GFUZ8ar43Gk" target="_blank">方言美人 — 函館出身のお姉さんが教える函館弁</a></p>
+        <p class="h-sub">CH: 【公式】方言美人</p>
+        <p class="h-sub">&gt;&gt; 하코다테 출신 언니가 가르치는 함관벤. 삿포로와 유사하지만 하코다테 고유 표현도 소개. 부드러운 홋카이도 억양 학습.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 마쓰카제마치 (松風町) · 스에히로초 (末広町)</p>
+        <p class="h-sub">하코다테 중심 이자카야·스낵바 밀집 구역. 야경 명소 하코다테산 근처. 이국적 서양 건축물과 술집이 공존.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★☆☆ (보통)</span></p>
+        <p class="h-sub">&gt; 소도시라 유흥가 규모 작음. 단, 야경 데이트 코스로 자연스러운 2단계 전략 가능. 삿포로 경유 당일치기도 추천.</p>
+        <div class="h-dialect">하코다테벤(函館弁) — 「なまら！」「めんこい」「～だべ」「したっけ」(홋카이도벤과 유사)</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>야경 명소에서 낮 사진 찍어주기 → 이자카야 저녁 제안. 항구 야경을 핑계로 '저녁에 같이 보러 가요'라고 자연스럽게 유도. 하코다테 함관벤은 삿포로와 유사 → 미리 학습한 방언 활용 가능.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[14:00~16:30]</td><td>모토마치 서양 건물가 탐방</td><td class='tip-h'>이국적 건축물 + 항구 뷰. 사진 찍어주기로 대화 시작.</td></tr>
+<tr><td class='time-h'>[16:30~19:00]</td><td>하코다테산 야경 로프웨이</td><td class='tip-h'>세계 3대 야경. 로프웨이 ¥1,500. 야경 감동으로 감성 최고조.</td></tr>
+<tr><td class='time-h'>[19:00~21:30]</td><td>마쓰카제마치 이자카야 1차</td><td class='tip-h'>하코다테 이카소멘(오징어소면) + 지역 사케. 방언 카드.</td></tr>
+<tr><td class='time-h'>[21:30~24:00]</td><td>스에히로초 바·스낵바 2차</td><td class='tip-h'>현지인 단골 바 탐색. 야경 감동 화제 활용.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>아침시장 예약 확인 후 귀환</td><td class='tip-h'>다음날 아침시장 해산물 계획 세우며 마무리.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>야경 감동</td><td class='jp-h'>「函館の夜景、なまらきれいだったじゃないですか！世界3位って聞いてたけど想像以上で！」</td><td class='note-h'>'하코다테 야경 엄청 예쁘지 않나요! 세계 3위라고 들었는데 상상 이상이라서!'</td></tr>
+<tr><td class='sit-h'>야경 제안</td><td class='jp-h'>「夜景、一緒に見に行きませんか？函館山、なまらよかったんで！」</td><td class='note-h'>'야경 같이 보러 가실래요? 하코다테산 엄청 좋았어서요!'</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「隣いいですか？一人でなまらさびしかったもので…したっけ一緒に飲みましょうよ！」</td><td class='note-h'>'옆자리 될까요? 혼자서 엄청 외로워서요… 그러면 같이 마셔요!'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「したっけ、LINE交換してもらえませんか？なまら嬉しいんですけど！」</td><td class='note-h'>'그러면 해줄 수 있어요? 엄청 기쁠 것 같은데요!'</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 하코다테 지역 사케 + 이카(오징어) 안주</p>
+        <p class="h-order jp-h">「地酒ください」/ 「函館ビールありますか？」</p>
+        <p class="h-sub">REC: 하코다테 비루 (函館ビール) / 기타노카이 (北の海) 지역 사케</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">고료카쿠 공원 (五稜郭公園)</p>
+        <p class="h-sub">BLOOM: 4월 말~5월 초 (홋카이도 늦은 개화)</p>
+        <p class="h-sub">&gt; 별 모양 성터 + 벚꽃 1,600그루. 4월 첫째 주는 아직 일름. 고료카쿠 타워에서 벚꽃 전망 가능 (개화 시기 맞을 경우).</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>하코다테산 야경 (函館山)</span> : 케이블카 ¥1,500. 세계 3대 야경. 낮에 올라가 정보 수집 후 저녁 야경 데이트 유도.</li>
+<li><span class='hl'>모토마치 (元町)</span> : 서양 교회·영사관 건물 밀집. 유럽 분위기. 인스타 명소.</li>
+<li><span class='hl'>하코다테 아침시장 (朝市)</span> : 새벽 6시부터 해산물 직판. 신선한 이카(오징어)·게 시식.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>하코다테 이자카야 거리</span> <span class='sr-h'>4.2★ 평균</span> — 마쓰카제마치 중심 이자카야 밀집.</li>
+<li><span class='sn-h'>이카소멘 전문점</span> <span class='sr-h'>4.4★</span> — 하코다테 명물 생오징어 소면. 대화 소재 무한.</li>
+<li><span class='sn-h'>Bar 야경</span> <span class='sr-h'>항구 인근</span> — 야경 뷰 바. 감성 분위기 최적.</li>
+<li><span class='sn-h'>스에히로초 스낵바</span> <span class='sr-h'>4.0★</span> — 현지인 단골 스낵바. 마마상 활용.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">이카소멘 (イカそうめん)</p>
+        <p class="h-sub">살아있는 오징어를 면처럼 썰어 간장+와사비. 하코다테 대표 해산물. 게(ずわいがに), 성게(うに), 아침시장 신선 해산물덮밥도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 하코다테 (¥7,500~, 역 도보 3분). 라 비스타 하코다테 베이 (¥9,000~, 항구 뷰 최고). 야경 데이트 후 귀환 거리 고려.</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥160,000~ + 숙박 3박 ¥33,000~51,000 + 식비/주류 3일 ¥28,000~48,000 = 총 ¥221,000~259,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,500~8,500 + 식사 ¥3,000~5,000 + 주류·이자카야 ¥2,500~7,000 + 교통 ¥500~1,000 = 1인 1일 ¥11,500~21,500</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="sendai">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🌿 센다이 (仙台) <span class="h-region">[ 도호쿠 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 규모 있는 도호쿠 중심지 · 고쿠분초 환락가 · 우설 맛집</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 센다이(SDJ) | 비행 약 3시간</p>
+        <p class="h-sub">&gt; 항공사: 아시아나·진에어. 직항 주 5~7회.</p>
+        <p class="h-sub">&gt; ACCESS: 센다이역까지 공항 지하철 약 17분 (¥660)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/jO38Re_EXuE" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/jO38Re_EXuE/hqdefault.jpg"
+              alt="仙台弁講座 ほんまちゃん流"
+              onerror="this.src='https://img.youtube.com/vi/jO38Re_EXuE/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/jO38Re_EXuE" target="_blank">仙台弁講座 ほんまちゃん流</a></p>
+        <p class="h-sub">CH: 90ヤシ</p>
+        <p class="h-sub">&gt;&gt; 센다이벤 강좌. 도호쿠 방언 특유의 억양과 표현 집중. おばんです 등 즉시 써먹을 수 있는 표현 중심.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 고쿠분초 (国分町)</p>
+        <p class="h-sub">도호쿠 최대 유흥가. 이자카야·클럽·스낵바·바 밀집. 주말 저녁 수천 명. 센다이 사람들 활발하고 외향적.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (높음)</span></p>
+        <p class="h-sub">&gt; 도호쿠 최대 도시. 규모 있는 유흥가. 센다이 사람들 외향적이고 인정 많음. 한국인에 친화적.</p>
+        <div class="h-dialect">센다이벤(仙台弁) — 「おばんです」「んだ/んだっけ」「いずい」「～だっちゃ」「けっぱれ！」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>고쿠분초 이자카야 카운터석. 「おばんです！」(저녁 인사)로 입장하면 현지인들 바로 반응. 「んだっけ？」(그렇죠?) 호응으로 대화 리듬 형성.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[18:00~19:30]</td><td>우설 저녁식사</td><td class='tip-h'>센다이 명물 우설(牛タン) 정식. 탄키(炭火) 우설 맛집 탐방.</td></tr>
+<tr><td class='time-h'>[19:30~21:30]</td><td>고쿠분초 이자카야 1차</td><td class='tip-h'>카운터석. 「おばんです！」로 입장. 방언 카드.</td></tr>
+<tr><td class='time-h'>[21:30~23:30]</td><td>고쿠분초 바·스낵바 2차</td><td class='tip-h'>스낵바 마마상 활용. 현지인 단골 탐색.</td></tr>
+<tr><td class='time-h'>[23:30~02:00]</td><td>고쿠분초 클럽</td><td class='tip-h'>센다이 클럽 문화. K-POP 신청으로 분위기 주도.</td></tr>
+<tr><td class='time-h'>[02:00~]</td><td>심야 우설 라멘 귀환</td><td class='tip-h'>센다이역 지하 식당가 심야 라멘으로 마무리.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>저녁 인사 충격요법</td><td class='jp-h'>「おばんです！仙台、なまら来てよかっただっちゃ！」</td><td class='note-h'>'안녕하세요(저녁)! 센다이, 엄청 와서 좋았어요!' — 도호쿠 인사로 즉각 반응</td></tr>
+<tr><td class='sit-h'>우설 화제</td><td class='jp-h'>「牛タン、んだっけ？こんなに旨いと思わなかっただっちゃ！」</td><td class='note-h'>'우설 맞죠? 이렇게 맛있을 줄 몰랐어요!' — んだっけ+だっちゃ 방언</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「隣いいですか？一人だっちゃ、けっぱってきたけどさびしくて」</td><td class='note-h'>'옆자리 될까요? 혼자라서 힘내왔는데 외로워서요'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「んだっけ！LINE交換しましょうよ！けっぱれ！って応援してもらえますか？」</td><td class='note-h'>'맞죠! 해요! 힘내라고 응원해줄 수 있어요?'</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 센다이 사케 + 다테마에 (伊達前)</p>
+        <p class="h-order jp-h">「地酒ください」/ 「宮城の日本酒ありますか？」</p>
+        <p class="h-sub">REC: 잇코이 (一ノ蔵) / 리조트인유(リゾートインユ) 미야기 사케</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">니시공원 (西公園) · 미야기노 벚꽃 (宮城野の桜)</p>
+        <p class="h-sub">BLOOM: 4월 초~중순</p>
+        <p class="h-sub">&gt; 센다이 벚꽃은 4월 초~중순. 4월 첫째 주는 개화 초기~최성기. 니시공원 + 미야기노 구역 벚꽃길 하나미 파티.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>센다이 우미노모리 수족관 (仙台うみの杜水族館)</span> : 이루카 쇼. 커플·가족 多.</li>
+<li><span class='hl'>마쓰시마 (松島)</span> : 센다이에서 JR 40분. 일본 3경 중 하나. 섬 사이 유람선.</li>
+<li><span class='hl'>아오바성 터 (青葉城跡)</span> : 다테 마사무네 동상 + 센다이 시내 뷰. 사진 명소.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>고쿠분초 이자카야 거리</span> <span class='sr-h'>4.3★ 평균</span> — 도호쿠 최대 유흥가. 이자카야 수백 개.</li>
+<li><span class='sn-h'>우설 맛집 (利久·たんや善治郎)</span> <span class='sr-h'>4.4★</span> — 센다이 우설 양대 산맥. 줄 서는 맛집.</li>
+<li><span class='sn-h'>고쿠분초 클럽</span> <span class='sr-h'>4.1★</span> — K-POP 이벤트 多. 댄스 교류 가능.</li>
+<li><span class='sn-h'>고쿠분초 스낵바</span> <span class='sr-h'>심야</span> — 스낵바 밀집. 마마상 활용.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">우설 (牛タン)</p>
+        <p class="h-sub">두껍게 썬 소 혀 숯불 구이. 센다이 발상. 맥보리 밥(麦飯)+꼬리곰탕(テールスープ) 세트. 즌다(枝豆) 떡, 사사가마보코도 명물.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 센다이 아네코지 (¥8,000~, 고쿠분초 도보 5분). 메트로폴리탄 호텔 센다이 (¥7,500~). APA호텔 센다이역 전 (¥6,000~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥150,000~190,000 + 숙박 3박 ¥36,000~54,000 + 식비/주류 3일 ¥32,000~54,000 = 총 ¥218,000~298,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥6,000~9,000 + 식사 ¥3,000~5,000 + 주류·이자카야 ¥3,000~9,000 + 교통 ¥500~1,000 = 1인 1일 ¥12,500~24,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="kanazawa">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🦀 가나자와 (金沢) <span class="h-region">[ 호쿠리쿠 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 작은 교토 · 켄로쿠엔 정원 · 게 제철 해산물</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 고마쓰(KMQ, 가나자와 인근) | 비행 약 2시간</p>
+        <p class="h-sub">&gt; 항공사: 아시아나. 고마쓰공항에서 가나자와역까지 버스 40분 ().</p>
+        <p class="h-sub">&gt; ACCESS: 가나자와역까지 공항버스 약 40분 (¥1,130). 또는 택시 ¥7,000.</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/ojk_8xIDLK8" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/ojk_8xIDLK8/hqdefault.jpg"
+              alt="金沢弁ネイティブ講座"
+              onerror="this.src='https://img.youtube.com/vi/ojk_8xIDLK8/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/ojk_8xIDLK8" target="_blank">金沢弁ネイティブ講座</a></p>
+        <p class="h-sub">CH: クレイジークラッシュ</p>
+        <p class="h-sub">&gt;&gt; 가나자와 네이티브의 가나자와벤 강의. きときと·やちゃ 등 핵심 표현 + 일상 대화. 짧고 핵심적인 구성.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 가타마치 (片町) · 기무라 (木倉町)</p>
+        <p class="h-sub">가나자와 최대 유흥가. 가타마치~기무라초 이자카야·바·스낵바 밀집. '작은 교토' 분위기의 운치 있는 유흥가.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★☆☆ (보통)</span></p>
+        <p class="h-sub">&gt; 소도시 분위기. 가나자와 특유의 세련된 문화인 성격. 신선한 해산물 화제로 대화 쉽게 시작 가능.</p>
+        <div class="h-dialect">가나자와벤(金沢弁) — 「きときと」「～やちゃ」「～だら」「せや」「ほやほや」</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>가타마치 이자카야에서 게·성게·회 안주 화제. 「きときとやちゃ！」(싱싱해요!) 방언으로 감탄. 켄로쿠엔 야경 데이트 제안.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[14:00~16:30]</td><td>켄로쿠엔 + 가나자와성 관람</td><td class='tip-h'>일본 3대 정원. 사진 찍어주기 포인트. 봄 벚꽃 명소.</td></tr>
+<tr><td class='time-h'>[16:30~18:30]</td><td>히가시 차야가이 (東茶屋街)</td><td class='tip-h'>에도 게이샤 문화 거리. 인스타 명소. 사진 명소.</td></tr>
+<tr><td class='time-h'>[19:00~21:30]</td><td>가타마치 이자카야 1차</td><td class='tip-h'>가나자와 제철 해산물 + 사케. 방언 카드.</td></tr>
+<tr><td class='time-h'>[21:30~24:00]</td><td>기무라초 바·스낵바 2차</td><td class='tip-h'>가나자와 특유의 세련된 바 문화. 스낵바 마마상 활용.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>심야 귀환</td><td class='tip-h'>가나자와역 인근 심야 사케 바.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>해산물 감탄</td><td class='jp-h'>「このカニ、きときとやちゃ！韓国でこんな新鮮なの食べたことないだら！」</td><td class='note-h'>'이 게 싱싱하네요! 한국에서 이렇게 신선한 거 먹어본 적 없죠!'</td></tr>
+<tr><td class='sit-h'>방언 확인</td><td class='jp-h'>「きときとって新鮮ってことですよね？せやせや、合ってますか？」</td><td class='note-h'>'きときと가 신선하다는 뜻이죠? 맞죠맞죠, 맞나요?'</td></tr>
+<tr><td class='sit-h'>자리 안내</td><td class='jp-h'>「隣いいですか？一人じゃほやほや、寂しいんやちゃ〜」</td><td class='note-h'>'옆자리 될까요? 혼자라 정말로 외로워요~'</td></tr>
+<tr><td class='sit-h'>LINE</td><td class='jp-h'>「ほやほやですか？LINE交換していただけますか？せや、よかったら！」</td><td class='note-h'>'정말요? 해주실 수 있어요? 그렇게, 괜찮으시면!'</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 가나자와 사케 (加賀の地酒)</p>
+        <p class="h-order jp-h">「加賀のお酒ください」/ 「きときとの地酒ありますか？」</p>
+        <p class="h-sub">REC: 후쿠미쓰야 (福光屋) / 요쇼보 (養老坊) 가가 사케</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">켄로쿠엔 (兼六園)</p>
+        <p class="h-sub">BLOOM: 3월 말~4월 초</p>
+        <p class="h-sub">&gt; 일본 3대 정원 내 벚꽃. 야간 라이트업 있음. 가나자와성 해자 벚꽃도 절경.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>켄로쿠엔 + 가나자와성 (兼六園·金沢城)</span> : 일본 3대 정원 + 성. 세트 관람. 벚꽃 시즌 최고.</li>
+<li><span class='hl'>히가시 차야가이 (東茶屋街)</span> : 에도 게이샤 거리. 인스타 필수. 금박 아이스크림도 명물.</li>
+<li><span class='hl'>오미초 시장 (近江町市場)</span> : 가나자와 중앙 시장. 신선한 게·해산물 탐방. 식문화 대화 무한.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>가타마치 이자카야 (片町)</span> <span class='sr-h'>4.3★ 평균</span> — 가나자와 최대 이자카야 밀집 구역.</li>
+<li><span class='sn-h'>오미초 시장 이자카야</span> <span class='sr-h'>4.4★</span> — 시장 내 이자카야. 아침부터 술 가능.</li>
+<li><span class='sn-h'>기무라초 스낵바</span> <span class='sr-h'>기무라초</span> — 가나자와 스낵바 밀집. 마마상 활용.</li>
+<li><span class='sn-h'>Bar Kanazawa</span> <span class='sr-h'>4.2★</span> — 카운터석 중심. 가가 사케 전문.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">노토 해산물 (能登の海鮮)</p>
+        <p class="h-sub">게(ずわいがに)·성게(うに)·방어(ぶり)·농어. 노토 굴·가나자와 사케 조합. 치라시스시(ちらし寿司), 금박 아이스크림도 명물.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 가나자와 (¥9,000~, 가타마치 도보 10분). 가나자와 만요 클럽 (¥8,500~). ANA크라운플라자 가나자와 (¥10,000~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥156,000~ + 숙박 3박 ¥36,000~60,000 + 식비/주류 3일 ¥32,000~56,000 = 총 ¥224,000~272,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥6,000~10,000 + 식사 ¥3,000~6,000 + 주류·이자카야 ¥3,000~9,000 + 교통 ¥600~1,200 = 1인 1일 ¥12,600~26,200</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="takamatsu">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🍜 다카마쓰 (高松) <span class="h-region">[ 시코쿠 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 사누키 우동의 본고장 · 리쓰린 공원 · 세토 내해 아트</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 다카마쓰(TAK) | 비행 약 1시간 40분</p>
+        <p class="h-sub">&gt; 에어부산 직항 주 3~4회. 간사이(KIX) 경유 → JR 마린라이너 2시간도 가능.</p>
+        <p class="h-sub">&gt; ACCESS: 다카마쓰 공항 → JR 다카마쓰역: 공항버스 40분</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/8fHvLvdv5mE" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/8fHvLvdv5mE/hqdefault.jpg"
+              alt="讃岐弁あるある 香川出身なら100%わかる方言集"
+              onerror="this.src='https://img.youtube.com/vi/8fHvLvdv5mE/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/8fHvLvdv5mE" target="_blank">讃岐弁あるある 香川出身なら100%わかる方言集</a></p>
+        <p class="h-sub">CH: 昭和散歩</p>
+        <p class="h-sub">&gt;&gt; 가가와현 사누키벤 대표 방언 모음. 현지에서 「なんしょん？」 한 마디면 분위기 UP.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 가타하라마치 (片原町) · 마루가메마치 (丸亀町)</p>
+        <p class="h-sub">다카마쓰의 이자카야·바는 가타하라마치~마루가메마치 상점가 주변에 밀집. 라이온 도리 상점가 아케이드 속 골목에 로컬 이자카야가 숨어 있습니다. 관광객 비율이 매우 낮아 진정한 현지 분위기를 체험할 수 있는 도시.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (좋음)</span></p>
+        <p class="h-sub">&gt; 외국인 여행객이 극소수인 시코쿠의 소도시. 이자카야에서 한국인을 만나기 어렵고, 현지인 비율이 매우 높습니다. 사누키 우동 문화에 자부심이 강해 우동 이야기만으로도 대화가 쉽게 풀립니다.</p>
+        <div class="h-dialect">사누키벤(讃岐弁) — 「なんしょん？」(뭐 하고 있어?) 「～やけん」(~이니까) 「ほんまぁ」(정말?). 간사이벤과 비슷하지만 독특한 억양이 특징.</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>세토 내해의 석양과 사누키 우동의 본고장라는 자부심을 활용. 「讃岐うどんの本場に来たかったんです！」(사누키 우동의 본고장에 오고 싶었어요!)로 대화 시작.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:30~18:30]</td><td>사누키 우동 워밍업</td><td class='tip-h'>셀프 우동 가게에서 가케우동(かけうどん) 체험. 다카마쓰역 주변 우동 가게 밀집.</td></tr>
+<tr><td class='time-h'>[18:30~20:00]</td><td>가타하라마치 이자카야 1차</td><td class='tip-h'>해산물 이자카야에서 세토 내해 회·뼈닭(骨付鳥) + 가가와 사케. 카운터석 추천.</td></tr>
+<tr><td class='time-h'>[20:00~22:00]</td><td>마루가메마치 2차</td><td class='tip-h'>라이온 도리 상점가 주변 이자카야 탐방. 현지인 퇴근 후 합류 시간대.</td></tr>
+<tr><td class='time-h'>[22:00~24:00]</td><td>바·스낵바 3차</td><td class='tip-h'>가타하라마치 남쪽 골목 스낵바 거리. 마마상과 대화하며 사케.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>마무리</td><td class='tip-h'>편의점 맥주 + 다카마쓰항 야경 산책. 숙소로 귀환.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>입장 시</td><td class='jp-h'>「讃岐うどん食べに来たんですけど、おすすめの居酒屋ありますか？」</td><td class='note-h'>사누키 우동 먹으러 왔는데 추천 이자카야 있어요?</td></tr>
+<tr><td class='sit-h'>방언 도전</td><td class='jp-h'>「なんしょん？って使い方合ってますか？」</td><td class='note-h'>「なんしょん？」(뭐 하고 있어?) 사용법 맞나요?</td></tr>
+<tr><td class='sit-h'>음식 화제</td><td class='jp-h'>「骨付鳥って、親鶏と雛鶏どっちがおすすめ？」</td><td class='note-h'>뼈닭은 오야도리(단단)와 히나도리(부드러운) 중 뭐가 추천이에요?</td></tr>
+<tr><td class='sit-h'>감사</td><td class='jp-h'>「また来ます！うどん県最高！」</td><td class='note-h'>또 올게요! 우동 현 최고!</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 가가와 사케 + 사누키 비루</p>
+        <p class="h-order jp-h">「生ビールください」/ 「地酒ありますか？」</p>
+        <p class="h-sub">REC: 긴료(金陵) 사케 / 에쓰가이진(悦凱陣) / 사누키 비루</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">리쓰린 공원 (栗林公園)</p>
+        <p class="h-sub">BLOOM: 3월 하순~4월 초</p>
+        <p class="h-sub">&gt; 일본 특별 명승지. 벚꽃+일본 정원의 조화가 절경. 야간 라이트업도 실시.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>리쓰린 공원 (栗林公園)</span> : 일본 최대급 회유식 정원. 특별 명승지. 75만㎡의 광대한 부지에 연못·다리·다실이 어우러진 절경. 입장료 ¥410.</li>
+<li><span class='hl'>나오시마 (直島) 아트</span> : 세토 내해의 현대미술 섬. 지중미술관·베네세하우스·쿠사마 야요이의 노란 호박. 다카마쓰항에서 페리 50분.</li>
+<li><span class='hl'>사누키 우동 순례</span> : 셀프 우동 가게 투어. 가마타마(釜玉)·잣코우동(ざるうどん) 등 다양한 스타일 비교. 1그릇 ¥200~500의 가성비.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>骨付鳥 一鶴 (잇카쿠)</span> <span class='sr-h'>4.2★ / 高松本店</span> — 사누키 명물 뼈닭(骨付鳥) 전문. 스파이시한 오야도리(親鶏)·부드러운 히나도리(雛鶏). 비루 필수 동반.</li>
+<li><span class='sn-h'>瀬戸内ダイニング 遊々 (유유)</span> <span class='sr-h'>4.3★</span> — 세토 내해 해산물 이자카야. 올리브 하마치·타이(鯛) 등 가가와 특산 해산물 코스.</li>
+<li><span class='sn-h'>BAR TERU</span> <span class='sr-h'>4.1★</span> — 마루가메마치 근처 바. 위스키 셀렉션 풍부. 현지인 단골 많은 분위기 좋은 바.</li>
+<li><span class='sn-h'>가타하라마치 스낵 골목</span> <span class='sr-h'>로컬 골목</span> — 가타하라마치 남쪽 골목. 스낵바 밀집 구역. 마마상과 대화하며 가가와 사케를 즐기는 문화.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">사누키 우동 (讃岐うどん)</p>
+        <p class="h-sub">가가와현의 소울푸드. 쫄깃한 면발이 생명. 셀프 우동 가게에서 1그릇 ¥200~500. 가케우동·가마타마·부카케 등 다양한 스타일. 뼈닭(骨付鳥)과 함께 가가와 양대 명물.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 다카마쓰 (¥8,000~, 역 도보 5분). 다카마쓰 도큐 REI 호텔 (¥7,000~). JR 클레멘트 다카마쓰 (¥9,000~, 역 직결).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥80,000~ + 숙박 3박 ¥30,000~48,000 + 식비/주류 3일 ¥24,000~42,000 = 총 ¥134,000~170,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,000~8,000 + 식사 ¥2,000~4,000 + 주류·이자카야 ¥3,000~7,000 + 교통 ¥500~1,000 = 1인 1일 ¥10,500~20,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="shizuoka">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🗻 시즈오카 (静岡) <span class="h-region">[ 추부 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 후지산 조망 · 시즈오카 오뎅 · 차 문화의 도시</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 후지산 시즈오카(FSZ) | 비행 약 2시간 (직항 제한적)</p>
+        <p class="h-sub">&gt; 직항 편수 적음. 도쿄(NRT/HND) 경유 → 신칸센 히카리 1시간이 가장 현실적. 나고야 경유도 가능.</p>
+        <p class="h-sub">&gt; ACCESS: 시즈오카 공항 → JR 시즈오카역: 공항버스 55분 / 도쿄역 → 시즈오카역: 신칸센 1시간</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/96H-WbLz3cA" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/96H-WbLz3cA/hqdefault.jpg"
+              alt="静岡弁 可愛い 方言女子"
+              onerror="this.src='https://img.youtube.com/vi/96H-WbLz3cA/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/96H-WbLz3cA" target="_blank">静岡弁 可愛い 方言女子</a></p>
+        <p class="h-sub">CH: 方言チャンネル</p>
+        <p class="h-sub">&gt;&gt; 시즈오카벤 귀여운 방언 모음. 「～だら？」 활용법 학습.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 오비야초 (呉服町) · 시치켄초 (七間町)</p>
+        <p class="h-sub">시즈오카의 이자카야 밀집 구역은 오비야초~시치켄초 일대. 시즈오카 오뎅 골목(青葉横丁·青葉おでん街)이 유명. 후지산을 바라보며 마시는 사케는 시즈오카만의 체험.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (좋음)</span></p>
+        <p class="h-sub">&gt; 도쿄와 가까우면서도 외국인 여행객이 적은 도시. 시즈오카 오뎅 골목에서 현지 직장인과 자연스러운 교류 가능. 차 문화와 후지산 자부심이 강합니다.</p>
+        <div class="h-dialect">시즈오카벤(静岡弁) — 「～だら？」(~이지?) 「～ら」(~할 거야) 「しょんない」(어쩔 수 없어). 간토벤에 가깝지만 독특한 어미가 특징.</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>후지산이 보이는 날은 최고의 대화 소재. 「今日、富士山見えましたか？」(오늘 후지산 보였어요?)로 시작. 시즈오카 오뎅과 시즈오카 차(茶)를 칭찬하면 현지인 반응 최고.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:00~18:30]</td><td>시즈오카 오뎅 골목 탐방</td><td class='tip-h'>아오바 요코초(青葉横丁)에서 시즈오카 오뎅 + 시즈오카 차 하이로 워밍업. 1인 ¥1,000~1,500.</td></tr>
+<tr><td class='time-h'>[18:30~20:30]</td><td>오비야초 이자카야 1차</td><td class='tip-h'>사쿠라 에비(桜えび)·시라스(しらす) 해산물 이자카야. 시즈오카 지역 사케와 함께.</td></tr>
+<tr><td class='time-h'>[20:30~22:30]</td><td>시치켄초 2차</td><td class='tip-h'>오비야초에서 시치켄초로 이동. 바·이자카야 밀집 구역.</td></tr>
+<tr><td class='time-h'>[22:30~24:00]</td><td>바·스낵바 3차</td><td class='tip-h'>시즈오카역 남쪽 골목 스낵바 구역. 현지인 비율 높음.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>마무리</td><td class='tip-h'>시즈오카 오뎅으로 마무리. 편의점 맥주와 함께 숙소 귀환.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>입장 시</td><td class='jp-h'>「静岡おでん初めてです！おすすめありますか？」</td><td class='note-h'>시즈오카 오뎅 처음이에요! 추천 있어요?</td></tr>
+<tr><td class='sit-h'>방언 도전</td><td class='jp-h'>「～だらって静岡弁ですか？使ってみたい！」</td><td class='note-h'>「～だら」가 시즈오카벤이에요? 써보고 싶어요!</td></tr>
+<tr><td class='sit-h'>후지산 화제</td><td class='jp-h'>「今日、富士山きれいに見えましたよ！」</td><td class='note-h'>오늘 후지산 깨끗하게 보였어요!</td></tr>
+<tr><td class='sit-h'>감사</td><td class='jp-h'>「静岡最高！また来ます！」</td><td class='note-h'>시즈오카 최고! 또 올게요!</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 시즈오카 차 하이 + 지역 사케</p>
+        <p class="h-order jp-h">「お茶ハイください」/ 「静岡の地酒ありますか？」</p>
+        <p class="h-sub">REC: 하나노마이(花の舞) / 이소지만(磯自慢) / 시즈오카 차 하이</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">순푸 공원 (駿府城公園)</p>
+        <p class="h-sub">BLOOM: 3월 하순~4월 초</p>
+        <p class="h-sub">&gt; 도쿠가와 이에야스의 성터. 벚꽃 660그루. 후지산 배경의 벚꽃이 절경.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>미호노마쓰바라 (三保松原)</span> : 후지산+소나무 숲+해변의 3점 세트. 유네스코 세계유산. 시즈오카역에서 버스 30분. 맑은 날 후지산 뷰 최고.</li>
+<li><span class='hl'>구노잔 도쇼구 (久能山東照宮)</span> : 도쿠가와 이에야스를 모시는 신사. 국보 건축. 니혼다이라 로프웨이로 접근. 시즈오카 차밭 풍경도 포함.</li>
+<li><span class='hl'>시즈오카 오뎅 골목 (青葉横丁)</span> : 낮에도 영업하는 오뎅 가게. 검은 국물의 시즈오카 오뎅은 독특한 맛. 아오바 공원 주변 산책과 함께.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>青葉おでん街 (아오바 오뎅가이)</span> <span class='sr-h'>4.3★</span> — 시즈오카 오뎅 전문 골목. 카운터석에서 현지인과 어깨를 맞대고 오뎅+사케. 10여 개 가게 밀집.</li>
+<li><span class='sn-h'>海ぼうず (우미보즈)</span> <span class='sr-h'>4.4★</span> — 시즈오카역 남쪽 해산물 이자카야. 사쿠라 에비 가키아게·시라스 안주 인기. 현지인 단골 많음.</li>
+<li><span class='sn-h'>KISSA&BAR 琥珀</span> <span class='sr-h'>4.2★</span> — 오비야초 근처 바. 시즈오카 차 칵테일 전문. 분위기 좋은 인테리어.</li>
+<li><span class='sn-h'>시치켄초 골목 이자카야</span> <span class='sr-h'>로컬 구역</span> — 오비야초에서 한 블록 남쪽. 소규모 이자카야·바 밀집. 퇴근 후 직장인 많음.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">시즈오카 오뎅 (静岡おでん)</p>
+        <p class="h-sub">검은 국물의 시즈오카 오뎅. 소고기 힘줄 국물+검은 한텐(黒はんぺん)이 특징. 아오노리(青のり)와 생선 가루를 뿌려 먹음. 사쿠라 에비·시라스도 시즈오카 명물.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 시즈오카 (¥8,500~, 역 도보 5분). 호텔 어소시아 시즈오카 (¥7,000~). 쿠에스트 시즈오카 (¥6,500~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥100,000~ + 숙박 3박 ¥30,000~54,000 + 식비/주류 3일 ¥24,000~42,000 = 총 ¥154,000~196,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥5,000~9,000 + 식사 ¥2,000~5,000 + 주류·이자카야 ¥3,000~7,000 + 교통 ¥500~1,000 = 1인 1일 ¥10,500~22,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="saga">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🏺 사가 (佐賀) <span class="h-region">[ 규슈 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 사가 규 · 아리타 도자기 · 바루운 사가</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 사가(HSG) | 비행 약 1시간 20분</p>
+        <p class="h-sub">&gt; 진에어·티웨이 직항 주 4~7회. 후쿠오카 공항에서 JR 1시간 40분으로도 접근 가능.</p>
+        <p class="h-sub">&gt; ACCESS: 사가 공항 → JR 사가역: 공항버스 35분</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/jSWE7X9jy2E" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/jSWE7X9jy2E/hqdefault.jpg"
+              alt="佐賀弁相談室 佐賀弁シリーズ入門編"
+              onerror="this.src='https://img.youtube.com/vi/jSWE7X9jy2E/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/jSWE7X9jy2E" target="_blank">佐賀弁相談室 佐賀弁シリーズ入門編</a></p>
+        <p class="h-sub">CH: 佐賀弁チャンネル</p>
+        <p class="h-sub">&gt;&gt; 사가벤 입문편. 「がばい」 활용법과 사가벤 특유의 부드러운 억양 학습.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 에키마에 (駅前) · 사가역 남쪽 골목</p>
+        <p class="h-sub">사가역 앞 에키마에 일대에 소규모 이자카야·스낵바 밀집. 대도시에 비해 규모는 작지만 외국인이 거의 없어 현지인 비율 100%에 가까운 순수 로컬 분위기.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★★ (최고)</span></p>
+        <p class="h-sub">&gt; 일본에서도 존재감이 낮은 현(県)으로 유명한 사가. 그만큼 외국인 관광객이 극소수이며, 이자카야에서 한국인을 만나는 것은 거의 불가능. 진정한 현지 체험의 보석같은 도시.</p>
+        <div class="h-dialect">사가벤(佐賀弁) — 「～ばい」(~이야) 「～たい」(~이지) 「がばい」(매우/대단히). 하카타벤과 유사하지만 더 부드러운 억양.</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>「がばいうまか！」(겁나 맛있어!)는 사가에서 최고의 칭찬. 사가 규(佐賀牛)를 이자카야에서 주문하며 대화 시작.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:30~18:30]</td><td>사가역 주변 카페에서 워밍업</td><td class='tip-h'>사가 명물 마루보로(丸ぼうろ) 과자와 커피. 가벼운 산책.</td></tr>
+<tr><td class='time-h'>[18:30~20:30]</td><td>에키마에 이자카야 1차</td><td class='tip-h'>사가 규 스테이크·해산물 이자카야. 사가 사케와 함께. 카운터석 추천.</td></tr>
+<tr><td class='time-h'>[20:30~22:30]</td><td>사가역 남쪽 골목 2차</td><td class='tip-h'>소규모 이자카야·야키토리집. 현지 직장인 합류 시간대.</td></tr>
+<tr><td class='time-h'>[22:30~24:00]</td><td>스낵바 3차</td><td class='tip-h'>에키마에 스낵바 골목. 마마상과 사가벤으로 대화.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>마무리</td><td class='tip-h'>편의점 맥주 + 사가역 주변 산책. 숙소 귀환.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>입장 시</td><td class='jp-h'>「佐賀牛食べたくて佐賀に来ました！」</td><td class='note-h'>사가 규 먹고 싶어서 사가에 왔어요!</td></tr>
+<tr><td class='sit-h'>방언 도전</td><td class='jp-h'>「がばいうまか！って使い方合ってます？」</td><td class='note-h'>「がばいうまか！」(겁나 맛있어!) 사용법 맞아요?</td></tr>
+<tr><td class='sit-h'>도자기 화제</td><td class='jp-h'>「有田焼って佐賀が本場なんですよね？」</td><td class='note-h'>아리타야키가 사가가 본고장이죠?</td></tr>
+<tr><td class='sit-h'>감사</td><td class='jp-h'>「佐賀、がばいよかった！また来ます！」</td><td class='note-h'>사가, 겁나 좋았어요! 또 올게요!</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 사가 니혼슈 (佐賀の地酒)</p>
+        <p class="h-order jp-h">「佐賀のお酒ありますか？」/ 「鍋島飲んでみたい！」</p>
+        <p class="h-sub">REC: 나베시마(鍋島) / 아마부키(天吹) / 만리쿄(万里鏡) 사가 사케</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">사가 성터 (佐賀城公園)</p>
+        <p class="h-sub">BLOOM: 3월 하순~4월 초</p>
+        <p class="h-sub">&gt; 사가 시내 중심부 벚꽃 명소. 해자 주변 벚꽃 산책로.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>아리타·이마리 도자기 마을 (有田・伊万里)</span> : 아리타야키·이마리야키 도자기의 본고장. 가마모토(窯元) 견학·도자기 시장. 사가역에서 JR 1시간.</li>
+<li><span class='hl'>요시노가리 유적 (吉野ヶ里遺跡)</span> : 일본 최대 야요이 시대 환호취락 유적. 국가 특별사적. 사가역에서 JR 15분. 입장료 ¥460.</li>
+<li><span class='hl'>다케오 온천 (武雄温泉)</span> : 1300년 역사의 온천. 다케오 온천 누문(국가 중요문화재). 사가역에서 JR 30분.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>さかなや道場 사가역 앞점</span> <span class='sr-h'>4.1★</span> — 사가역 앞 해산물 이자카야. 이카 이케즈쿠리(활오징어) 전문. 가성비 우수.</li>
+<li><span class='sn-h'>佐賀牛レストラン 季楽</span> <span class='sr-h'>4.5★</span> — JA 직영 사가 규 전문점. A5 등급 사가 규를 합리적 가격에. 런치도 인기.</li>
+<li><span class='sn-h'>BAR 사가역 남쪽</span> <span class='sr-h'>4.0★</span> — 에키마에 남쪽 골목 바. 사가 사케·위스키 셀렉션. 현지인 단골.</li>
+<li><span class='sn-h'>에키마에 스낵 거리</span> <span class='sr-h'>로컬 골목</span> — 사가역 남쪽 200m 골목. 스낵바 10여 곳 밀집. 외국인 방문 극소수.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">사가 규 (佐賀牛)</p>
+        <p class="h-sub">일본 최고급 브랜드 소고기 중 하나. A4~A5 등급. 부드러운 마블링과 깊은 감칠맛. 이카 이케즈쿠리(活イカ造り, 활오징어 회)도 사가의 대표 명물.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 콤포트 호텔 사가 (¥5,000~, 역 도보 3분). 호텔 뉴 오타니 사가 (¥7,000~). 도요코인 사가역 앞 (¥4,500~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥60,000~ + 숙박 3박 ¥27,000~42,000 + 식비/주류 3일 ¥24,000~42,000 = 총 ¥111,000~144,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥4,500~7,000 + 식사 ¥2,000~5,000 + 주류·이자카야 ¥3,000~7,000 + 교통 ¥400~800 = 1인 1일 ¥9,900~19,800</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="tokushima">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 💃 도쿠시마 (徳島) <span class="h-region">[ 시코쿠 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 아와오도리의 고향 · 나루토 소용돌이 · 이야 계곡</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">직항 없음 | 간사이(KIX) 경유 → 고속버스 2시간 반</p>
+        <p class="h-sub">&gt; 인천 → 간사이(KIX) → 고속버스 2시간 30분이 가장 현실적. 도쿠시마 공항(TKS)은 국내선만 운행.</p>
+        <p class="h-sub">&gt; ACCESS: 간사이 공항 → 도쿠시마역: 고속버스 직행 2시간 30분 / 도쿠시마 공항 → 시내: 버스 30분</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/nqD8mpDutx8" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/nqD8mpDutx8/hqdefault.jpg"
+              alt="徳島の方言 阿波弁をゆっくり解説"
+              onerror="this.src='https://img.youtube.com/vi/nqD8mpDutx8/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/nqD8mpDutx8" target="_blank">徳島の方言 阿波弁をゆっくり解説</a></p>
+        <p class="h-sub">CH: 方言解説</p>
+        <p class="h-sub">&gt;&gt; 도쿠시마 아와벤 방언 해설. 「～じょ」 등 특유의 어미 학습.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 아키타마치 (秋田町)</p>
+        <p class="h-sub">도쿠시마 최대 환락가 아키타마치. 좁은 골목에 이자카야·스낵바·바가 밀집. 외국인 관광객이 거의 없는 순수 로컬 구역. 아와오도리 시즌(8월)에는 축제 열기가 골목을 가득 채웁니다.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★★ (최고)</span></p>
+        <p class="h-sub">&gt; 시코쿠에서도 가장 로컬한 분위기의 소도시. 한국인 여행객이 극소수이며, 이자카야에서 한국인을 만나는 것은 거의 불가능. 아와오도리 문화가 도시 전체에 스며들어 있어 축제 이야기만으로도 대화가 풀립니다.</p>
+        <div class="h-dialect">아와벤(阿波弁) — 「～じょ」(~이야) 「～けん」(~이니까) 「たまるか」(참을 수 없어). 사누키벤과 비슷하지만 더 부드러운 어감.</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>아와오도리를 화제로 대화 시작. 「阿波踊り見たことないんですけど、すごいんですか？」(아와오도리 본 적 없는데 대단한가요?). 나루토 소용돌이·스다치(すだち)도 자부심의 원천.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[17:00~18:30]</td><td>아와오도리 회관 방문</td><td class='tip-h'>아와오도리 카이칸에서 연중 공연 관람. 도쿠시마역 도보 10분. 입장료 ¥800.</td></tr>
+<tr><td class='time-h'>[18:30~20:30]</td><td>아키타마치 이자카야 1차</td><td class='tip-h'>도쿠시마 라멘·생선회·스다치 사와. 카운터석에서 현지인과 교류.</td></tr>
+<tr><td class='time-h'>[20:30~22:30]</td><td>아키타마치 2차</td><td class='tip-h'>야키토리·이자카야 탐방. 아와오도리 시즌이면 거리 축제도 체험.</td></tr>
+<tr><td class='time-h'>[22:30~24:00]</td><td>스낵바 3차</td><td class='tip-h'>아키타마치 안쪽 골목 스낵바. 마마상과 아와벤으로 대화.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>마무리</td><td class='tip-h'>도쿠시마 라멘으로 마무리. 숙소 귀환.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>입장 시</td><td class='jp-h'>「阿波踊り見に来たんですけど、徳島ラーメンも気になって！」</td><td class='note-h'>아와오도리 보러 왔는데 도쿠시마 라멘도 궁금해서!</td></tr>
+<tr><td class='sit-h'>방언 도전</td><td class='jp-h'>「～じょって言ってみたい！使い方合ってますか？」</td><td class='note-h'>「～じょ」 써보고 싶어요! 사용법 맞나요?</td></tr>
+<tr><td class='sit-h'>명물 화제</td><td class='jp-h'>「すだちって徳島が日本一なんですよね？」</td><td class='note-h'>스다치가 도쿠시마가 일본 1위죠?</td></tr>
+<tr><td class='sit-h'>감사</td><td class='jp-h'>「また阿波踊りの時に来ます！」</td><td class='note-h'>아와오도리 때 또 올게요!</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 스다치 사와 + 아와 사케</p>
+        <p class="h-order jp-h">「すだちサワーください」/ 「阿波の地酒ありますか？」</p>
+        <p class="h-sub">REC: 나루토다이(鳴門鯛) / 미마쓰루(三芳菊) / 스다치 사와</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">즈쓰지산 공원 (眉山公園)</p>
+        <p class="h-sub">BLOOM: 3월 하순~4월 초</p>
+        <p class="h-sub">&gt; 도쿠시마 시내를 한눈에 조망. 로프웨이로 정상까지. 벚꽃+야경 동시 감상.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>나루토 소용돌이 (鳴門の渦潮)</span> : 세계 3대 조류 중 하나. 대명교(大鳴門橋) 위 유리바닥에서 소용돌이 관찰. 관광선도 운행. 도쿠시마역에서 버스 1시간.</li>
+<li><span class='hl'>이야 계곡 (祖谷渓谷)</span> : 일본 3대 비경 중 하나. 카즈라바시(かずら橋, 덩굴다리)가 유명. 에메랄드 빛 계곡물. 렌터카 추천 (도쿠시마역에서 2시간).</li>
+<li><span class='hl'>아와오도리 카이칸 (阿波おどり会館)</span> : 연중 아와오도리 공연 관람 가능. 박물관+체험 코너. 도쿠시마역 도보 10분. 입장료 ¥800.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>安兵衛 (야스베에)</span> <span class='sr-h'>4.3★</span> — 아키타마치 로컬 이자카야. 해산물·야키토리 전문. 현지 직장인 단골 밀집.</li>
+<li><span class='sn-h'>てっちゃん</span> <span class='sr-h'>4.2★</span> — 도쿠시마 라멘 인기점. 노른자가 올라간 도쿠시마 라멘 정통파. 라멘+맥주 조합 최고.</li>
+<li><span class='sn-h'>BAR AQUA</span> <span class='sr-h'>4.1★</span> — 아키타마치 바. 칵테일·위스키 셀렉션. 분위기 좋은 카운터석.</li>
+<li><span class='sn-h'>아키타마치 스낵 골목</span> <span class='sr-h'>로컬 골목</span> — 아키타마치 안쪽 골목. 스낵바 20여 곳 밀집. 현지인 비율 거의 100%.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">도쿠시마 라멘 (徳島ラーメン)</p>
+        <p class="h-sub">돼지뼈 간장 육수에 달걀 노른자를 올린 진한 맛. 밥과 함께 먹는 것이 도쿠시마 스타일. 스다치(すだち, 시트러스)도 도쿠시마의 대표 특산물.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 도미인 도쿠시마 (¥7,500~, 역 도보 5분). JR 호텔 클레멘트 도쿠시마 (¥8,000~, 역 직결). 도요코인 도쿠시마역 앞 (¥4,500~).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥100,000~ + 숙박 3박 ¥27,000~42,000 + 식비/주류 3일 ¥20,000~36,000 = 총 ¥147,000~178,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥4,500~7,000 + 식사 ¥1,500~4,000 + 주류·이자카야 ¥3,000~6,000 + 교통 ¥400~800 = 1인 1일 ¥9,400~17,800</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="miyakojima">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🏝️ 미야코지마 (宮古島) <span class="h-region">[ 오키나와 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 동양의 카리브 · 요나하마에하마 · 이라부 대교</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 나하(OKA) → 미야코(MMY) | 총 약 4시간 (경유)</p>
+        <p class="h-sub">&gt; 나하 경유 필수 (나하→미야코 약 50분). 또는 시모지시마 공항(SHI)으로 도쿄 나리타 직항(제트스타).</p>
+        <p class="h-sub">&gt; ACCESS: 미야코 공항 → 히라라 시내: 택시 10분 / 렌터카 추천 (섬 관광 필수)</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/dW9C4tg9zDE" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/dW9C4tg9zDE/hqdefault.jpg"
+              alt="宮古島vlog 初の宮古島で5泊6日"
+              onerror="this.src='https://img.youtube.com/vi/dW9C4tg9zDE/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/dW9C4tg9zDE" target="_blank">宮古島vlog 初の宮古島で5泊6日</a></p>
+        <p class="h-sub">CH: 宮古島Travel</p>
+        <p class="h-sub">&gt;&gt; 미야코지마 여행 브이로그. 해변·이자카야·현지 음식 체험.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 히라라 (平良) 시내 · 시모사토 (下里) 도리</p>
+        <p class="h-sub">미야코지마의 이자카야는 히라라 시내 시모사토 도리(下里通り) 주변에 밀집. 관광객과 현지인이 함께 어울리는 섬 특유의 느긋한 분위기. 라이브 음악 이자카야가 많습니다.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (좋음)</span></p>
+        <p class="h-sub">&gt; 섬 특유의 개방적 분위기. 오토오리(オトーリ)라는 미야코 특유의 음주 문화가 있어, 이자카야에서 현지인이 먼저 술을 권하는 경우도. 해변의 석양을 화제로 대화 시작이 자연스럽습니다.</p>
+        <div class="h-dialect">미야코 방언(宮古語/ミャークフツ) — 「んみゃーち」(어서 오세요) 「たんでぃがぁたんでぃ」(감사합니다). 표준 일본어와 매우 달라 별도 언어에 가까움.</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>미야코의 오토오리(オトーリ) 음주 문화를 알면 현지인과 쉽게 친해질 수 있습니다. 「오토오리 가르쳐주세요」로 대화 시작.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[16:00~18:00]</td><td>해변에서 석양 감상</td><td class='tip-h'>요나하마에하마·스나야마 비치에서 석양. 미야코블루 바다 사진 촬영.</td></tr>
+<tr><td class='time-h'>[18:00~20:00]</td><td>시모사토 도리 이자카야 1차</td><td class='tip-h'>미야코 소바·섬 두부·라프테(豚角煮). 아와모리 미즈와리로 시작.</td></tr>
+<tr><td class='time-h'>[20:00~22:00]</td><td>라이브 음악 이자카야 2차</td><td class='tip-h'>산신(三線) 라이브 연주를 들으며 아와모리. 오토오리 체험.</td></tr>
+<tr><td class='time-h'>[22:00~24:00]</td><td>바 3차</td><td class='tip-h'>히라라 시내 바. 미야코지마 칵테일·아와모리 고급 라인.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>마무리</td><td class='tip-h'>별 하늘 감상. 미야코지마는 빛 공해 적어 만천의 별. 숙소 귀환.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>입장 시</td><td class='jp-h'>「宮古島初めてです！おすすめの泡盛ありますか？」</td><td class='note-h'>미야코지마 처음이에요! 추천 아와모리 있어요?</td></tr>
+<tr><td class='sit-h'>오토오리 체험</td><td class='jp-h'>「オトーリって教えてもらえますか？」</td><td class='note-h'>오토오리 가르쳐주실 수 있나요?</td></tr>
+<tr><td class='sit-h'>해변 화제</td><td class='jp-h'>「前浜ビーチの夕日、最高でした！」</td><td class='note-h'>마에하마 비치 석양 최고였어요!</td></tr>
+<tr><td class='sit-h'>감사</td><td class='jp-h'>「宮古島最高！たんでぃがぁたんでぃ！」</td><td class='note-h'>미야코지마 최고! 감사합니다! (미야코 방언)</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 미야코 아와모리 (宮古泡盛)</p>
+        <p class="h-order jp-h">「泡盛の水割りください」/ 「オトーリやりましょう！」</p>
+        <p class="h-sub">REC: 구스(菊之露) / 미야코지마(宮古島) / 자키미(残波)</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">히라라 시내 공원</p>
+        <p class="h-sub">BLOOM: 1월 하순~2월 초 (칸히자쿠라)</p>
+        <p class="h-sub">&gt; 오키나와 벚꽃은 1~2월 개화. 4월에는 열대 꽃(하이비스커스 등)이 만개.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>요나하마에하마 비치 (与那覇前浜)</span> : 동양 최고의 해변으로 불리는 7km 백사장. 미야코블루의 투명한 바다. 시노클링·제트스키 등 마린 액티비티 가능.</li>
+<li><span class='hl'>이라부 대교 (伊良部大橋)</span> : 무료 통행 일본 최장 3,540m 다리. 미야코블루 바다 위를 달리는 절경 드라이브. 이라부지마·시모지시마로 연결.</li>
+<li><span class='hl'>시모지시마 17엔드 (下地島17END)</span> : 활주로 끝 해변. 에메랄드 그린 바다와 비행기 착륙을 동시에 볼 수 있는 인스타 명소.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>島おでん たから</span> <span class='sr-h'>4.4★</span> — 히라라 시내 이자카야. 미야코 소바·섬 음식 전문. 현지인 단골 多. 라이브 삼선 연주.</li>
+<li><span class='sn-h'>郷家 (ごーや)</span> <span class='sr-h'>4.3★</span> — 시모사토 도리 이자카야. 오키나완 음식+라이브 음악. 오토오리 체험 가능.</li>
+<li><span class='sn-h'>Bar TIPSY</span> <span class='sr-h'>4.1★</span> — 히라라 시내 바. 미야코지마 칵테일 전문. 여행객·현지인 믹스.</li>
+<li><span class='sn-h'>시모사토 도리 이자카야 골목</span> <span class='sr-h'>시모사토 주변</span> — 히라라 시내 메인 스트리트. 이자카야·바 20여 곳 밀집. 도보로 바 호핑 가능.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">미야코 소바 (宮古そば)</p>
+        <p class="h-sub">돼지뼈+가쓰오부시 국물에 납작한 면. 소키(갈비살)·가마보코가 면 아래에 숨어 있는 것이 미야코 스타일. 섬 두부(島豆腐)·라프테(豚角煮)도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 미야코지마 도큐 호텔&리조트 (¥15,000~, 해변 앞). 호텔 아토루 에메랄드 (¥10,000~). 게스트하우스 풍차 (¥3,500~, 히라라 시내).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥180,000~ + 숙박 3박 ¥24,000~90,000 + 식비/주류 3일 ¥24,000~42,000 + 렌터카 3일 ¥15,000~24,000 = 총 ¥243,000~336,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥4,000~15,000 + 식사 ¥2,000~5,000 + 주류·이자카야 ¥3,000~7,000 + 렌터카 ¥2,500~4,000 = 1인 1일 ¥11,500~31,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="ishigaki">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// 🐠 이시가키 (石垣島) <span class="h-region">[ 오키나와 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 이시가키 규 · 가비라만 · 야에야마 제도 관문</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">인천(ICN) → 이시가키(ISG) | 직항 약 2시간 30분 (피치 계절편) 또는 나하 경유</p>
+        <p class="h-sub">&gt; 피치 항공 계절 직항 (주 2~3회). 나하(OKA) 경유 시 나하→이시가키 약 1시간.</p>
+        <p class="h-sub">&gt; ACCESS: 신이시가키 공항 → 시내: 버스/택시 15분 / 렌터카 추천</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/m4F45q_BJP8" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/m4F45q_BJP8/hqdefault.jpg"
+              alt="石垣島グルメ 人気グルメ店22選"
+              onerror="this.src='https://img.youtube.com/vi/m4F45q_BJP8/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/m4F45q_BJP8" target="_blank">石垣島グルメ 人気グルメ店22選</a></p>
+        <p class="h-sub">CH: 石垣島ガイド</p>
+        <p class="h-sub">&gt;&gt; 이시가키 그루메 22선. 이시가키 규·야에야마 소바 등 현지 음식 가이드.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 미사키초 (美崎町) 번화가</p>
+        <p class="h-sub">이시가키 시내 미사키초(美崎町)가 이자카야·바 밀집 구역. 730 교차로 주변이 중심가. 이시가키 규 전문점·야에야마 소바집·라이브 음악 이자카야가 밀집. 섬 특유의 개방적 분위기.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★★☆ (좋음)</span></p>
+        <p class="h-sub">&gt; 일본 본토와 다른 야에야마(八重山) 문화권. 섬 생활의 느긋함이 이자카야에도 반영. 관광객과 현지인이 자연스럽게 섞이는 분위기. 이시가키 규로 대화 시작이 쉬움.</p>
+        <div class="h-dialect">야에야마 방언(八重山語/ヤイマムニ) — 「みーふぁいゆー」(감사합니다) 「おーりとーり」(어서 오세요). 표준 일본어와 크게 달라 별도 언어에 가까움.</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>이시가키 규(石垣牛)의 맛을 칭찬하는 것이 최고의 대화 시작. 「石垣牛、本当に美味しいですね！」. 다케토미지마 등 이웃 섬 이야기도 좋은 화제.</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[16:00~18:00]</td><td>가비라만·해변에서 석양</td><td class='tip-h'>가비라만(川平湾) 글라스 보트 또는 후사키 비치에서 석양 감상.</td></tr>
+<tr><td class='time-h'>[18:00~20:00]</td><td>미사키초 이자카야 1차</td><td class='tip-h'>이시가키 규 야키니쿠·야에야마 소바. 오리온 비루+아와모리.</td></tr>
+<tr><td class='time-h'>[20:00~22:00]</td><td>라이브 음악 이자카야 2차</td><td class='tip-h'>산신(三線) 라이브 연주 이자카야. 야에야마 민요와 함께 아와모리.</td></tr>
+<tr><td class='time-h'>[22:00~24:00]</td><td>바 3차</td><td class='tip-h'>미사키초 바. 이시가키 칵테일·아와모리 고급 라인.</td></tr>
+<tr><td class='time-h'>[24:00~]</td><td>마무리</td><td class='tip-h'>별 하늘 감상 (이시가키는 별 보호구역). 숙소 귀환.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>입장 시</td><td class='jp-h'>「石垣牛が有名って聞いて来ました！」</td><td class='note-h'>이시가키 규가 유명하다고 들어서 왔어요!</td></tr>
+<tr><td class='sit-h'>방언 도전</td><td class='jp-h'>「おーりとーりって、いらっしゃいませの意味ですか？」</td><td class='note-h'>「おーりとーり」가 어서오세요라는 뜻인가요?</td></tr>
+<tr><td class='sit-h'>바다 화제</td><td class='jp-h'>「川平湾の色、信じられないくらいきれいでした！」</td><td class='note-h'>가비라만 색이 믿을 수 없을 정도로 예뻤어요!</td></tr>
+<tr><td class='sit-h'>감사</td><td class='jp-h'>「石垣島最高！みーふぁいゆー！」</td><td class='note-h'>이시가키 최고! 감사합니다! (야에야마 방언)</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 야에야마 아와모리 + 오리온 비루</p>
+        <p class="h-order jp-h">「泡盛の水割りください」/ 「石垣の地ビールありますか？」</p>
+        <p class="h-sub">REC: 시라유리(白百合) / 오모토(於茂登) / 이시가키 지역 맥주</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">반나 공원 (バンナ公園)</p>
+        <p class="h-sub">BLOOM: 1월 하순~2월 초 (칸히자쿠라)</p>
+        <p class="h-sub">&gt; 이시가키 시내 전망대에서 벚꽃. 4월은 열대 꽃(데이고 등) 시즌.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>가비라만 (川平湾)</span> : 미쉐린 3스타 절경. 에메랄드 그린 바다. 글라스 보트로 산호초·열대어 관찰. 이시가키 공항에서 차 30분.</li>
+<li><span class='hl'>다케토미지마 (竹富島)</span> : 이시가키항에서 페리 10분. 전통 적기와 집·물소 수레·콘도이 비치. 야에야마 전통 문화 체험.</li>
+<li><span class='hl'>요나구니지마 (与那国島)</span> : 일본 최서단 섬. 해저 유적·요나구니 말(ヨナグニウマ). 이시가키에서 비행기 30분.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>ひとし 石垣본점</span> <span class='sr-h'>4.5★</span> — 이시가키 규 전문 이자카야. 예약 필수 인기점. 마구로(참치)도 유명. 현지인·관광객 모두 사랑.</li>
+<li><span class='sn-h'>島料理 カビラ</span> <span class='sr-h'>4.3★</span> — 야에야마 전통 요리 전문. 섬 두부·고야 찬푸루·이시가키 규 스테이크. 라이브 삼선 연주.</li>
+<li><span class='sn-h'>BAR VANILLA</span> <span class='sr-h'>4.2★</span> — 미사키초 바. 이시가키 칵테일·아와모리 셀렉션. 섬 분위기의 느긋한 바.</li>
+<li><span class='sn-h'>미사키초 이자카야 골목</span> <span class='sr-h'>730 교차로 주변</span> — 이시가키 최대 번화가. 이자카야·바·라이브하우스 30여 곳 밀집.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">이시가키 규 (石垣牛)</p>
+        <p class="h-sub">야에야마 제도에서 사육한 프리미엄 브랜드 소고기. 온난한 기후에서 스트레스 없이 자란 소. 야키니쿠·스테이크·니기리 초밥으로 즐김. 야에야마 소바(八重山そば)도 필수.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: ANA 인터콘티넨탈 이시가키 (¥20,000~, 비치 프런트). 호텔 이시가키 리조트 그란비리오 (¥12,000~). 게스트하우스 슈테른 (¥3,500~, 미사키초 인근).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥120,000~ + 숙박 3박 ¥24,000~120,000 + 식비/주류 3일 ¥30,000~54,000 + 렌터카 3일 ¥15,000~24,000 = 총 ¥189,000~318,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥4,000~20,000 + 식사 ¥2,000~6,000 + 주류·이자카야 ¥3,000~9,000 + 렌터카 ¥2,500~4,000 = 1인 1일 ¥11,500~39,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+<section class="h-city" id="shimoji">
+  <div class="h-city-head">
+    <div class="h-corner tl"></div><div class="h-corner tr"></div>
+    <h2>// ✈️ 시모지시마 (下地島) <span class="h-region">[ 오키나와 ]</span></h2>
+    <p class="h-tagline">&gt;&gt; 17엔드 비치 · 미야코블루 · 신공항 리조트</p>
+  </div>
+
+  <div class="h-city-grid">
+    <div class="h-col-main">
+
+      <div class="h-block">
+        <div class="h-block-title">[ ✈ FLIGHT INFO ]</div>
+        <p class="h-p">나리타(NRT) → 시모지시마(SHI) | 직항 약 3시간 (제트스타)</p>
+        <p class="h-sub">&gt; 제트스타 나리타/간사이 직항. 한국에서는 나하(OKA) 경유 → 미야코(MMY) 후 이라부 대교로 연결이 현실적.</p>
+        <p class="h-sub">&gt; ACCESS: 시모지시마 공항 → 미야코지마 히라라 시내: 이라부 대교 경유 차량 15~20분</p>
+      </div>
+
+      <div class="h-block yt-h-block">
+        <div class="h-block-title">[ 📺 DIALECT TRAINING ]</div>
+        <div class="h-yt-wrap">
+          <a href="https://youtu.be/PgrksOn98Zo" target="_blank" rel="noopener">
+            <img
+              src="https://img.youtube.com/vi/PgrksOn98Zo/hqdefault.jpg"
+              alt="宮古島観光 下地島17END 沖縄観光ガイド"
+              onerror="this.src='https://img.youtube.com/vi/PgrksOn98Zo/mqdefault.jpg'"
+            >
+            <div class="h-play-overlay">
+              <span class="h-play-btn">▶ PLAY</span>
+              <span class="h-play-sub">유튜브에서 시청</span>
+            </div>
+          </a>
+        </div>
+        <p class="h-yt-title">&gt; <a href="https://youtu.be/PgrksOn98Zo" target="_blank">宮古島観光 下地島17END 沖縄観光ガイド</a></p>
+        <p class="h-sub">CH: 沖縄ガイド</p>
+        <p class="h-sub">&gt;&gt; 시모지시마 17엔드 해변 관광 가이드. 미야코블루의 절경.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍻 APPROACH STRATEGY ]</div>
+        <p class="h-p"><span class="h-label">ZONE :</span> 이라부지마 (伊良部島) 연결 · 미야코지마 히라라 이동</p>
+        <p class="h-sub">시모지시마·이라부지마 자체에는 이자카야가 매우 적습니다. 대부분 이라부 대교를 건너 미야코지마 히라라 시내에서 이자카야·바를 즐깁니다. 섬 자체는 절경 해변과 자연이 주요 매력.</p>
+        <p class="h-p"><span class="h-label">SCORE:</span> <span class="h-score">★★★☆☆ (보통)</span></p>
+        <p class="h-sub">&gt; 시모지시마는 주로 해변·자연 중심의 관광지. 이자카야 문화는 미야코지마 본섬에 집중. 시모지시마 공항 근처에 소규모 카페·식당이 있으나 나이트라이프는 미야코지마와 연계.</p>
+        <div class="h-dialect">미야코 방언(宮古語) — 미야코지마와 동일. 「んみゃーち」(어서 오세요) 「たんでぃがぁたんでぃ」(감사합니다).</div>
+        <div class="h-strat-box">
+          <span class="h-strat-label">// PLAN</span>
+          <p>17엔드 해변의 사진을 이자카야에서 보여주며 대화 시작. 미야코지마 히라라 시내 이자카야에서 「下地島の17END行ってきました！」(시모지시마 17엔드 다녀왔어요!).</p>
+        </div>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ⏰ NIGHT TIMETABLE ]</div>
+        <table class="h-table">
+          <thead><tr><th>TIME</th><th>ACTIVITY</th><th>TIP</th></tr></thead>
+          <tbody><tr><td class='time-h'>[10:00~12:00]</td><td>17엔드 비치 방문</td><td class='tip-h'>시모지시마 공항 활주로 끝 해변. 에메랄드 그린 바다+비행기 착륙 동시 감상.</td></tr>
+<tr><td class='time-h'>[12:00~14:00]</td><td>이라부지마 런치</td><td class='tip-h'>이라부 소바·해산물 정식. 이라부지마 사라하마 비치 산책.</td></tr>
+<tr><td class='time-h'>[14:00~17:00]</td><td>통리하마 비치·중노시마 해변</td><td class='tip-h'>시모지시마의 숨은 해변 탐방. 스노클링·다이빙.</td></tr>
+<tr><td class='time-h'>[17:30~]</td><td>이라부 대교를 건너 미야코지마로</td><td class='tip-h'>미야코지마 히라라 시내에서 이자카야·바 (미야코지마 타임테이블 참고).</td></tr>
+<tr><td class='time-h'>[]</td><td>💡 시모지시마 나이트라이프</td><td class='tip-h'>시모지시마·이라부지마 자체 이자카야는 매우 제한적. 미야코지마 히라라까지 차 15~20분.</td></tr>
+</tbody>
+        </table>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 💬 DIALOGUE SCRIPT ]</div>
+        <table class="h-table">
+          <thead><tr><th>STATUS</th><th>LINE (JP)</th><th>NOTE</th></tr></thead>
+          <tbody><tr><td class='sit-h'>입장 시 (미야코 이자카야에서)</td><td class='jp-h'>「下地島の17END、最高でした！」</td><td class='note-h'>시모지시마 17엔드 최고였어요!</td></tr>
+<tr><td class='sit-h'>해변 화제</td><td class='jp-h'>「通り池って本当に神秘的ですね！」</td><td class='note-h'>통리하마(通り池) 정말 신비롭네요!</td></tr>
+<tr><td class='sit-h'>다리 화제</td><td class='jp-h'>「伊良部大橋、日本一長いって本当ですか？」</td><td class='note-h'>이라부 대교가 일본에서 가장 길다는 거 진짜예요?</td></tr>
+<tr><td class='sit-h'>감사</td><td class='jp-h'>「宮古の海、世界一きれい！たんでぃがぁたんでぃ！」</td><td class='note-h'>미야코 바다 세계 최고! 감사합니다!</td></tr>
+</tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <div class="h-col-side">
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍶 LOCAL DRINK ]</div>
+        <p class="h-drink-name">&gt; 미야코 아와모리 (미야코지마와 동일)</p>
+        <p class="h-order jp-h">「泡盛の水割りください」</p>
+        <p class="h-sub">REC: 구스(菊之露) / 미야코지마(宮古島) — 미야코지마 이자카야에서 음용</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🌸 SAKURA POINT ]</div>
+        <p class="hl">이라부 대교 드라이브</p>
+        <p class="h-sub">BLOOM: 4월은 열대 꽃 시즌</p>
+        <p class="h-sub">&gt; 벚꽃 대신 열대 꽃(하이비스커스·부겐빌레아)이 만개. 이라부 대교 위에서 미야코블루 감상.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ ☀ DAYTIME ]</div>
+        <ul class="h-list"><li><span class='hl'>17엔드 비치 (17END)</span> : 시모지시마 공항 활주로 끝 해변. 비행기 착륙과 에메랄드 바다를 동시에 감상하는 인스타 명소. 간조 시 나타나는 백사장이 환상적.</li>
+<li><span class='hl'>통리하마 비치 (通り池)</span> : 두 개의 연못이 바다와 지하로 연결된 신비로운 스팟. 다이빙 명소. 시모지시마 서쪽 해안.</li>
+<li><span class='hl'>이라부 대교 (伊良部大橋)</span> : 일본 최장 무료 다리. 미야코블루 바다 위 절경 드라이브. 시모지시마↔미야코지마 연결.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍺 IZAKAYA LIST ]</div>
+        <ul class="h-list h-spots"><li><span class='sn-h'>島おでん たから (미야코지마)</span> <span class='sr-h'>4.4★</span> — 미야코지마 히라라 시내. 시모지시마에서 이라부 대교 경유 15분. 미야코 소바·섬 음식 전문.</li>
+<li><span class='sn-h'>カフェ 下地島空港 (공항 카페)</span> <span class='sr-h'>시모지시마 공항 내</span> — 미야코블루를 바라보며 커피·경식. 공항 자체가 관광 명소.</li>
+<li><span class='sn-h'>이라부지마 식당</span> <span class='sr-h'>로컬</span> — 이라부지마의 소규모 식당. 이라부 소바·해산물 정식. 이자카야는 아니지만 현지 분위기 체험.</li>
+<li><span class='sn-h'>미야코지마 시모사토 도리 (연계)</span> <span class='sr-h'>시모사토 주변</span> — 나이트라이프는 미야코지마 본섬에서. 이라부 대교로 15분.</li>
+</ul>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🍽 LOCAL FOOD ]</div>
+        <p class="h-food-name">이라부 소바 + 미야코 소바</p>
+        <p class="h-sub">이라부지마의 이라부 소바는 미야코 소바의 변형. 가쓰오부시 육수에 납작한 면. 시모지시마 자체 명물은 적으나 이라부지마·미야코지마의 섬 음식을 함께 즐길 수 있습니다.</p>
+      </div>
+
+      <div class="h-block">
+        <div class="h-block-title">[ 🏨 BUDGET ]</div>
+        <p class="h-sub">추천: 이라부지마 호텔 사우스아일랜드 (¥12,000~). 시모지시마 빌라 (¥15,000~, 해변 인근). 미야코지마 히라라 숙소도 이용 가능 (이라부 대교 15분).</p>
+        <p class="h-budget">&gt; 2인 총: 항공 왕복 ¥180,000~ + 숙박 3박 ¥24,000~120,000 + 식비/주류 3일 ¥24,000~42,000 + 렌터카 3일 ¥15,000~24,000 = 총 ¥243,000~366,000</p>
+        <p class="h-budget">&gt; 1인 1일: 숙박 ¥4,000~20,000 + 식사 ¥2,000~5,000 + 주류 ¥2,000~5,000 + 렌터카 ¥2,500~4,000 = 1인 1일 ¥10,500~34,000</p>
+      </div>
+
+    </div>
+  </div>
+  <div class="h-corner bl"></div><div class="h-corner br"></div>
+</section>
+
+    <section class="h-section" id="eval">
+      <div class="h-section-title">// 08 — MISSION EVALUATION</div>
+      <table class="h-common">
+        <thead><tr><th>도시</th><th>적합도</th><th>평가</th></tr></thead>
+        <tbody><tr><td class='hl'>후쿠오카</td><td class='score-h five'>★★★★★</td><td>접근성·가격 최고. 벚꽃 시즌 최적. 한국인 방문 잦아 희소성은 낮음.</td></tr>
+<tr><td class='hl'>미야자키</td><td class='score-h four'>★★★★☆</td><td>스낵바 밀도 전국 1위. 이자카야 문화 체험 최적. 교외 명소는 렌터카 필요.</td></tr>
+<tr><td class='hl'>가고시마</td><td class='score-h five'>★★★★★</td><td>사쿠라지마+벚꽃 4월 절경. 쇼추 문화 대화 소재 풍부.</td></tr>
+<tr><td class='hl'>오이타/벳부</td><td class='score-h three'>★★★☆☆</td><td>4월 첫째주 벳부 온천마쓰리 = 무료 입욕 + 벚꽃. 최적 타이밍.</td></tr>
+<tr><td class='hl'>구마모토</td><td class='score-h four'>★★★★☆</td><td>구마모토성+벚꽃 야경. 바사시·쿠마몬 대화 소재 풍부.</td></tr>
+<tr><td class='hl'>나가사키</td><td class='score-h four'>★★★★☆</td><td>세계 3대 야경+이국적 역사. 관광 밀도 높음.</td></tr>
+<tr><td class='hl'>나하</td><td class='score-h four'>★★★★☆</td><td>항공 접근 최고. 류큐 문화 독특. 4월 벚꽃은 없지만 아열대 기후 쾌적.</td></tr>
+<tr><td class='hl'>기타큐슈</td><td class='score-h four'>★★★★☆</td><td>외국인 희소 = 현지 밀도 최고. 가성비 우수.</td></tr>
+<tr><td class='hl'>히로시마</td><td class='score-h four'>★★★★☆</td><td>원폭돔+미야지마+벚꽃. 4월 관광 최적. 역사 감동.</td></tr>
+<tr><td class='hl'>오카야마</td><td class='score-h four'>★★★★☆</td><td>고라쿠엔 벚꽃 명소. 외국인 거의 없어 현지 체험 진정성 높음.</td></tr>
+<tr><td class='hl'>마쓰야마</td><td class='score-h three'>★★★☆☆</td><td>3000년 역사 도고온천+벚꽃. 문학 도시 분위기.</td></tr>
+<tr><td class='hl'>삿포로</td><td class='score-h four'>★★★★☆</td><td>스스키노 이자카야 규모 최대. 4월은 아직 춥고 벚꽃 없음.</td></tr>
+<tr><td class='hl'>하코다테</td><td class='score-h three'>★★★☆☆</td><td>세계 3대 야경. 4월은 벚꽃 이르지만 고료카쿠 5월 초 만개.</td></tr>
+<tr><td class='hl'>센다이</td><td class='score-h four'>★★★★☆</td><td>도호쿠 최대 이자카야 밀집. 규탄 문화. 벚꽃 만개 시즌.</td></tr>
+<tr><td class='hl'>가나자와</td><td class='score-h four'>★★★★☆</td><td>겐로쿠엔 야간 벚꽃 라이트업 = 일본 3대 정원의 절정.</td></tr>
+<tr><td class='hl'>다카마쓰</td><td class='score-h four'>★★★★☆</td><td>사누키 우동+리쓰린 공원+나오시마 아트. 소도시 로컬 이자카야 체험 최적.</td></tr>
+<tr><td class='hl'>시즈오카</td><td class='score-h three'>★★★☆☆</td><td>후지산 조망+시즈오카 오뎅 골목. 도쿄 경유 시 신칸센 1시간으로 접근.</td></tr>
+<tr><td class='hl'>사가</td><td class='score-h four'>★★★★☆</td><td>사가 규+나베시마 사케. 외국인 극소수의 진정한 로컬 체험. 가성비 최고.</td></tr>
+<tr><td class='hl'>도쿠시마</td><td class='score-h three'>★★☆☆☆</td><td>아와오도리 문화+나루토 소용돌이. 직항 없어 접근성 낮지만 로컬 밀도 최고.</td></tr>
+<tr><td class='hl'>미야코지마</td><td class='score-h three'>★★☆☆☆</td><td>미야코블루 절경+오토오리 음주 문화. 렌터카 필수. 나하 경유로 접근성 낮음.</td></tr>
+<tr><td class='hl'>이시가키</td><td class='score-h three'>★★★☆☆</td><td>이시가키 규+가비라만 절경. 야에야마 제도 관문. 피치 직항 계절편 활용.</td></tr>
+<tr><td class='hl'>시모지시마</td><td class='score-h three'>★★☆☆☆</td><td>17엔드 절경. 미야코지마와 연계 여행 추천. 이자카야는 미야코지마 히라라에서.</td></tr>
+</tbody>
+      </table>
+      <h3>[ FINAL LOG ]</h3>
+      <div class="h-conclusion">
+        <ul style="padding-left:16px">
+          <li>【종합 추천】 후쿠오카: LCC 최다 취항, 야타이·이자카야 문화 최고, 대중교통 편리, 벚꽃 시즌 최적.</li><li>【규슈 소도시】 미야자키·가고시마·구마모토·나가사키: 방언 체험 + 독특한 지역 문화 + 저렴한 물가.</li><li>【하나미 활용】 4월 초 규슈·주고쿠 최적. 벚꽃 낮 관광 → 이자카야 저녁 코스로 하루 알차게 활용.</li><li>【예산 최적화】 기타큐슈·미야자키: 항공권·물가 모두 저렴. 가성비 여행에 최적.</li><li>【최종 제안】 3박 4일 단일 도시 집중: 도심 관광 + 이자카야 문화 체험을 깊이 있게 즐기기.</li>
+        </ul>
+      </div>
+      <p style="font-size:10px;color:var(--grey);margin-top:16px;text-align:center;letter-spacing:1px">
+        // 일본 문화와 이자카야 예절을 존중하는 범위 내에서 활용하시기 바랍니다. //
+      </p>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
