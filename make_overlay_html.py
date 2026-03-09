@@ -1068,7 +1068,7 @@ for _ck, _culture_custom in {
     ),
     "videos": [
       {"id": _cd["youtube_dialect"]["id"], "title": f"{_cd['name_ko']} 방언 마스터", "channel": "방언 채널", "note": f"{_cd['name_ko']} 방언 + 이자카야 실전 표현 집중 훈련"},
-      {"id": "Zir_yogumcY", "title": "일본 이자카야 현지 야간 탐방", "channel": "Japan Night", "note": "이자카야 입장~현지인 대화까지 단계별 실전 가이드"},
+      {"id": "T37Dfc-3Keg", "title": "일본 나이트라이프 에티켓 15가지", "channel": "Abroad in Japan", "note": "이자카야 에티켓·주문법·현지인 매너 완전 가이드"},
     ]
   }
 
@@ -1352,7 +1352,7 @@ for _ck in CITY_ORDER:
     "strategy": f"<p>🏆 <b>방언을 화제로 만드는 방법</b></p><p>「{_cd['name_ko']} 방언 공부하고 왔어요!」라고 먼저 선언하면 더 큰 효과가 납니다. 방언을 사용한 후 「맞게 말한 거예요?」라고 확인을 요청하면 현지인이 선생님 역할을 맡게 되고 대화가 자연스럽게 이어집니다.</p>",
     "videos": [
       {"id": _yt["id"], "title": _yt["title"], "channel": _yt["channel"], "note": _yt["note"]},
-      {"id": "Zir_yogumcY", "title": "일본 이자카야 방언 실전 사용법", "channel": "Japan Night Guide", "note": "방언을 이자카야에서 실제로 사용하는 방법과 현지인 반응 사례"},
+      {"id": "_NqpL-pUUfo", "title": "일본 47개 도도부현 방언 완전정복", "channel": "Ten Tobata", "note": "전국 47개 지역 방언을 한 영상으로 비교·체험"},
     ]
   }
 
@@ -1512,7 +1512,7 @@ for _ck in CITY_ORDER:
   _cd = CITY_DATA[_ck]
   _s_spot, _s_time, _s_tip = _cd["sakura"]
   _dt_vids = OVERLAY_DETAIL.get(_ck, {}).get("daytime", {}).get("videos", [])
-  _dt_vid1 = _dt_vids[0] if _dt_vids else {"id":"Zir_yogumcY","title":"일본 봄 여행","channel":"Japan Travel","note":"일본 벚꽃 시즌 여행 가이드"}
+  _dt_vid1 = _dt_vids[0] if _dt_vids else {"id":"kZN2yTa1HcY","title":"4K 일본 벚꽃 — 카와즈 사쿠라","channel":"VIRTUAL JAPAN","note":"일본 벚꽃 시즌 4K 풍경 영상"}
   _hd = _hanami_city_data[_ck]
   OVERLAY_HANAMI[_ck] = {
     "title": f"🌸 {_cd['name_ko']} 하나미 완전 가이드",
@@ -1534,7 +1534,7 @@ for _ck in CITY_ORDER:
     ),
     "videos": [
       _dt_vid1,
-      {"id": "Zir_yogumcY", "title": "일본 하나미 & 이자카야 연결", "channel": "Japan Travel Guide", "note": "벚꽃 시즌 하나미 파티 → 이자카야 유도 실전 가이드"},
+      {"id": "kZN2yTa1HcY", "title": "4K 일본 벚꽃 명소 가이드", "channel": "VIRTUAL JAPAN", "note": "일본 각지의 벚꽃 명소 4K 영상 모음"},
     ]
   }
 
@@ -1818,7 +1818,7 @@ for _ck in CITY_ORDER:
   _cd = CITY_DATA[_ck]
   _md = _matsuri_data[_ck]
   _dt_vids = OVERLAY_DETAIL.get(_ck, {}).get("daytime", {}).get("videos", [])
-  _vid1 = _dt_vids[0] if _dt_vids else {"id": "Zir_yogumcY", "title": "일본 여행 가이드", "channel": "Japan Travel", "note": "일본 관광 명소 가이드"}
+  _vid1 = _dt_vids[0] if _dt_vids else {"id": "opZAkJlG3nU", "title": "일본 마쓰리 체험기", "channel": "Paolo fromTOKYO", "note": "일본 전통 축제 현장 밀착 가이드"}
   # Build detail HTML
   _april_html = "".join(
     f"<div {_MB_}><b>{n}</b><br>{d}</div>" for n, d in _md["april"]
@@ -1849,7 +1849,7 @@ for _ck in CITY_ORDER:
     ),
     "videos": [
       _vid1,
-      {"id": "Zir_yogumcY", "title": "일본 마쓰리 이자카야 연결 가이드", "channel": "Japan Night Guide", "note": "마쓰리 체험 후 이자카야에서 대화 소재 활용법 실전"},
+      {"id": "opZAkJlG3nU", "title": "일본 마쓰리 비하인드 체험", "channel": "Paolo fromTOKYO", "note": "마쓰리 축제 참여 방법·현지인 교류 실전 가이드"},
     ]
   }
 
@@ -2846,8 +2846,8 @@ def build_timetable_overlay(cityKey):
       "videos": [
         {"id": cd["youtube_dialect"]["id"], "title": cd["youtube_dialect"]["title"],
          "channel": cd["youtube_dialect"]["channel"], "note": cd["youtube_dialect"]["note"]},
-        {"id": "Zir_yogumcY", "title": "일본 이자카야 에티켓 & 실전 가이드",
-         "channel": "Japan Night", "note": "이자카야 주문법·에티켓·메뉴 읽는 법 실전 가이드"},
+        {"id": "FhWbhTn0aB4", "title": "관광지 너머 진짜 일본 여행",
+         "channel": "Tokyo Lens", "note": "관광지 밖 숨겨진 일본 소도시·이자카야 탐방 가이드"},
       ]
     })
   return rows
